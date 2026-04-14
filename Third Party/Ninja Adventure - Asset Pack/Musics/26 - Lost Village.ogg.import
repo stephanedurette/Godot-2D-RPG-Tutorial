@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ci2uhoslu5cw8"
+path="res://.godot/imported/26 - Lost Village.ogg-fd1cf8a1d97398677490cd661b7c8a3e.oggvorbisstr"
+
+[deps]
+
+source_file="res://Third Party/Ninja Adventure - Asset Pack/Musics/26 - Lost Village.ogg"
+dest_files=["res://.godot/imported/26 - Lost Village.ogg-fd1cf8a1d97398677490cd661b7c8a3e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

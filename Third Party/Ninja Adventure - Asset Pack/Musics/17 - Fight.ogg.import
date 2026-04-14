@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cy01it688rpwi"
+path="res://.godot/imported/17 - Fight.ogg-05c79fb01db2e45a06a03120da3d39ed.oggvorbisstr"
+
+[deps]
+
+source_file="res://Third Party/Ninja Adventure - Asset Pack/Musics/17 - Fight.ogg"
+dest_files=["res://.godot/imported/17 - Fight.ogg-05c79fb01db2e45a06a03120da3d39ed.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

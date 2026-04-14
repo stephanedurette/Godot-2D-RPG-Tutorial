@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://ck5hpl4hrdipu"]
+
+[ext_resource type="Texture2D" uid="uid://c25uxottkgy5q" path="res://Third Party/Ninja Adventure - Asset Pack/Actor/Characters/Knight/SeparateAnim/Item.png" id="1_b5us1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nms7q"]
+radius = 7.0
+height = 16.0
+
+[node name="Player" type="CharacterBody2D" unique_id=1937175503]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1864982244]
+shape = SubResource("CapsuleShape2D_nms7q")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1183288699]
+texture = ExtResource("1_b5us1")

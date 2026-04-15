@@ -1,10 +1,14 @@
 extends Area2D
 
 @export var destinationScene: String
+@export var destinationPortalFullPath: String
 
 func _on_body_entered(body: Node2D) -> void:
 	if (body is Player):
-		get_tree().change_scene_to_file.call_deferred(destinationScene)
+		if (PortalManager.currentPortalPath == ""):
+			PortalManager.travel_to_portal(destinationScene, destinationPortalFullPath)
+		else:
+			PortalManager.currentPortalPath = ""
 
 
 func _on_body_exited(_body: Node2D) -> void:

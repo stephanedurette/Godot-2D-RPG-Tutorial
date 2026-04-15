@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b8dfxr83dctdl"]
+
+[ext_resource type="Script" uid="uid://b4smmth7fk1q3" path="res://Src/Portals/portal_manager.gd" id="1_rival"]
+
+[node name="PortalManager" type="Node" unique_id=817367014]
+script = ExtResource("1_rival")

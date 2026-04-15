@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dlf033cp5wtxe"]
 
-[ext_resource type="Script" uid="uid://mrrqgxh8xfdg" path="res://Src/SceneEntrance/scene_entrance.gd" id="1_bratk"]
+[ext_resource type="Script" uid="uid://mrrqgxh8xfdg" path="res://Src/Portals/portal.gd" id="1_bratk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tkbpy"]
 

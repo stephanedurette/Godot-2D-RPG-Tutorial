@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dlf033cp5wtxe"]
+
+[ext_resource type="Script" uid="uid://mrrqgxh8xfdg" path="res://Src/SceneEntrance/scene_entrance.gd" id="1_bratk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tkbpy"]
+
+[node name="SceneEntrance" type="Area2D" unique_id=1988916478]
+script = ExtResource("1_bratk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1864491367]
+shape = SubResource("RectangleShape2D_tkbpy")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

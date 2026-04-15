@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bjp8ugwrh3m4g"]
+
+[ext_resource type="PackedScene" uid="uid://ck5hpl4hrdipu" path="res://Src/Player/player.tscn" id="1_7dqcm"]
+[ext_resource type="PackedScene" uid="uid://dlf033cp5wtxe" path="res://Src/SceneEntrance/scene_entrance.tscn" id="2_sy2ga"]
+
+[node name="dungeon_level" type="Node2D" unique_id=526094986]
+
+[node name="Player" parent="." unique_id=1937175503 instance=ExtResource("1_7dqcm")]
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=406797831]
+zoom = Vector2(5, 5)
+
+[node name="SceneEntrance" parent="." unique_id=1988916478 instance=ExtResource("2_sy2ga")]
+position = Vector2(-4, -35)
+destinationScene = "res://Src/Levels/test_level.tscn"

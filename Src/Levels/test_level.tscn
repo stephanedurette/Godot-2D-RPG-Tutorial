@@ -5,8 +5,6 @@
 [node name="Test Level" type="Node2D" unique_id=1816505977]
 
 [node name="Player" parent="." unique_id=1937175503 instance=ExtResource("1_g10f2")]
-motion_mode = 1
-move_speed = 50.0
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=799724733]
 zoom = Vector2(5, 5)

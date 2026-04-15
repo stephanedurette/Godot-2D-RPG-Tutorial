@@ -4,7 +4,7 @@ signal on_move_direction_changed(direction: Vector2)
 
 var move_direction : Vector2 = Vector2.ZERO
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	_update_move_direction()
 	
 func _update_move_direction():

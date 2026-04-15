@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ck5hpl4hrdipu"]
 
 [ext_resource type="Script" uid="uid://cwwyt6ho35rus" path="res://Src/Player/player.gd" id="1_i1ivj"]
-[ext_resource type="Script" uid="uid://dfm0brnpvhdyf" path="res://Src/Player/player_input.gd" id="2_nms7q"]
+[ext_resource type="Script" uid="uid://dfm0brnpvhdyf" path="res://Src/Player/input_vector_component.gd" id="2_nms7q"]
 [ext_resource type="Texture2D" uid="uid://b042he7gaty05" path="res://Third Party/Ninja Adventure - Asset Pack/Actor/Characters/Knight/SpriteSheet.png" id="3_i1ivj"]
 [ext_resource type="Script" uid="uid://2jioufjumbn" path="res://Src/Player/player_animations.gd" id="3_srngh"]
 
@@ -244,8 +244,12 @@ animation_player = NodePath("AnimationTree")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1864982244]
 shape = SubResource("CapsuleShape2D_nms7q")
 
-[node name="PlayerInput" type="Node" parent="." unique_id=445702645]
+[node name="InputVectorComponent" type="Node" parent="." unique_id=445702645]
 script = ExtResource("2_nms7q")
+left_input_name = "move_left"
+right_input_name = "move_right"
+up_input_name = "move_up"
+down_input_name = "move_down"
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=879248044]
 tree_root = SubResource("AnimationNodeStateMachine_srngh")
@@ -263,4 +267,4 @@ hframes = 4
 vframes = 7
 frame = 4
 
-[connection signal="on_move_direction_changed" from="PlayerInput" to="." method="_on_player_input_on_move_direction_changed"]
+[connection signal="on_value_changed" from="InputVectorComponent" to="." method="_on_player_input_on_move_direction_changed"]

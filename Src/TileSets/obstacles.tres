@@ -1,0 +1,14 @@
+[gd_resource type="TileSet" format=3 uid="uid://c7ia7r7tkv15f"]
+
+[ext_resource type="Texture2D" uid="uid://dwg0pgquedpjd" path="res://Third Party/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetNature.png" id="1_6x1xb"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y4oy6"]
+texture = ExtResource("1_6x1xb")
+2:0/size_in_atlas = Vector2i(2, 2)
+2:0/0 = 0
+2:0/0/texture_origin = Vector2i(0, 14)
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, 0, -16, -12, 16, -12, 16, 0)
+
+[resource]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_y4oy6")

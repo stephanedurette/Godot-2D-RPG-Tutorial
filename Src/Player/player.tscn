@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://cwwyt6ho35rus" path="res://Src/Player/player.gd" id="1_i1ivj"]
 [ext_resource type="Script" uid="uid://dfm0brnpvhdyf" path="res://Src/Player/input_vector_component.gd" id="2_nms7q"]
 [ext_resource type="Texture2D" uid="uid://b042he7gaty05" path="res://Third Party/Ninja Adventure - Asset Pack/Actor/Characters/Knight/SpriteSheet.png" id="3_i1ivj"]
-[ext_resource type="Script" uid="uid://2jioufjumbn" path="res://Src/Player/player_animations.gd" id="3_srngh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nms7q"]
 radius = 7.0
@@ -55,12 +54,24 @@ blend_point_3/node = SubResource("AnimationNodeAnimation_ya03o")
 blend_point_3/pos = Vector2(0, -1)
 blend_mode = 1
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_srngh"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lagon"]
+advance_mode = 2
+advance_condition = &"moving"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xk721"]
+advance_mode = 2
+advance_condition = &"idle"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_srngh"]
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_i1ivj")
 states/Idle/position = Vector2(452, 82)
 states/Move/node = SubResource("AnimationNodeBlendSpace2D_uc31e")
-states/Move/position = Vector2(452, 141)
+states/Move/position = Vector2(452, 206)
 states/Start/position = Vector2(312, 88)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_srngh"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_lagon"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_xk721")]
 graph_offset = Vector2(-64, 4)
 
 [sub_resource type="Animation" id="Animation_i1ivj"]
@@ -235,11 +246,10 @@ _data = {
 &"move_up": SubResource("Animation_v0kqs")
 }
 
-[node name="Player" type="CharacterBody2D" unique_id=1937175503 node_paths=PackedStringArray("animation_player")]
+[node name="Player" type="CharacterBody2D" unique_id=1937175503]
 motion_mode = 1
 script = ExtResource("1_i1ivj")
 move_speed = 50.0
-animation_player = NodePath("AnimationTree")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1864982244]
 shape = SubResource("CapsuleShape2D_nms7q")
@@ -254,9 +264,10 @@ down_input_name = "move_down"
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=879248044]
 tree_root = SubResource("AnimationNodeStateMachine_srngh")
 anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/idle = false
+parameters/conditions/moving = false
 parameters/Idle/blend_position = Vector2(-0.6545012, -0.7819905)
 parameters/Move/blend_position = Vector2(-0.008921325, -0.6018957)
-script = ExtResource("3_srngh")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=962927423]
 libraries/ = SubResource("AnimationLibrary_0va8g")

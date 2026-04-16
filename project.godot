@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 EventBus="*uid://1pryc2jho2uh"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [file_customization]
 
 folder_colors={

@@ -24,6 +24,9 @@ tile_set = ExtResource("1_kok8v")
 [node name="PushButton" parent="DirtLayer" unique_id=1106219846 instance=ExtResource("6_0jdrx")]
 position = Vector2(8, -16)
 
+[node name="PushButton2" parent="DirtLayer" unique_id=358160436 instance=ExtResource("6_0jdrx")]
+position = Vector2(24, -32)
+
 [node name="ObstacleLayer" type="TileMapLayer" parent="." unique_id=1421706805]
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AAD+/wEAAAACAAAAAAAEAP3/AAAAAAIAAAADAPv/AAAAAAIAAAAAAPz/AAAAAAIAAAD9//v/AAAAAAIAAAD6//n/AAAAAAIAAAAIAP7/AAAAAAIAAAALAP//AAAAAAIAAAAOAP//AAAAAAIAAAAOAAYAAAAAAAIAAAAKAAYAAAAAAAIAAAAGAAUAAAAAAAIAAAACAAQAAAAAAAIAAAD5/wAAAAAAAAIAAAD0//3/AAAAAAIAAADz//r/AAAAAAIAAADy//j/AAAAAAIAAAD9/wQAAAACAAAAAAD7/wYAAAACAAAAAAD0/wIAAAACAAAAAAD1/wYAAAACAAAAAAAMAAIAAQAAAAcAAAA=")
@@ -45,6 +48,7 @@ position = Vector2(56, 0)
 
 [node name="Door" parent="ObstacleLayer" unique_id=1675673477 instance=ExtResource("7_s1smv")]
 position = Vector2(-24, -32)
+buttons_needed = 2
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=22291798]
 zoom = Vector2(5, 5)
@@ -55,3 +59,5 @@ limit_bottom = 190
 
 [connection signal="pressed" from="DirtLayer/PushButton" to="ObstacleLayer/Door" method="open"]
 [connection signal="unpressed" from="DirtLayer/PushButton" to="ObstacleLayer/Door" method="close"]
+[connection signal="pressed" from="DirtLayer/PushButton2" to="ObstacleLayer/Door" method="open"]
+[connection signal="unpressed" from="DirtLayer/PushButton2" to="ObstacleLayer/Door" method="close"]

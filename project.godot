@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="2D Rpg tutorial"
-run/main_scene="uid://dnsyiu1qm1ykk"
+run/main_scene="uid://e47c880nge53"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
-PortalManager="*uid://b8dfxr83dctdl"
+EventBus="*uid://1pryc2jho2uh"
 
 [file_customization]
 

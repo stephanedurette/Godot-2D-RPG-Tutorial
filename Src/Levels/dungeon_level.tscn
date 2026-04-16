@@ -8,8 +8,9 @@ script = ExtResource("1_sy2ga")
 defaultSpawnPosition = NodePath("DefaultPlayerSpawn")
 level_camera = NodePath("Camera2D")
 
-[node name="TestLevelPortal" parent="." unique_id=1988916478 instance=ExtResource("2_sy2ga")]
+[node name="TestLevelPortal" parent="." unique_id=1988916478 node_paths=PackedStringArray("level") instance=ExtResource("2_sy2ga")]
 position = Vector2(-4, -35)
+level = NodePath("..")
 
 [node name="DefaultPlayerSpawn" type="Marker2D" parent="." unique_id=118303721]
 

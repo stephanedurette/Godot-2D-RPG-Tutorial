@@ -1,3 +1,5 @@
+class_name PushButton
+
 extends Area2D
 
 @onready var sprite: AnimatedSprite2D = $Sprite

@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://p5ytsp46jjf4" path="res://Src/BlockPuzzle/pushable_block.tscn" id="5_v211m"]
 [ext_resource type="PackedScene" uid="uid://bcx8sg748exxu" path="res://Src/BlockPuzzle/push_button.tscn" id="6_0jdrx"]
 [ext_resource type="PackedScene" uid="uid://bo1ew70s84j5n" path="res://Src/Door/door.tscn" id="7_s1smv"]
+[ext_resource type="PackedScene" uid="uid://bdkw26ydj2kki" path="res://Src/BlockPuzzle/button_group.tscn" id="8_nmpib"]
 
 [node name="Test Level" type="Node2D" unique_id=1816505977 node_paths=PackedStringArray("defaultSpawnPosition", "level_camera")]
 script = ExtResource("1_pkap3")
@@ -48,7 +49,6 @@ position = Vector2(56, 0)
 
 [node name="Door" parent="ObstacleLayer" unique_id=1675673477 instance=ExtResource("7_s1smv")]
 position = Vector2(-24, -32)
-buttons_needed = 2
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=22291798]
 zoom = Vector2(5, 5)
@@ -57,7 +57,9 @@ limit_top = -154
 limit_right = 267
 limit_bottom = 190
 
-[connection signal="pressed" from="DirtLayer/PushButton" to="ObstacleLayer/Door" method="open"]
-[connection signal="unpressed" from="DirtLayer/PushButton" to="ObstacleLayer/Door" method="close"]
-[connection signal="pressed" from="DirtLayer/PushButton2" to="ObstacleLayer/Door" method="open"]
-[connection signal="unpressed" from="DirtLayer/PushButton2" to="ObstacleLayer/Door" method="close"]
+[node name="Button Group" parent="." unique_id=1823490022 node_paths=PackedStringArray("buttons") instance=ExtResource("8_nmpib")]
+buttons = [NodePath("../DirtLayer/PushButton"), NodePath("../DirtLayer/PushButton2")]
+
+[connection signal="on_all_buttons_pressed" from="Button Group" to="ObstacleLayer/Door" method="open"]
+[connection signal="on_none_buttons_pressed" from="Button Group" to="ObstacleLayer/Door" method="close"]
+[connection signal="on_some_buttons_pressed" from="Button Group" to="ObstacleLayer/Door" method="close"]

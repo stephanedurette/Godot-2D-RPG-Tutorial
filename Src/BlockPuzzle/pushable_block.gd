@@ -7,7 +7,7 @@ extends RigidBody2D
 
 @onready var rays: Array[ShapeCast2D] = [$Up, $Down, $Left, $Right]
 
-@onready var directions: Dictionary[Vector2, ShapeCast2D] = {
+@onready var direction_rays: Dictionary[Vector2, ShapeCast2D] = {
 	Vector2.RIGHT: $Right,
 	Vector2.LEFT: $Left,
 	Vector2.UP: $Up,
@@ -27,12 +27,14 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	state_machine.current_state.process(delta)
-	print(can_move(Vector2.UP))
 
 func can_move(dir: Vector2) -> bool:
-	if directions[dir].is_colliding() && directions[dir].get_collider(0) is PushableBlock:
-		return false
-	return true
+	if !direction_rays[dir].is_colliding():
+		return true
+	
+	var col = direction_rays[dir].get_collider(0)
+	
+	return col is not PushableBlock and col is not TileMapLayer
 
 func get_push_direction() -> Vector2:
 	for ray in rays:

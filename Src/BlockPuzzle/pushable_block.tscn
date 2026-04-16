@@ -16,9 +16,7 @@ size = Vector2(3, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_epq7o"]
 size = Vector2(1, 3)
 
-[node name="PushableBlock" type="RigidBody2D" unique_id=141768508]
-gravity_scale = 0.0
-freeze = true
+[node name="PushableBlock" type="AnimatableBody2D" unique_id=1460572135]
 script = ExtResource("1_l4qa5")
 push_distance = 16
 push_speed = 16.0
@@ -30,25 +28,25 @@ texture = SubResource("AtlasTexture_l4qa5")
 shape = SubResource("RectangleShape2D_hfnxp")
 
 [node name="Down" type="ShapeCast2D" parent="." unique_id=1826197416]
+position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_l4qa5")
-target_position = Vector2(0, 9)
-max_results = 1
+target_position = Vector2(0, 1)
 collide_with_areas = true
 
 [node name="Up" type="ShapeCast2D" parent="." unique_id=185602236]
+position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_l4qa5")
-target_position = Vector2(0, -9)
-max_results = 1
+target_position = Vector2(0, -1)
 collide_with_areas = true
 
 [node name="Left" type="ShapeCast2D" parent="." unique_id=722409155]
+position = Vector2(-8, 0)
 shape = SubResource("RectangleShape2D_epq7o")
-target_position = Vector2(-9, 0)
-max_results = 1
+target_position = Vector2(-1, 0)
 collide_with_areas = true
 
 [node name="Right" type="ShapeCast2D" parent="." unique_id=1645695754]
+position = Vector2(8, 0)
 shape = SubResource("RectangleShape2D_epq7o")
-target_position = Vector2(9, 0)
-max_results = 1
+target_position = Vector2(1, 0)
 collide_with_areas = true

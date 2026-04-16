@@ -1,6 +1,6 @@
 class_name PushableBlock
 
-extends RigidBody2D
+extends AnimatableBody2D
 
 @export var push_distance: int
 @export var push_speed: float
@@ -29,20 +29,28 @@ func _process(delta: float) -> void:
 	state_machine.current_state.process(delta)
 
 func can_move(dir: Vector2) -> bool:
-	if !direction_rays[dir].is_colliding():
-		return true
+	for i in direction_rays[dir].get_collision_count():
+		var col = direction_rays[dir].get_collider(i)
+		if col is PushableBlock || col is TileMapLayer:
+			return false
 	
-	var col = direction_rays[dir].get_collider(0)
-	
-	return col is not PushableBlock and col is not TileMapLayer
+	return true
 
 func get_push_direction() -> Vector2:
 	for ray in rays:
-		
-		if ray.is_colliding() && ray.get_collider(0) is BlockPusher:
-			if (-ray.target_position.dot((ray.get_collider(0) as BlockPusher).push_direction) > 0):
+		var pusher = get_pusher(ray)
+		if (pusher != null):
+			if (-ray.target_position.dot(pusher.push_direction) > 0):
 				return -ray.target_position.normalized()
 	return Vector2.ZERO
+
+func get_pusher(cast: ShapeCast2D) -> BlockPusher:
+
+	for i in cast.get_collision_count():
+		if (cast.get_collider(i) is BlockPusher):
+			return cast.get_collider(i) as BlockPusher
+			
+	return null
 
 class PushBlockState extends State:
 	var pushable_block: PushableBlock

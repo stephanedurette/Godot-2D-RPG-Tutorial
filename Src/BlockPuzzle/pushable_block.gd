@@ -2,7 +2,7 @@ class_name PushableBlock
 
 extends RigidBody2D
 
-@export var push_distance: float
+@export var push_distance: int
 @export var push_speed: float
 
 @onready var rays: Array[RayCast2D] = [$Up, $Down, $Left, $Right]
@@ -39,17 +39,25 @@ class IdleState extends PushBlockState:
 	func process(delta):
 		var current_push_direction = pushable_block.get_push_direction()
 		if (current_push_direction != Vector2.ZERO):
+			pushable_block.pushing_state.target_position = pushable_block.global_position + current_push_direction * pushable_block.push_distance
 			pushable_block.state_machine.change_state(pushable_block.pushing_state)
 
 class PushingState extends PushBlockState:
+	var target_position: Vector2
+	
 	func enter():
-		pass
+		var tween = pushable_block.get_tree().create_tween()
+		tween.tween_property(pushable_block, "global_position", target_position, pushable_block.push_distance / pushable_block.push_speed)
+		tween.tween_callback(on_push_finished)
 	
 	func process(delta):
 		pass
 		
 	func exit():
 		pass
+	
+	func on_push_finished():
+		pushable_block.state_machine.change_state(pushable_block.idle_state)
 		
 		
 		

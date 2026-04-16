@@ -13,6 +13,8 @@ size = Vector2(16, 16)
 [node name="PushableBlock" type="RigidBody2D" unique_id=141768508]
 gravity_scale = 0.0
 script = ExtResource("1_l4qa5")
+push_distance = 16
+push_speed = 16.0
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=925401951]
 texture = SubResource("AtlasTexture_l4qa5")

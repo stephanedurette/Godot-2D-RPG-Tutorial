@@ -5,7 +5,7 @@ extends RigidBody2D
 @export var push_distance: int
 @export var push_speed: float
 
-@onready var rays: Array[RayCast2D] = [$Up, $Down, $Left, $Right]
+@onready var rays: Array[ShapeCast2D] = [$Up, $Down, $Left, $Right]
 
 var state_machine: State_Machine
 var idle_state: IdleState
@@ -23,9 +23,9 @@ func _process(delta: float) -> void:
 
 func get_push_direction() -> Vector2:
 	for ray in rays:
-		var collider = ray.get_collider()
-		if collider is BlockPusher:
-			if (-ray.target_position.dot((collider as BlockPusher).push_direction) > 0):
+		
+		if ray.is_colliding() && ray.get_collider(0) is BlockPusher:
+			if (-ray.target_position.dot((ray.get_collider(0) as BlockPusher).push_direction) > 0):
 				return -ray.target_position.normalized()
 	return Vector2.ZERO
 

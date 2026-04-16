@@ -33,7 +33,10 @@ scale = Vector2(0.5, 0.5)
 level = NodePath("../..")
 
 [node name="PushableBlock" parent="ObstacleLayer" unique_id=141768508 instance=ExtResource("5_v211m")]
-position = Vector2(71, 13)
+position = Vector2(24, 0)
+
+[node name="PushableBlock2" parent="ObstacleLayer" unique_id=221227763 instance=ExtResource("5_v211m")]
+position = Vector2(40, 0)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=22291798]
 zoom = Vector2(5, 5)

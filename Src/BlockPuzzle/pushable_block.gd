@@ -7,6 +7,13 @@ extends RigidBody2D
 
 @onready var rays: Array[ShapeCast2D] = [$Up, $Down, $Left, $Right]
 
+@onready var directions: Dictionary[Vector2, ShapeCast2D] = {
+	Vector2.RIGHT: $Right,
+	Vector2.LEFT: $Left,
+	Vector2.UP: $Up,
+	Vector2.DOWN: $Down,
+}
+
 var state_machine: State_Machine
 var idle_state: IdleState
 var pushing_state: PushingState
@@ -20,6 +27,12 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	state_machine.current_state.process(delta)
+	print(can_move(Vector2.UP))
+
+func can_move(dir: Vector2) -> bool:
+	if directions[dir].is_colliding() && directions[dir].get_collider(0) is PushableBlock:
+		return false
+	return true
 
 func get_push_direction() -> Vector2:
 	for ray in rays:
@@ -38,7 +51,7 @@ class PushBlockState extends State:
 class IdleState extends PushBlockState:
 	func process(delta):
 		var current_push_direction = pushable_block.get_push_direction()
-		if (current_push_direction != Vector2.ZERO):
+		if (current_push_direction != Vector2.ZERO && pushable_block.can_move(current_push_direction)):
 			pushable_block.pushing_state.target_position = pushable_block.global_position + current_push_direction * pushable_block.push_distance
 			pushable_block.state_machine.change_state(pushable_block.pushing_state)
 

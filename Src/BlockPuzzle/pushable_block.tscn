@@ -34,25 +34,21 @@ shape = SubResource("RectangleShape2D_l4qa5")
 target_position = Vector2(0, 9)
 max_results = 1
 collide_with_areas = true
-collide_with_bodies = false
 
 [node name="Up" type="ShapeCast2D" parent="." unique_id=185602236]
 shape = SubResource("RectangleShape2D_l4qa5")
 target_position = Vector2(0, -9)
 max_results = 1
 collide_with_areas = true
-collide_with_bodies = false
 
 [node name="Left" type="ShapeCast2D" parent="." unique_id=722409155]
 shape = SubResource("RectangleShape2D_epq7o")
 target_position = Vector2(-9, 0)
 max_results = 1
 collide_with_areas = true
-collide_with_bodies = false
 
 [node name="Right" type="ShapeCast2D" parent="." unique_id=1645695754]
 shape = SubResource("RectangleShape2D_epq7o")
 target_position = Vector2(9, 0)
 max_results = 1
 collide_with_areas = true
-collide_with_bodies = false

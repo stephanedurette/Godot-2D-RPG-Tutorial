@@ -8,13 +8,13 @@ atlas = ExtResource("1_8qia3")
 region = Rect2(128, 48, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hfnxp"]
-size = Vector2(14, 13)
+size = Vector2(14, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l4qa5"]
-size = Vector2(8, 1)
+size = Vector2(3, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_epq7o"]
-size = Vector2(1, 8)
+size = Vector2(1, 3)
 
 [node name="PushableBlock" type="RigidBody2D" unique_id=141768508]
 gravity_scale = 0.0
@@ -27,7 +27,6 @@ push_speed = 16.0
 texture = SubResource("AtlasTexture_l4qa5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=294457718]
-position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_hfnxp")
 
 [node name="Down" type="ShapeCast2D" parent="." unique_id=1826197416]

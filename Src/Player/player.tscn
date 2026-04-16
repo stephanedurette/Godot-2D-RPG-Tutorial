@@ -283,7 +283,8 @@ frame = 4
 [node name="BlockPusher" parent="." unique_id=896786495 instance=ExtResource("4_srngh")]
 
 [node name="CollisionShape2D" parent="BlockPusher" index="0" unique_id=636045233]
-position = Vector2(0, 1)
+visible = false
+position = Vector2(0, 1.5)
 
 [connection signal="on_value_changed" from="InputVectorComponent" to="." method="_on_player_input_on_move_direction_changed"]
 

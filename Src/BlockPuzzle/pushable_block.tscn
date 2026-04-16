@@ -28,7 +28,7 @@ texture = SubResource("AtlasTexture_l4qa5")
 shape = SubResource("RectangleShape2D_hfnxp")
 
 [node name="Down" type="ShapeCast2D" parent="." unique_id=1826197416]
-position = Vector2(0, 7)
+position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_l4qa5")
 target_position = Vector2(0, 1)
 collide_with_areas = true

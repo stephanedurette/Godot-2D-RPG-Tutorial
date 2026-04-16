@@ -6,15 +6,23 @@ extends Node2D
 
 var is_player_teleporting: bool
 
+func load_level(level: Level):
+	levelParent.add_child.call_deferred(level)
+
+func unload_level(level: Level):
+	levelParent.remove_child.call_deferred(level)
+
+func unload_all_levels():
+	for l in levelParent.get_children():
+		if (l is Level):
+			unload_level(l)
+
 func _ready() -> void:
 	EventBus.on_portal_entered.connect(on_portal_entered)
 	
-	for l in levelParent.get_children():
-		if (l is Level):
-			l.visible = true
-			levelParent.remove_child(l)
+	unload_all_levels()
 	
-	levelParent.add_child(startingLevel)
+	load_level(startingLevel)
 	startingLevel.add_player(player, startingLevel.defaultSpawnPosition)
 			
 	
@@ -25,11 +33,13 @@ func on_portal_entered(p: Portal):
 	
 	is_player_teleporting = true
 	
-	if (p.otherPortal.level != p.level):
-		levelParent.add_child.call_deferred(p.otherPortal.level)
-		
-	p.level.remove_player()
-	p.otherPortal.level.add_player(player, p.otherPortal)
+	var from : Level = p.level
+	var to : Level = p.otherPortal.level
 	
-	if (p.otherPortal.level != p.level):
-		levelParent.remove_child.call_deferred(p.level)
+	if (from != to):
+		load_level(to)
+		from.remove_player()
+		to.add_player(player, p.otherPortal)
+		unload_level(from)
+	else:
+		player.global_position = p.otherPortal.global_position

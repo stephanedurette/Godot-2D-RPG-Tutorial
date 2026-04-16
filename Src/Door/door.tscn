@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bo1ew70s84j5n"]
+
+[ext_resource type="Texture2D" uid="uid://bn65vh7ew2w2n" path="res://Third Party/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetReliefDetail.png" id="1_j7e2j"]
+[ext_resource type="Script" uid="uid://3tppdsoja0xs" path="res://Src/Door/door.gd" id="1_yurfb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yurfb"]
+atlas = ExtResource("1_j7e2j")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pveie"]
+size = Vector2(16, 16)
+
+[node name="Door" type="StaticBody2D" unique_id=1675673477]
+script = ExtResource("1_yurfb")
+open_close_time = 0.5
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1129381474]
+texture = SubResource("AtlasTexture_yurfb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1853128541]
+shape = SubResource("RectangleShape2D_pveie")

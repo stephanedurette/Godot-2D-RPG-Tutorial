@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://p5ytsp46jjf4"]
+
+[ext_resource type="Texture2D" uid="uid://belp7vrjxx3qi" path="res://Third Party/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetDungeon.png" id="1_8qia3"]
+[ext_resource type="Script" uid="uid://c4ke1d2st6bdg" path="res://Src/BlockPuzzle/pushable_block.gd" id="1_l4qa5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4qa5"]
+atlas = ExtResource("1_8qia3")
+region = Rect2(128, 48, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hfnxp"]
+size = Vector2(16, 16)
+
+[node name="PushableBlock" type="RigidBody2D" unique_id=141768508]
+gravity_scale = 0.0
+script = ExtResource("1_l4qa5")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=925401951]
+texture = SubResource("AtlasTexture_l4qa5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=294457718]
+shape = SubResource("RectangleShape2D_hfnxp")
+
+[node name="Down" type="RayCast2D" parent="." unique_id=239511326]
+target_position = Vector2(0, 9)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Right" type="RayCast2D" parent="." unique_id=193632219]
+target_position = Vector2(9, 0)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Left" type="RayCast2D" parent="." unique_id=890698646]
+target_position = Vector2(-9, 0)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Up" type="RayCast2D" parent="." unique_id=1027989293]
+target_position = Vector2(0, -9)
+collide_with_areas = true
+collide_with_bodies = false

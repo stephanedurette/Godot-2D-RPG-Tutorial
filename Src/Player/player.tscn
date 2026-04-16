@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cwwyt6ho35rus" path="res://Src/Player/player.gd" id="1_i1ivj"]
 [ext_resource type="Script" uid="uid://dfm0brnpvhdyf" path="res://Src/Player/input_vector_component.gd" id="2_nms7q"]
 [ext_resource type="Texture2D" uid="uid://b042he7gaty05" path="res://Third Party/Ninja Adventure - Asset Pack/Actor/Characters/Knight/SpriteSheet.png" id="3_i1ivj"]
+[ext_resource type="PackedScene" uid="uid://clwj70nxsbfog" path="res://Src/BlockPuzzle/block_pusher.tscn" id="4_srngh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nms7q"]
 radius = 5.0
@@ -279,4 +280,11 @@ hframes = 4
 vframes = 7
 frame = 4
 
+[node name="BlockPusher" parent="." unique_id=896786495 instance=ExtResource("4_srngh")]
+
+[node name="CollisionShape2D" parent="BlockPusher" index="0" unique_id=636045233]
+position = Vector2(0, 0.5)
+
 [connection signal="on_value_changed" from="InputVectorComponent" to="." method="_on_player_input_on_move_direction_changed"]
+
+[editable path="BlockPusher"]

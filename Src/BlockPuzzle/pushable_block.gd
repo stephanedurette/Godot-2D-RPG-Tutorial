@@ -81,6 +81,7 @@ class PushingState extends PushBlockState:
 	
 	func on_push_finished():
 		pushable_block.state_machine.change_state(pushable_block.idle_state)
+		pushable_block.global_position = target_position
 		
 		
 		

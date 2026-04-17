@@ -10,12 +10,15 @@ extends StaticBody2D
 var tween: Tween
 
 func open():
-	_open_door.call_deferred(true)
+	_animate_door_open.call_deferred(true)
 	
 func close():
-	_open_door.call_deferred(false)
+	_animate_door_open.call_deferred(false)
 
-func _open_door(open: bool):
+func _animate_door_open(open: bool):
+	if (!is_inside_tree()):
+		return
+		
 	if tween != null:
 		tween.kill()
 	

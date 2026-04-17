@@ -4,6 +4,7 @@ extends AnimatableBody2D
 
 @export var push_distance: int
 @export var push_speed: float
+@export var first_push_time: float
 
 @onready var rays: Array[ShapeCast2D] = [$Up, $Down, $Left, $Right]
 
@@ -59,11 +60,35 @@ class PushBlockState extends State:
 		pushable_block = p
 
 class IdleState extends PushBlockState:
+	var current_push_time: float
+	var current_push_direction: Vector2
+	
+	func enter():
+		pass
+	
 	func process(delta):
-		var current_push_direction = pushable_block.get_push_direction()
-		if (current_push_direction != Vector2.ZERO && pushable_block.can_move(current_push_direction)):
-			pushable_block.pushing_state.target_position = pushable_block.global_position + current_push_direction * pushable_block.push_distance
-			pushable_block.state_machine.change_state(pushable_block.pushing_state)
+		var new_push_direction = pushable_block.get_push_direction()
+		
+		if (new_push_direction == Vector2.ZERO):
+			current_push_time = 0
+			return
+		
+		if (!pushable_block.can_move(new_push_direction)):
+			current_push_time = 0
+			return
+		
+		if(new_push_direction != current_push_direction):
+			current_push_direction = new_push_direction
+			current_push_time = 0
+			return
+		
+		current_push_time += delta
+		if (current_push_time >= pushable_block.first_push_time):
+			_on_push_finished()
+		
+	func _on_push_finished():
+		pushable_block.pushing_state.target_position = pushable_block.global_position + current_push_direction * pushable_block.push_distance
+		pushable_block.state_machine.change_state(pushable_block.pushing_state)
 
 class PushingState extends PushBlockState:
 	var target_position: Vector2
@@ -80,6 +105,8 @@ class PushingState extends PushBlockState:
 		pass
 	
 	func on_push_finished():
+		pushable_block.idle_state.current_push_time = pushable_block.first_push_time
+		
 		pushable_block.state_machine.change_state(pushable_block.idle_state)
 		pushable_block.global_position = target_position
 		

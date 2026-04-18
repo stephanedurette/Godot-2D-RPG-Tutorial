@@ -44,6 +44,9 @@ level = NodePath("../..")
 [node name="PushableBlock2" parent="ObstacleLayer" unique_id=221227763 instance=ExtResource("5_v211m")]
 position = Vector2(40, 0)
 
+[node name="PushableBlock3" parent="ObstacleLayer" unique_id=1460572135 instance=ExtResource("5_v211m")]
+position = Vector2(56, 0)
+
 [node name="Door" parent="ObstacleLayer" unique_id=1675673477 instance=ExtResource("7_s1smv")]
 position = Vector2(-24, -32)
 

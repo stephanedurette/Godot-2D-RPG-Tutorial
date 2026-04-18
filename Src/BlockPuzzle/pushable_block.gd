@@ -10,6 +10,8 @@ extends AnimatableBody2D
 @onready var directions : Array[Vector2i] = [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT]
 @onready var raycaster: Raycaster2D = $Raycaster2D
 
+@onready var RAYCAST_OFFSET: int = GlobalVariables.GRID_PIXEL_SIZE / 2
+
 var state_machine: State_Machine
 var idle_state: IdleState
 var pushing_state: PushingState
@@ -33,13 +35,13 @@ func _physics_process(delta: float) -> void:
 	raycaster.physics_process(delta)
 
 func can_move(dir: Vector2) -> bool:
-	var res = raycaster.ray(dir, global_position + (sprite_width / 2 + 1) * dir, push_distance - 1, ["block_push_obstacle"])
+	var res = raycaster.ray(dir, global_position + (RAYCAST_OFFSET + 1) * dir, push_distance - 2, ["block_push_obstacle"])
 	return res == null
 	
 
 func get_push_direction() -> Vector2:
 	for dir in directions:
-		var b = raycaster.ray(dir, global_position, sprite_width / 2 + 3, ["block_pusher"])
+		var b = raycaster.ray(dir,global_position, RAYCAST_OFFSET + 1, ["block_pusher"])
 		if b != null:
 			if (b as Player).current_move_direction.dot(-dir) > 0:
 				return -dir

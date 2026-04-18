@@ -2,7 +2,6 @@ class_name PushableBlock
 
 extends AnimatableBody2D
 
-@export var sprite_width: float = 16
 @export var push_distance: int
 @export var push_speed: float
 @export var first_push_time: float
@@ -63,7 +62,6 @@ class IdleState extends PushBlockState:
 	
 	func process(delta):
 		var new_push_direction = pushable_block.get_push_direction()
-		print(new_push_direction)
 		if (new_push_direction == Vector2.ZERO):
 			current_push_time = 0
 			return

@@ -10,9 +10,8 @@ region = Rect2(32, 0, 16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pveie"]
 size = Vector2(16, 16)
 
-[node name="Door" type="StaticBody2D" unique_id=1675673477]
+[node name="Door" type="StaticBody2D" unique_id=1675673477 groups=["block_push_obstacle"]]
 script = ExtResource("1_yurfb")
-buttons_needed = 1
 open_close_time = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1129381474]

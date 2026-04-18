@@ -43,3 +43,21 @@ filter_groups = Array[String](["block_pusher"])
 [node name="Top" parent="PlayerDetectors" unique_id=539388297 instance=ExtResource("4_epq7o")]
 position = Vector2(0, -9)
 filter_groups = Array[String](["block_pusher"])
+
+[node name="ObstacleDetectors" type="Node2D" parent="." unique_id=1350449209]
+
+[node name="Right" parent="ObstacleDetectors" unique_id=891091562 instance=ExtResource("4_epq7o")]
+position = Vector2(9, 0)
+filter_groups = Array[String](["block_push_obstacle"])
+
+[node name="Bottom" parent="ObstacleDetectors" unique_id=1965488166 instance=ExtResource("4_epq7o")]
+position = Vector2(0, 9)
+filter_groups = Array[String](["block_push_obstacle"])
+
+[node name="Left" parent="ObstacleDetectors" unique_id=505376186 instance=ExtResource("4_epq7o")]
+position = Vector2(-9, 0)
+filter_groups = Array[String](["block_push_obstacle"])
+
+[node name="Top" parent="ObstacleDetectors" unique_id=1130900233 instance=ExtResource("4_epq7o")]
+position = Vector2(0, -9)
+filter_groups = Array[String](["block_push_obstacle"])

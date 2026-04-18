@@ -13,9 +13,17 @@ var pushing_state: PushingState
 var player: Player
 var player_direction: Vector2
 
+var obstacle_directions: Dictionary[Vector2, bool] = {
+	Vector2.UP:false,
+	Vector2.DOWN:false,
+	Vector2.LEFT:false,
+	Vector2.RIGHT:false
+}
+
 func _ready() -> void:
 	_initialize_state_machine()
 	_initialize_player_colliders()
+	_initialize_obstacle_colliders()
 
 func _initialize_player_colliders():
 	$PlayerDetectors/Bottom.connect("on_node_entered",func(node): _on_player_entered_area(node, Vector2.DOWN))
@@ -28,6 +36,16 @@ func _initialize_player_colliders():
 	$PlayerDetectors/Left.connect("on_node_exited", _on_player_exited_area)
 	$PlayerDetectors/Right.connect("on_node_exited", _on_player_exited_area)
 	
+func _initialize_obstacle_colliders():
+	$ObstacleDetectors/Bottom.connect("on_node_entered", func(node): _on_obstacle_entered_area(Vector2.DOWN))
+	$ObstacleDetectors/Top.connect("on_node_entered", func(node): _on_obstacle_entered_area(Vector2.UP))
+	$ObstacleDetectors/Left.connect("on_node_entered", func(node): _on_obstacle_entered_area(Vector2.LEFT))
+	$ObstacleDetectors/Right.connect("on_node_entered", func(node): _on_obstacle_entered_area(Vector2.RIGHT))
+	
+	$ObstacleDetectors/Bottom.connect("on_node_exited", func(node): _on_obstacle_left_area(Vector2.DOWN))
+	$ObstacleDetectors/Top.connect("on_node_exited", func(node): _on_obstacle_left_area(Vector2.UP))
+	$ObstacleDetectors/Left.connect("on_node_exited", func(node): _on_obstacle_left_area(Vector2.LEFT))
+	$ObstacleDetectors/Right.connect("on_node_exited", func(node): _on_obstacle_left_area(Vector2.RIGHT))
 
 func _initialize_state_machine():
 	idle_state = IdleState.new(self)
@@ -40,8 +58,7 @@ func _process(delta: float) -> void:
 	state_machine.current_state.process(delta)
 
 func can_move(dir: Vector2) -> bool:
-	return true
-	#return res == null
+	return !obstacle_directions[dir]
 	
 
 func get_push_direction() -> Vector2:
@@ -54,12 +71,17 @@ func get_push_direction() -> Vector2:
 	return Vector2.ZERO
 
 func _on_player_entered_area(node: Node2D, dir: Vector2):
-	print(dir)
 	player = node as Player
 	player_direction = dir
 	
 func _on_player_exited_area(node: Node2D):
 	player = null
+
+func _on_obstacle_entered_area(dir: Vector2):
+	obstacle_directions[dir] = true
+	
+func _on_obstacle_left_area(dir: Vector2):
+	obstacle_directions[dir] = false
 	
 
 class PushBlockState extends State:
@@ -115,8 +137,9 @@ class PushingState extends PushBlockState:
 	func on_push_finished():
 		pushable_block.idle_state.current_push_time = pushable_block.first_push_time
 		
-		pushable_block.state_machine.change_state(pushable_block.idle_state)
 		pushable_block.global_position = target_position
+		pushable_block.state_machine.change_state(pushable_block.idle_state)
+		
 		
 		
 		

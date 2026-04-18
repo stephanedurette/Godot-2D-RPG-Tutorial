@@ -33,8 +33,8 @@ func _physics_process(delta: float) -> void:
 	raycaster.physics_process(delta)
 
 func can_move(dir: Vector2) -> bool:
-	return true
-	#return raycaster.ray(dir, global_position, push_distance + sprite_width / 2 + 1, ["block_push_obstacle"]) != null
+	var res = raycaster.ray(dir, global_position + (sprite_width / 2 + 1) * dir, push_distance - 1, ["block_push_obstacle"])
+	return res == null
 	
 
 func get_push_direction() -> Vector2:

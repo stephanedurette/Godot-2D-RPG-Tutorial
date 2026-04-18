@@ -10,7 +10,8 @@ func physics_process(_delta):
 func ray(direction: Vector2, start_position: Vector2, length: float, filter_groups: Array[String]) -> Node2D:
 	
 	var query = PhysicsRayQueryParameters2D.create(start_position, start_position + length * direction)
-
+	query.collision_mask = 0xFFFFFFFF
+	
 	var exclude_list = []
 	while true:
 		query.exclude = exclude_list
@@ -19,6 +20,7 @@ func ray(direction: Vector2, start_position: Vector2, length: float, filter_grou
 			return null
 		 
 		if _is_node_in_group_list(result["collider"], filter_groups):
+			print(result["collider"])
 			return result["collider"]
 		else:
 			exclude_list.append(result["rid"])

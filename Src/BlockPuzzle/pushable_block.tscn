@@ -30,12 +30,16 @@ shape = SubResource("RectangleShape2D_hfnxp")
 
 [node name="Right" parent="PlayerDetectors" unique_id=1909048769 instance=ExtResource("4_epq7o")]
 position = Vector2(9, 0)
+filter_groups = Array[String](["block_pusher"])
 
 [node name="Bottom" parent="PlayerDetectors" unique_id=1203242175 instance=ExtResource("4_epq7o")]
 position = Vector2(0, 9)
+filter_groups = Array[String](["block_pusher"])
 
 [node name="Left" parent="PlayerDetectors" unique_id=163214342 instance=ExtResource("4_epq7o")]
 position = Vector2(-9, 0)
+filter_groups = Array[String](["block_pusher"])
 
 [node name="Top" parent="PlayerDetectors" unique_id=539388297 instance=ExtResource("4_epq7o")]
 position = Vector2(0, -9)
+filter_groups = Array[String](["block_pusher"])

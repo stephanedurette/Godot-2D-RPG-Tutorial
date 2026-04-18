@@ -1,6 +1,11 @@
+class_name ObservableArea2D
+
 extends Area2D
 
 @export var filter_groups: Array[String]
+
+signal on_node_entered(Node2D)
+signal on_node_exited(Node2D)
 
 var _colliding_objects_hash_set: Dictionary[Node2D, bool]
 
@@ -25,10 +30,12 @@ func get_nearest(from_position: Vector3) -> Node2D:
 func _on_entered(node: Node2D):
 	if (_is_node_valid(node)):
 		_colliding_objects_hash_set.get_or_add(node, true)
+		on_node_entered.emit(node)
 
 func _on_exited(node: Node2D):
 	if (_is_node_valid(node)):
 		_colliding_objects_hash_set.erase(node)
+		on_node_exited.emit(node)
 
 func _is_node_valid(node: Node2D) -> bool:
 	if filter_groups.size() == 0:

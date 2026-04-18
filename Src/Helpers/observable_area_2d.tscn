@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dylrvqssduaov"]
+
+[ext_resource type="Script" uid="uid://b2c2g8ksm61gf" path="res://Src/Helpers/observable_area_2d.gd" id="1_esmuh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i4bpe"]
+
+[node name="ObservableArea2D" type="Area2D" unique_id=1909048769]
+script = ExtResource("1_esmuh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=939765]
+shape = SubResource("RectangleShape2D_i4bpe")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

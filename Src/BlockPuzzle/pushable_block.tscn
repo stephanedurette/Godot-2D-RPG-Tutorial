@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://belp7vrjxx3qi" path="res://Third Party/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetDungeon.png" id="1_8qia3"]
 [ext_resource type="Script" uid="uid://c4ke1d2st6bdg" path="res://Src/BlockPuzzle/pushable_block.gd" id="1_l4qa5"]
+[ext_resource type="PackedScene" uid="uid://dylrvqssduaov" path="res://Src/Helpers/observable_area_2d.tscn" id="3_hfnxp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l4qa5"]
 atlas = ExtResource("1_8qia3")
@@ -10,13 +11,7 @@ region = Rect2(128, 48, 16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hfnxp"]
 size = Vector2(14, 14)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_l4qa5"]
-size = Vector2(3, 1)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_epq7o"]
-size = Vector2(1, 3)
-
-[node name="PushableBlock" type="AnimatableBody2D" unique_id=1460572135]
+[node name="PushableBlock" type="AnimatableBody2D" unique_id=1460572135 groups=["block_push_obstacle"]]
 script = ExtResource("1_l4qa5")
 push_distance = 16
 push_speed = 16.0
@@ -28,26 +23,46 @@ texture = SubResource("AtlasTexture_l4qa5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=294457718]
 shape = SubResource("RectangleShape2D_hfnxp")
 
-[node name="Down" type="ShapeCast2D" parent="." unique_id=1826197416]
-position = Vector2(0, 8)
-shape = SubResource("RectangleShape2D_l4qa5")
-target_position = Vector2(0, 1)
-collide_with_areas = true
+[node name="Pusher Detection" type="Node2D" parent="." unique_id=1891709794]
 
-[node name="Up" type="ShapeCast2D" parent="." unique_id=185602236]
-position = Vector2(0, -8)
-shape = SubResource("RectangleShape2D_l4qa5")
-target_position = Vector2(0, -1)
-collide_with_areas = true
+[node name="Right" parent="Pusher Detection" unique_id=1909048769 instance=ExtResource("3_hfnxp")]
+position = Vector2(9, 0)
+scale = Vector2(0.1653099, 0.06553473)
+filter_groups = Array[String](["block_pusher"])
 
-[node name="Left" type="ShapeCast2D" parent="." unique_id=722409155]
-position = Vector2(-8, 0)
-shape = SubResource("RectangleShape2D_epq7o")
-target_position = Vector2(-1, 0)
-collide_with_areas = true
+[node name="Left" parent="Pusher Detection" unique_id=2147367437 instance=ExtResource("3_hfnxp")]
+position = Vector2(-8.999998, 0)
+scale = Vector2(0.1653099, 0.06553473)
+filter_groups = Array[String](["block_pusher"])
 
-[node name="Right" type="ShapeCast2D" parent="." unique_id=1645695754]
-position = Vector2(8, 0)
-shape = SubResource("RectangleShape2D_epq7o")
-target_position = Vector2(1, 0)
-collide_with_areas = true
+[node name="Up" parent="Pusher Detection" unique_id=2061449772 instance=ExtResource("3_hfnxp")]
+position = Vector2(0, -9)
+scale = Vector2(0.055197977, 0.13916618)
+filter_groups = Array[String](["block_pusher"])
+
+[node name="Down" parent="Pusher Detection" unique_id=106827623 instance=ExtResource("3_hfnxp")]
+position = Vector2(0, 8.999998)
+scale = Vector2(0.055197977, 0.13916618)
+filter_groups = Array[String](["block_pusher"])
+
+[node name="Obstacle Detection" type="Node2D" parent="." unique_id=161711637]
+
+[node name="Right" parent="Obstacle Detection" unique_id=1484391027 instance=ExtResource("3_hfnxp")]
+position = Vector2(9, 0)
+scale = Vector2(0.1653099, 0.06553473)
+filter_groups = Array[String](["block_push_obstacle"])
+
+[node name="Left" parent="Obstacle Detection" unique_id=1496941083 instance=ExtResource("3_hfnxp")]
+position = Vector2(-8.999998, 0)
+scale = Vector2(0.1653099, 0.06553473)
+filter_groups = Array[String](["block_push_obstacle"])
+
+[node name="Up" parent="Obstacle Detection" unique_id=1863552151 instance=ExtResource("3_hfnxp")]
+position = Vector2(0, -9)
+scale = Vector2(0.055197977, 0.13916618)
+filter_groups = Array[String](["block_push_obstacle"])
+
+[node name="Down" parent="Obstacle Detection" unique_id=1287175889 instance=ExtResource("3_hfnxp")]
+position = Vector2(0, 8.999998)
+scale = Vector2(0.055197977, 0.13916618)
+filter_groups = Array[String](["block_push_obstacle"])

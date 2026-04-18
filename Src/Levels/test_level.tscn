@@ -28,7 +28,7 @@ position = Vector2(8, -16)
 [node name="PushButton2" parent="DirtLayer" unique_id=358160436 instance=ExtResource("6_0jdrx")]
 position = Vector2(24, -32)
 
-[node name="ObstacleLayer" type="TileMapLayer" parent="." unique_id=1421706805]
+[node name="ObstacleLayer" type="TileMapLayer" parent="." unique_id=1421706805 groups=["block_push_obstacle"]]
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AAD+/wEAAAACAAAAAAAEAP3/AAAAAAIAAAADAPv/AAAAAAIAAAAAAPz/AAAAAAIAAAD9//v/AAAAAAIAAAD6//n/AAAAAAIAAAAIAP7/AAAAAAIAAAALAP//AAAAAAIAAAAOAP//AAAAAAIAAAAOAAYAAAAAAAIAAAAKAAYAAAAAAAIAAAAGAAUAAAAAAAIAAAACAAQAAAAAAAIAAAD5/wAAAAAAAAIAAAD0//3/AAAAAAIAAADz//r/AAAAAAIAAADy//j/AAAAAAIAAAD9/wQAAAACAAAAAAD7/wYAAAACAAAAAAD0/wIAAAACAAAAAAD1/wYAAAACAAAAAAAMAAIAAQAAAAcAAAA=")
 tile_set = ExtResource("2_3x3l4")

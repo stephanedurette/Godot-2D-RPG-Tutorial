@@ -30,6 +30,10 @@ folder_colors={
 "res://Third Party/": "green"
 }
 
+[global_group]
+
+block_push_obstacle=""
+
 [input]
 
 move_left={

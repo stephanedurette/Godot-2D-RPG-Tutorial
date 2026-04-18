@@ -280,7 +280,7 @@ hframes = 4
 vframes = 7
 frame = 4
 
-[node name="BlockPusher" parent="." unique_id=896786495 instance=ExtResource("4_srngh")]
+[node name="BlockPusher" parent="." unique_id=896786495 groups=["block_pusher"] instance=ExtResource("4_srngh")]
 
 [node name="CollisionShape2D" parent="BlockPusher" index="0" unique_id=636045233]
 visible = false

@@ -7,6 +7,8 @@ extends Area2D
 signal on_node_entered(Node2D)
 signal on_node_exited(Node2D)
 
+@onready var box_collider: RectangleShape2D = $CollisionShape2D.shape
+
 var _colliding_objects_hash_set: Dictionary[Node2D, bool]
 
 func is_colliding() -> bool:
@@ -14,6 +16,9 @@ func is_colliding() -> bool:
 
 func get_first() -> Node2D:
 	return _colliding_objects_hash_set.keys()[0]
+
+func set_size(size: Vector2):
+	box_collider.size = size
 
 func get_nearest(from_position: Vector3) -> Node2D:
 	var smallest_distance: float = 1000

@@ -3,11 +3,6 @@
 [ext_resource type="Script" uid="uid://cwwyt6ho35rus" path="res://Src/Player/player.gd" id="1_i1ivj"]
 [ext_resource type="Script" uid="uid://dfm0brnpvhdyf" path="res://Src/Player/input_vector_component.gd" id="2_nms7q"]
 [ext_resource type="Texture2D" uid="uid://b042he7gaty05" path="res://Third Party/Ninja Adventure - Asset Pack/Actor/Characters/Knight/SpriteSheet.png" id="3_i1ivj"]
-[ext_resource type="PackedScene" uid="uid://clwj70nxsbfog" path="res://Src/BlockPuzzle/block_pusher.tscn" id="4_srngh"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nms7q"]
-radius = 5.0
-height = 10.0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i1ivj"]
 animation = &"idle_down"
@@ -247,14 +242,14 @@ _data = {
 &"move_up": SubResource("Animation_v0kqs")
 }
 
-[node name="Player" type="CharacterBody2D" unique_id=1937175503]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nms7q"]
+radius = 5.0
+height = 10.0
+
+[node name="Player" type="CharacterBody2D" unique_id=1937175503 groups=["block_pusher"]]
 motion_mode = 1
 script = ExtResource("1_i1ivj")
 move_speed = 50.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1864982244]
-position = Vector2(0, 3)
-shape = SubResource("CapsuleShape2D_nms7q")
 
 [node name="InputVectorComponent" type="Node" parent="." unique_id=445702645]
 script = ExtResource("2_nms7q")
@@ -280,12 +275,8 @@ hframes = 4
 vframes = 7
 frame = 4
 
-[node name="BlockPusher" parent="." unique_id=896786495 groups=["block_pusher"] instance=ExtResource("4_srngh")]
-
-[node name="CollisionShape2D" parent="BlockPusher" index="0" unique_id=636045233]
-visible = false
-position = Vector2(0, 1.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1864982244]
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_nms7q")
 
 [connection signal="on_value_changed" from="InputVectorComponent" to="." method="_on_player_input_on_move_direction_changed"]
-
-[editable path="BlockPusher"]

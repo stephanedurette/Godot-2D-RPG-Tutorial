@@ -2,29 +2,24 @@ class_name PushableBlock
 
 extends AnimatableBody2D
 
+@export var sprite_width: float = 16
 @export var push_distance: int
 @export var push_speed: float
 @export var first_push_time: float
 
-@onready var player_detection_casts: Dictionary[Vector2, ObservableArea2D] = {
-	Vector2.RIGHT: $"Pusher Detection/Right",
-	Vector2.LEFT: $"Pusher Detection/Left",
-	Vector2.UP: $"Pusher Detection/Up",
-	Vector2.DOWN: $"Pusher Detection/Down",
-}
-
-@onready var obstacle_detection_casts: Dictionary[Vector2, ObservableArea2D] = {
-	Vector2.RIGHT: $"Obstacle Detection/Right",
-	Vector2.LEFT: $"Obstacle Detection/Left",
-	Vector2.UP: $"Obstacle Detection/Up",
-	Vector2.DOWN: $"Obstacle Detection/Down",
-}
+@onready var directions : Array[Vector2i] = [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT]
+@onready var raycaster: Raycaster2D = $Raycaster2D
 
 var state_machine: State_Machine
 var idle_state: IdleState
 var pushing_state: PushingState
 
+var space_state
+
 func _ready() -> void:
+	_initialize_state_machine()
+
+func _initialize_state_machine():
 	idle_state = IdleState.new(self)
 	pushing_state = PushingState.new(self)
 	
@@ -34,15 +29,21 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	state_machine.current_state.process(delta)
 
+func _physics_process(delta: float) -> void:
+	raycaster.physics_process(delta)
+
 func can_move(dir: Vector2) -> bool:
-	return !obstacle_detection_casts[dir].is_colliding()
+	return true
+	#return raycaster.ray(dir, global_position, push_distance + sprite_width / 2 + 1, ["block_push_obstacle"]) != null
+	
 
 func get_push_direction() -> Vector2:
-	for dir in player_detection_casts.keys():
-		if (player_detection_casts[dir].is_colliding()):
-			var pusher = player_detection_casts[dir].get_first() as BlockPusher
-			if (-dir.dot(pusher.push_direction) > 0):
+	for dir in directions:
+		var b = raycaster.ray(dir, global_position, sprite_width / 2 + 3, ["block_pusher"])
+		if b != null:
+			if (b as Player).current_move_direction.dot(-dir) > 0:
 				return -dir
+				
 	return Vector2.ZERO
 
 class PushBlockState extends State:
@@ -60,7 +61,7 @@ class IdleState extends PushBlockState:
 	
 	func process(delta):
 		var new_push_direction = pushable_block.get_push_direction()
-		
+		print(new_push_direction)
 		if (new_push_direction == Vector2.ZERO):
 			current_push_time = 0
 			return

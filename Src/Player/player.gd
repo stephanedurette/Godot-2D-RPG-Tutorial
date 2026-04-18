@@ -5,7 +5,6 @@ extends CharacterBody2D
 @export var move_speed : float = 10
 
 @onready var animation_tree: AnimationTree = $"AnimationTree"
-@onready var block_pusher: BlockPusher = $BlockPusher
 
 var current_move_direction: Vector2
 
@@ -19,7 +18,6 @@ func _process(_delta: float) -> void:
 
 func _on_player_input_on_move_direction_changed(direction: Vector2) -> void:
 	current_move_direction = direction
-	block_pusher.push_direction = current_move_direction
 	
 	if (current_move_direction != Vector2.ZERO):
 		animation_tree.set("parameters/Idle/blend_position", current_move_direction)

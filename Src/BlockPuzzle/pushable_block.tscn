@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://belp7vrjxx3qi" path="res://Third Party/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetDungeon.png" id="1_8qia3"]
 [ext_resource type="Script" uid="uid://c4ke1d2st6bdg" path="res://Src/BlockPuzzle/pushable_block.gd" id="1_l4qa5"]
-[ext_resource type="PackedScene" uid="uid://dylrvqssduaov" path="res://Src/Helpers/observable_area_2d.tscn" id="3_hfnxp"]
+[ext_resource type="PackedScene" uid="uid://bejpclknsp3dd" path="res://Src/Helpers/raycaster_2d.tscn" id="3_hfnxp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l4qa5"]
 atlas = ExtResource("1_8qia3")
@@ -23,46 +23,4 @@ texture = SubResource("AtlasTexture_l4qa5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=294457718]
 shape = SubResource("RectangleShape2D_hfnxp")
 
-[node name="Pusher Detection" type="Node2D" parent="." unique_id=1891709794]
-
-[node name="Right" parent="Pusher Detection" unique_id=1909048769 instance=ExtResource("3_hfnxp")]
-position = Vector2(9, 0)
-scale = Vector2(0.1653099, 0.06553473)
-filter_groups = Array[String](["block_pusher"])
-
-[node name="Left" parent="Pusher Detection" unique_id=2147367437 instance=ExtResource("3_hfnxp")]
-position = Vector2(-8.999998, 0)
-scale = Vector2(0.1653099, 0.06553473)
-filter_groups = Array[String](["block_pusher"])
-
-[node name="Up" parent="Pusher Detection" unique_id=2061449772 instance=ExtResource("3_hfnxp")]
-position = Vector2(0, -9)
-scale = Vector2(0.055197977, 0.13916618)
-filter_groups = Array[String](["block_pusher"])
-
-[node name="Down" parent="Pusher Detection" unique_id=106827623 instance=ExtResource("3_hfnxp")]
-position = Vector2(0, 8.999998)
-scale = Vector2(0.055197977, 0.13916618)
-filter_groups = Array[String](["block_pusher"])
-
-[node name="Obstacle Detection" type="Node2D" parent="." unique_id=161711637]
-
-[node name="Right" parent="Obstacle Detection" unique_id=1484391027 instance=ExtResource("3_hfnxp")]
-position = Vector2(9, 0)
-scale = Vector2(0.1653099, 0.06553473)
-filter_groups = Array[String](["block_push_obstacle"])
-
-[node name="Left" parent="Obstacle Detection" unique_id=1496941083 instance=ExtResource("3_hfnxp")]
-position = Vector2(-8.999998, 0)
-scale = Vector2(0.1653099, 0.06553473)
-filter_groups = Array[String](["block_push_obstacle"])
-
-[node name="Up" parent="Obstacle Detection" unique_id=1863552151 instance=ExtResource("3_hfnxp")]
-position = Vector2(0, -9)
-scale = Vector2(0.055197977, 0.13916618)
-filter_groups = Array[String](["block_push_obstacle"])
-
-[node name="Down" parent="Obstacle Detection" unique_id=1287175889 instance=ExtResource("3_hfnxp")]
-position = Vector2(0, 8.999998)
-scale = Vector2(0.055197977, 0.13916618)
-filter_groups = Array[String](["block_push_obstacle"])
+[node name="Raycaster2D" parent="." unique_id=1590234572 instance=ExtResource("3_hfnxp")]

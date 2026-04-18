@@ -33,6 +33,7 @@ folder_colors={
 [global_group]
 
 block_push_obstacle=""
+block_pusher=""
 
 [input]
 

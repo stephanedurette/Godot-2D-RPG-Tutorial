@@ -6,10 +6,12 @@ extends AnimatableBody2D
 @export var push_speed: float
 @export var first_push_time: float
 
-@onready var directions : Array[Vector2i] = [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT]
-@onready var raycaster: Raycaster2D = $Raycaster2D
-
-@onready var RAYCAST_OFFSET: int = GlobalVariables.GRID_PIXEL_SIZE / 2
+@onready var player_detection: Dictionary[Vector2, ObservableShapeCast2D] = {
+	Vector2.UP:$PlayerDetectors/Up,
+	Vector2.DOWN:$PlayerDetectors/Down,
+	Vector2.LEFT:$PlayerDetectors/Left,
+	Vector2.RIGHT:$PlayerDetectors/Right,
+}
 
 var state_machine: State_Machine
 var idle_state: IdleState
@@ -30,20 +32,19 @@ func _initialize_state_machine():
 func _process(delta: float) -> void:
 	state_machine.current_state.process(delta)
 
-func _physics_process(delta: float) -> void:
-	raycaster.physics_process(delta)
-
 func can_move(dir: Vector2) -> bool:
-	var res = raycaster.ray(dir, global_position + (RAYCAST_OFFSET + 1) * dir, push_distance - 2, ["block_push_obstacle"])
-	return res == null
+	return true
+	#return res == null
 	
 
 func get_push_direction() -> Vector2:
-	for dir in directions:
-		var b = raycaster.ray(dir,global_position, RAYCAST_OFFSET + 1, ["block_pusher"])
-		if b != null:
-			if (b as Player).current_move_direction.dot(-dir) > 0:
-				return -dir
+	for direction in player_detection.keys():
+		if !player_detection[direction].colliding():
+			continue
+			
+		var p: Player = player_detection[direction].first() as Player
+		if p.current_move_direction.dot(-direction) > 0:
+			return -direction
 				
 	return Vector2.ZERO
 

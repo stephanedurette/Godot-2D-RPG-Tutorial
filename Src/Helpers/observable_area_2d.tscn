@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b2c2g8ksm61gf" path="res://Src/Helpers/observable_area_2d.gd" id="1_esmuh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i4bpe"]
+resource_local_to_scene = true
 
 [node name="ObservableArea2D" type="Area2D" unique_id=1909048769]
 script = ExtResource("1_esmuh")

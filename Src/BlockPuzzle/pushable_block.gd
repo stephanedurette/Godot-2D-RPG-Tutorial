@@ -6,21 +6,28 @@ extends AnimatableBody2D
 @export var push_speed: float
 @export var first_push_time: float
 
-@onready var player_detection: Dictionary[Vector2, ObservableShapeCast2D] = {
-	Vector2.UP:$PlayerDetectors/Up,
-	Vector2.DOWN:$PlayerDetectors/Down,
-	Vector2.LEFT:$PlayerDetectors/Left,
-	Vector2.RIGHT:$PlayerDetectors/Right,
-}
-
 var state_machine: State_Machine
 var idle_state: IdleState
 var pushing_state: PushingState
 
-var space_state
+var player: Player
+var player_direction: Vector2
 
 func _ready() -> void:
 	_initialize_state_machine()
+	_initialize_player_colliders()
+
+func _initialize_player_colliders():
+	$PlayerDetectors/Bottom.connect("on_node_entered",func(node): _on_player_entered_area(node, Vector2.DOWN))
+	$PlayerDetectors/Top.connect("on_node_entered",func(node): _on_player_entered_area(node, Vector2.UP))
+	$PlayerDetectors/Left.connect("on_node_entered",func(node): _on_player_entered_area(node, Vector2.LEFT))
+	$PlayerDetectors/Right.connect("on_node_entered",func(node): _on_player_entered_area(node, Vector2.RIGHT))
+	
+	$PlayerDetectors/Bottom.connect("on_node_exited", _on_player_exited_area)
+	$PlayerDetectors/Top.connect("on_node_exited", _on_player_exited_area)
+	$PlayerDetectors/Left.connect("on_node_exited", _on_player_exited_area)
+	$PlayerDetectors/Right.connect("on_node_exited", _on_player_exited_area)
+	
 
 func _initialize_state_machine():
 	idle_state = IdleState.new(self)
@@ -38,15 +45,22 @@ func can_move(dir: Vector2) -> bool:
 	
 
 func get_push_direction() -> Vector2:
-	for direction in player_detection.keys():
-		if !player_detection[direction].colliding():
-			continue
-			
-		var p: Player = player_detection[direction].first() as Player
-		if p.current_move_direction.dot(-direction) > 0:
-			return -direction
-				
+	if (player == null):
+		return Vector2.ZERO
+	
+	if player.current_move_direction.dot(-player_direction) > 0:
+		return -player_direction
+	
 	return Vector2.ZERO
+
+func _on_player_entered_area(node: Node2D, dir: Vector2):
+	print(dir)
+	player = node as Player
+	player_direction = dir
+	
+func _on_player_exited_area(node: Node2D):
+	player = null
+	
 
 class PushBlockState extends State:
 	var pushable_block: PushableBlock

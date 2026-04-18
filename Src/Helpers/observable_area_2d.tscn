@@ -4,6 +4,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i4bpe"]
 resource_local_to_scene = true
+size = Vector2(1, 1)
 
 [node name="ObservableArea2D" type="Area2D" unique_id=1909048769]
 script = ExtResource("1_esmuh")

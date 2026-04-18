@@ -34,13 +34,11 @@ func get_nearest(from_position: Vector3) -> Node2D:
 	
 func _on_entered(node: Node2D):
 	if (_is_node_valid(node)):
-		print(node)
 		_colliding_objects_hash_set.get_or_add(node, true)
 		on_node_entered.emit(node)
 
 func _on_exited(node: Node2D):
 	if (_is_node_valid(node)):
-		print(node)
 		_colliding_objects_hash_set.erase(node)
 		on_node_exited.emit(node)
 

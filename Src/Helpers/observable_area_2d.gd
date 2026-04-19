@@ -20,6 +20,9 @@ func get_first() -> Node2D:
 func set_size(size: Vector2):
 	box_collider.size = size
 
+func set_offset(offset: Vector2):
+	$CollisionShape2D.position = offset
+
 func get_nearest(from_position: Vector3) -> Node2D:
 	var smallest_distance: float = 1000
 	var closest_node: Node2D

@@ -6,6 +6,10 @@ extends AnimatableBody2D
 @export var push_speed: float
 @export var first_push_time: float
 
+@onready var player_colliders: Array[ObservableArea2D] = [$PlayerDetectors/Bottom, $PlayerDetectors/Top, $PlayerDetectors/Left, $PlayerDetectors/Right]
+@onready var obstacle_colliders: Array[ObservableArea2D] = [$ObstacleDetectors/Bottom, $ObstacleDetectors/Top, $ObstacleDetectors/Left, $ObstacleDetectors/Right]
+@onready var directions: Array[Vector2] = [Vector2.DOWN, Vector2.UP, Vector2.LEFT, Vector2.RIGHT]
+
 var state_machine: State_Machine
 var idle_state: IdleState
 var pushing_state: PushingState
@@ -26,26 +30,17 @@ func _ready() -> void:
 	_initialize_obstacle_colliders()
 
 func _initialize_player_colliders():
-	$PlayerDetectors/Bottom.connect("on_node_entered",func(node): _on_player_entered_area(node, Vector2.DOWN))
-	$PlayerDetectors/Top.connect("on_node_entered",func(node): _on_player_entered_area(node, Vector2.UP))
-	$PlayerDetectors/Left.connect("on_node_entered",func(node): _on_player_entered_area(node, Vector2.LEFT))
-	$PlayerDetectors/Right.connect("on_node_entered",func(node): _on_player_entered_area(node, Vector2.RIGHT))
-	
-	$PlayerDetectors/Bottom.connect("on_node_exited", _on_player_exited_area)
-	$PlayerDetectors/Top.connect("on_node_exited", _on_player_exited_area)
-	$PlayerDetectors/Left.connect("on_node_exited", _on_player_exited_area)
-	$PlayerDetectors/Right.connect("on_node_exited", _on_player_exited_area)
+	for i in player_colliders.size():
+		player_colliders[i].connect("on_node_entered",func(node): _on_player_entered_area(node, directions[i]))
+		player_colliders[i].connect("on_node_exited", _on_player_exited_area)
 	
 func _initialize_obstacle_colliders():
-	$ObstacleDetectors/Bottom.connect("on_node_entered", func(node): _on_obstacle_entered_area(Vector2.DOWN))
-	$ObstacleDetectors/Top.connect("on_node_entered", func(node): _on_obstacle_entered_area(Vector2.UP))
-	$ObstacleDetectors/Left.connect("on_node_entered", func(node): _on_obstacle_entered_area(Vector2.LEFT))
-	$ObstacleDetectors/Right.connect("on_node_entered", func(node): _on_obstacle_entered_area(Vector2.RIGHT))
+	for i in obstacle_colliders.size():
+		obstacle_colliders[i].connect("on_node_entered",func(node): _on_obstacle_entered_area(directions[i]))
+		obstacle_colliders[i].connect("on_node_exited",func(node): _on_obstacle_left_area(directions[i]))
 	
-	$ObstacleDetectors/Bottom.connect("on_node_exited", func(node): _on_obstacle_left_area(Vector2.DOWN))
-	$ObstacleDetectors/Top.connect("on_node_exited", func(node): _on_obstacle_left_area(Vector2.UP))
-	$ObstacleDetectors/Left.connect("on_node_exited", func(node): _on_obstacle_left_area(Vector2.LEFT))
-	$ObstacleDetectors/Right.connect("on_node_exited", func(node): _on_obstacle_left_area(Vector2.RIGHT))
+	$ObstacleDetectors/Bottom.set_size(Vector2(1, push_distance))
+	$ObstacleDetectors/Bottom.set_offset(Vector2(0, push_distance / 2))
 
 func _initialize_state_machine():
 	idle_state = IdleState.new(self)

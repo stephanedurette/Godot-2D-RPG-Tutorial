@@ -9,10 +9,10 @@ func colliding() -> bool:
 		if _is_node_valid(get_collider(i)):
 			return true
 	return false
+	
 func first() -> Node2D:
 	for i in get_collision_count():
 		if _is_node_valid(get_collider(i)):
-			print(get_collider(i))
 			return get_collider(i)
 	return null
 

@@ -31,13 +31,13 @@ func _ready() -> void:
 
 func _initialize_player_colliders():
 	for i in player_colliders.size():
-		player_colliders[i].connect("on_node_entered",func(node): _on_player_entered_area(node, directions[i]))
-		player_colliders[i].connect("on_node_exited", _on_player_exited_area)
+		player_colliders[i].connect("on_node_entered",func(node, _area): _on_player_entered_area(node, directions[i]))
+		player_colliders[i].connect("on_node_exited", func(node, _area): _on_player_exited_area())
 	
 func _initialize_obstacle_colliders():
 	for i in obstacle_colliders.size():
-		obstacle_colliders[i].connect("on_node_entered",func(node): _on_obstacle_entered_area(directions[i], node))
-		obstacle_colliders[i].connect("on_node_exited",func(_node): _on_obstacle_left_area(directions[i]))
+		obstacle_colliders[i].connect("on_node_entered",func(node, area): _on_obstacle_entered_area(directions[i], node, area))
+		obstacle_colliders[i].connect("on_node_exited",func(_node, _area): _on_obstacle_left_area(directions[i]))
 		
 		var size: Vector2 = Vector2(1 if directions[i].x == 0 else push_distance, 1 if directions[i].y == 0 else push_distance)
 		var offset: Vector2 = Vector2(directions[i].x * push_distance / 2, directions[i].y * push_distance / 2)
@@ -61,9 +61,12 @@ func move_distance(dir: Vector2) -> int:
 	if(obstacle_sqr_distances[dir] == -1):
 		return push_distance
 	
-	var obstacle_distance_rounded_to_grid: int = floor(sqrt(obstacle_sqr_distances[dir]) / GlobalVariables.GRID_PIXEL_SIZE) * GlobalVariables.GRID_PIXEL_SIZE
-	print(sqrt(obstacle_sqr_distances[dir]) / GlobalVariables.GRID_PIXEL_SIZE)
-	return min(push_distance, obstacle_distance_rounded_to_grid)
+	var obstacle_distance: float = sqrt(obstacle_sqr_distances[dir])
+	print(obstacle_distance)
+	if (obstacle_distance <= push_distance):
+		return 0
+	else:
+		return push_distance
 	
 
 func get_push_direction() -> Vector2:
@@ -79,11 +82,11 @@ func _on_player_entered_area(node: Node2D, dir: Vector2):
 	player = node as Player
 	player_direction = dir
 	
-func _on_player_exited_area(_node: Node2D):
+func _on_player_exited_area():
 	player = null
 
-func _on_obstacle_entered_area(dir: Vector2, node: Node2D):
-	obstacle_sqr_distances[dir] = node.global_position.distance_squared_to(self.global_position)
+func _on_obstacle_entered_area(dir: Vector2, node: Node2D, area: ObservableArea2D):
+	obstacle_sqr_distances[dir] = area.get_nearest_squared_distance(global_position)
 	
 func _on_obstacle_left_area(dir: Vector2):
 	obstacle_sqr_distances[dir] = -1

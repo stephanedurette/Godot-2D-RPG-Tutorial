@@ -4,8 +4,8 @@ extends Area2D
 
 @export var filter_groups: Array[String]
 
-signal on_node_entered(Node2D)
-signal on_node_exited(Node2D)
+signal on_node_entered(Node2D, ObservableArea2D)
+signal on_node_exited(Node2D, ObservableArea2D)
 
 @onready var box_collider: RectangleShape2D = $CollisionShape2D.shape
 
@@ -23,7 +23,7 @@ func set_size(size: Vector2):
 func set_offset(offset: Vector2):
 	$CollisionShape2D.position = offset
 
-func get_nearest(from_position: Vector3) -> Node2D:
+func get_nearest_squared_distance(from_position: Vector2) -> float:
 	var smallest_distance: float = 1000
 	var closest_node: Node2D
 	
@@ -33,17 +33,17 @@ func get_nearest(from_position: Vector3) -> Node2D:
 			smallest_distance = distance
 			closest_node = n
 	
-	return closest_node
+	return smallest_distance
 	
 func _on_entered(node: Node2D):
 	if (_is_node_valid(node)):
 		_colliding_objects_hash_set.get_or_add(node, true)
-		on_node_entered.emit(node)
+		on_node_entered.emit(node, self)
 
 func _on_exited(node: Node2D):
 	if (_is_node_valid(node)):
 		_colliding_objects_hash_set.erase(node)
-		on_node_exited.emit(node)
+		on_node_exited.emit(node, self)
 
 func _is_node_valid(node: Node2D) -> bool:
 	if filter_groups.size() == 0:

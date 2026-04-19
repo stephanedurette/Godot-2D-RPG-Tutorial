@@ -17,11 +17,11 @@ var pushing_state: PushingState
 var player: Player
 var player_direction: Vector2
 
-var obstacle_directions: Dictionary[Vector2, bool] = {
-	Vector2.UP:false,
-	Vector2.DOWN:false,
-	Vector2.LEFT:false,
-	Vector2.RIGHT:false
+var obstacle_sqr_distances: Dictionary[Vector2, float] = {
+	Vector2.UP: -1,
+	Vector2.DOWN: -1,
+	Vector2.LEFT: -1,
+	Vector2.RIGHT: -1
 }
 
 func _ready() -> void:
@@ -36,7 +36,7 @@ func _initialize_player_colliders():
 	
 func _initialize_obstacle_colliders():
 	for i in obstacle_colliders.size():
-		obstacle_colliders[i].connect("on_node_entered",func(_node): _on_obstacle_entered_area(directions[i]))
+		obstacle_colliders[i].connect("on_node_entered",func(node): _on_obstacle_entered_area(directions[i], node))
 		obstacle_colliders[i].connect("on_node_exited",func(_node): _on_obstacle_left_area(directions[i]))
 		
 		var size: Vector2 = Vector2(1 if directions[i].x == 0 else push_distance, 1 if directions[i].y == 0 else push_distance)
@@ -54,8 +54,16 @@ func _initialize_state_machine():
 func _process(delta: float) -> void:
 	state_machine.current_state.process(delta)
 
-func can_move(dir: Vector2) -> bool:
-	return !obstacle_directions[dir]
+func move_distance(dir: Vector2) -> int:
+	if (dir == Vector2.ZERO):
+		return 0
+	
+	if(obstacle_sqr_distances[dir] == -1):
+		return push_distance
+	
+	var obstacle_distance_rounded_to_grid: int = floor(sqrt(obstacle_sqr_distances[dir]) / GlobalVariables.GRID_PIXEL_SIZE) * GlobalVariables.GRID_PIXEL_SIZE
+	print(sqrt(obstacle_sqr_distances[dir]) / GlobalVariables.GRID_PIXEL_SIZE)
+	return min(push_distance, obstacle_distance_rounded_to_grid)
 	
 
 func get_push_direction() -> Vector2:
@@ -74,11 +82,11 @@ func _on_player_entered_area(node: Node2D, dir: Vector2):
 func _on_player_exited_area(_node: Node2D):
 	player = null
 
-func _on_obstacle_entered_area(dir: Vector2):
-	obstacle_directions[dir] = true
+func _on_obstacle_entered_area(dir: Vector2, node: Node2D):
+	obstacle_sqr_distances[dir] = node.global_position.distance_squared_to(self.global_position)
 	
 func _on_obstacle_left_area(dir: Vector2):
-	obstacle_directions[dir] = false
+	obstacle_sqr_distances[dir] = -1
 	
 
 class PushBlockState extends State:
@@ -90,17 +98,16 @@ class PushBlockState extends State:
 class IdleState extends PushBlockState:
 	var current_push_time: float
 	var current_push_direction: Vector2
+	var current_move_distance: int
 	
 	func enter():
 		pass
 	
 	func process(delta):
 		var new_push_direction = pushable_block.get_push_direction()
-		if (new_push_direction == Vector2.ZERO):
-			current_push_time = 0
-			return
+		current_move_distance = pushable_block.move_distance(new_push_direction)
 		
-		if (!pushable_block.can_move(new_push_direction)):
+		if (new_push_direction == Vector2.ZERO || current_move_distance == 0):
 			current_push_time = 0
 			return
 		
@@ -114,7 +121,7 @@ class IdleState extends PushBlockState:
 			_on_push_finished()
 		
 	func _on_push_finished():
-		pushable_block.pushing_state.target_position = pushable_block.global_position + current_push_direction * pushable_block.push_distance
+		pushable_block.pushing_state.target_position = pushable_block.global_position + current_push_direction * current_move_distance
 		pushable_block.state_machine.change_state(pushable_block.pushing_state)
 
 class PushingState extends PushBlockState:

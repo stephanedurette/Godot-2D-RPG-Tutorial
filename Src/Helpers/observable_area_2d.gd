@@ -23,8 +23,8 @@ func set_size(size: Vector2):
 func set_offset(offset: Vector2):
 	$CollisionShape2D.position = offset
 
-func get_nearest_squared_distance(from_position: Vector2) -> float:
-	var smallest_distance: float = 1000
+func get_nearest(from_position: Vector2) -> Node2D:
+	var smallest_distance: float = INF
 	var closest_node: Node2D
 	
 	for n in _colliding_objects_hash_set.keys():
@@ -33,7 +33,7 @@ func get_nearest_squared_distance(from_position: Vector2) -> float:
 			smallest_distance = distance
 			closest_node = n
 	
-	return smallest_distance
+	return closest_node
 	
 func _on_entered(node: Node2D):
 	if (_is_node_valid(node)):

@@ -7,7 +7,6 @@ extends AnimatableBody2D
 @export var first_push_time: float
 
 @onready var player_colliders: Array[ObservableArea2D] = [$PlayerDetectors/Bottom, $PlayerDetectors/Top, $PlayerDetectors/Left, $PlayerDetectors/Right]
-@onready var obstacle_colliders: Array[ObservableArea2D] = [$ObstacleDetectors/Bottom, $ObstacleDetectors/Top, $ObstacleDetectors/Left, $ObstacleDetectors/Right]
 @onready var directions: Array[Vector2] = [Vector2.DOWN, Vector2.UP, Vector2.LEFT, Vector2.RIGHT]
 
 var state_machine: State_Machine
@@ -17,11 +16,11 @@ var pushing_state: PushingState
 var player: Player
 var player_direction: Vector2
 
-var obstacle_sqr_distances: Dictionary[Vector2, float] = {
-	Vector2.UP: -1,
-	Vector2.DOWN: -1,
-	Vector2.LEFT: -1,
-	Vector2.RIGHT: -1
+@onready var obstacle_colliders: Dictionary[Vector2, ObservableArea2D] = {
+	Vector2.UP: $ObstacleDetectors/Top,
+	Vector2.DOWN: $ObstacleDetectors/Bottom,
+	Vector2.LEFT: $ObstacleDetectors/Left,
+	Vector2.RIGHT: $ObstacleDetectors/Right
 }
 
 func _ready() -> void:
@@ -35,14 +34,11 @@ func _initialize_player_colliders():
 		player_colliders[i].connect("on_node_exited", func(node, _area): _on_player_exited_area())
 	
 func _initialize_obstacle_colliders():
-	for i in obstacle_colliders.size():
-		obstacle_colliders[i].connect("on_node_entered",func(node, area): _on_obstacle_entered_area(directions[i], node, area))
-		obstacle_colliders[i].connect("on_node_exited",func(_node, _area): _on_obstacle_left_area(directions[i]))
-		
-		var size: Vector2 = Vector2(1 if directions[i].x == 0 else push_distance, 1 if directions[i].y == 0 else push_distance)
-		var offset: Vector2 = Vector2(directions[i].x * push_distance / 2, directions[i].y * push_distance / 2)
-		obstacle_colliders[i].set_size(size)
-		obstacle_colliders[i].set_offset(offset)
+	for k in obstacle_colliders.keys():
+		var size: Vector2 = Vector2(1 if k.x == 0 else push_distance, 1 if k.y == 0 else push_distance)
+		var offset: Vector2 = Vector2(k.x * push_distance / 2, k.y * push_distance / 2)
+		obstacle_colliders[k].set_size(size)
+		obstacle_colliders[k].set_offset(offset)
 
 func _initialize_state_machine():
 	idle_state = IdleState.new(self)
@@ -58,15 +54,13 @@ func move_distance(dir: Vector2) -> int:
 	if (dir == Vector2.ZERO):
 		return 0
 	
-	if(obstacle_sqr_distances[dir] == -1):
+	if(!obstacle_colliders[dir].is_colliding()):
 		return push_distance
 	
-	var obstacle_distance: float = sqrt(obstacle_sqr_distances[dir])
-	print(obstacle_distance)
-	if (obstacle_distance <= push_distance):
-		return 0
-	else:
-		return push_distance
+	var closest: Node2D = obstacle_colliders[dir].get_nearest(global_position)
+	print(closest.global_position.distance_to(global_position))
+	
+	return 0
 	
 
 func get_push_direction() -> Vector2:
@@ -84,13 +78,6 @@ func _on_player_entered_area(node: Node2D, dir: Vector2):
 	
 func _on_player_exited_area():
 	player = null
-
-func _on_obstacle_entered_area(dir: Vector2, node: Node2D, area: ObservableArea2D):
-	obstacle_sqr_distances[dir] = area.get_nearest_squared_distance(global_position)
-	
-func _on_obstacle_left_area(dir: Vector2):
-	obstacle_sqr_distances[dir] = -1
-	
 
 class PushBlockState extends State:
 	var pushable_block: PushableBlock

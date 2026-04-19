@@ -243,8 +243,8 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nms7q"]
-radius = 5.0
-height = 10.0
+radius = 6.0
+height = 12.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1937175503 groups=["block_pusher"]]
 motion_mode = 1
@@ -276,7 +276,7 @@ vframes = 7
 frame = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1864982244]
-position = Vector2(0, 3)
+position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_nms7q")
 
 [connection signal="on_value_changed" from="InputVectorComponent" to="." method="_on_player_input_on_move_direction_changed"]

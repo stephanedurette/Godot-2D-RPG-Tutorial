@@ -15,14 +15,14 @@ func open():
 func close():
 	_animate_door_open.call_deferred(false)
 
-func _animate_door_open(open: bool):
+func _animate_door_open(_open: bool):
 	if (!is_inside_tree()):
 		return
 		
 	if tween != null:
 		tween.kill()
 	
-	collider.disabled = open
-	var final_modulate: Color = Color.TRANSPARENT if open else Color.WHITE
+	collider.disabled = _open
+	var final_modulate: Color = Color.TRANSPARENT if _open else Color.WHITE
 	tween = get_tree().create_tween()
 	tween.tween_property(sprite, "self_modulate", final_modulate, open_close_time).set_ease(Tween.EASE_IN_OUT)

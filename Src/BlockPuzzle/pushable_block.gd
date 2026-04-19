@@ -36,11 +36,13 @@ func _initialize_player_colliders():
 	
 func _initialize_obstacle_colliders():
 	for i in obstacle_colliders.size():
-		obstacle_colliders[i].connect("on_node_entered",func(node): _on_obstacle_entered_area(directions[i]))
-		obstacle_colliders[i].connect("on_node_exited",func(node): _on_obstacle_left_area(directions[i]))
-	
-	$ObstacleDetectors/Bottom.set_size(Vector2(1, push_distance))
-	$ObstacleDetectors/Bottom.set_offset(Vector2(0, push_distance / 2))
+		obstacle_colliders[i].connect("on_node_entered",func(_node): _on_obstacle_entered_area(directions[i]))
+		obstacle_colliders[i].connect("on_node_exited",func(_node): _on_obstacle_left_area(directions[i]))
+		
+		var size: Vector2 = Vector2(1 if directions[i].x == 0 else push_distance, 1 if directions[i].y == 0 else push_distance)
+		var offset: Vector2 = Vector2(directions[i].x * push_distance / 2, directions[i].y * push_distance / 2)
+		obstacle_colliders[i].set_size(size)
+		obstacle_colliders[i].set_offset(offset)
 
 func _initialize_state_machine():
 	idle_state = IdleState.new(self)
@@ -69,7 +71,7 @@ func _on_player_entered_area(node: Node2D, dir: Vector2):
 	player = node as Player
 	player_direction = dir
 	
-func _on_player_exited_area(node: Node2D):
+func _on_player_exited_area(_node: Node2D):
 	player = null
 
 func _on_obstacle_entered_area(dir: Vector2):
@@ -123,7 +125,7 @@ class PushingState extends PushBlockState:
 		tween.tween_property(pushable_block, "global_position", target_position, pushable_block.push_distance / pushable_block.push_speed)
 		tween.tween_callback(on_push_finished)
 	
-	func process(delta):
+	func process(_delta):
 		pass
 		
 	func exit():

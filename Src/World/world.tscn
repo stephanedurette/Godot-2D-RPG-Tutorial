@@ -9,7 +9,7 @@
 y_sort_enabled = true
 script = ExtResource("1_uxffa")
 player = NodePath("Player")
-startingLevel = NodePath("Levels/dungeon_level")
+startingLevel = NodePath("Levels/Test Level")
 levelParent = NodePath("Levels")
 
 [node name="Player" parent="." unique_id=1937175503 instance=ExtResource("2_8pn1l")]

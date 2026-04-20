@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dsyyds25m7f6p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lnkmb"]
+resource_local_to_scene = true
+size = Vector2(16, 16)
+
+[node name="InvisibleBlockWall" type="Area2D" unique_id=2022664053 groups=["block_push_obstacle"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1443529204]
+shape = SubResource("RectangleShape2D_lnkmb")

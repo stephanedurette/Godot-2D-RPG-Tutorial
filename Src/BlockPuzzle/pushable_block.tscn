@@ -32,7 +32,7 @@ size = Vector2(1, 1)
 [node name="PushableBlock" type="AnimatableBody2D" unique_id=1460572135 groups=["block_push_obstacle"]]
 script = ExtResource("1_l4qa5")
 push_distance = 16
-push_speed = 16.0
+push_speed = 32.0
 first_push_time = 0.35
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=925401951]

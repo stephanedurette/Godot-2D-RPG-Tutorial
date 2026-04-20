@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://delqge15a5iop"]
+
+[ext_resource type="PackedScene" uid="uid://bcx8sg748exxu" path="res://Src/BlockPuzzle/Buttons/push_button.tscn" id="1_cabih"]
+[ext_resource type="Texture2D" uid="uid://belp7vrjxx3qi" path="res://Third Party/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetDungeon.png" id="2_o54m6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7bwuv"]
+atlas = ExtResource("2_o54m6")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yb38v"]
+atlas = ExtResource("2_o54m6")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ckdpx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7bwuv")
+}],
+"loop": true,
+"name": &"pressed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yb38v")
+}],
+"loop": true,
+"name": &"unpressed",
+"speed": 5.0
+}]
+
+[node name="PushButtonLatch" unique_id=1106219846 instance=ExtResource("1_cabih")]
+stays_pressed = true
+
+[node name="Sprite" parent="." index="0" unique_id=710496948]
+sprite_frames = SubResource("SpriteFrames_ckdpx")

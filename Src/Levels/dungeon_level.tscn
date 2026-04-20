@@ -6,8 +6,10 @@
 [ext_resource type="TileSet" uid="uid://cm205fmsdx04d" path="res://Src/TileSets/interior_floor.tres" id="4_sy2ga"]
 [ext_resource type="PackedScene" uid="uid://bo1ew70s84j5n" path="res://Src/Door/door.tscn" id="5_wjflc"]
 [ext_resource type="PackedScene" uid="uid://bcx8sg748exxu" path="res://Src/BlockPuzzle/Buttons/push_button.tscn" id="6_6yrwc"]
+[ext_resource type="PackedScene" uid="uid://delqge15a5iop" path="res://Src/BlockPuzzle/Buttons/push_button_latch.tscn" id="6_dq0f2"]
 [ext_resource type="PackedScene" uid="uid://p5ytsp46jjf4" path="res://Src/BlockPuzzle/Blocks/pushable_block.tscn" id="7_dq0f2"]
 [ext_resource type="PackedScene" uid="uid://bdkw26ydj2kki" path="res://Src/BlockPuzzle/Buttons/button_group.tscn" id="8_sxihp"]
+[ext_resource type="PackedScene" uid="uid://7dsm2sqde6p6" path="res://Src/BlockPuzzle/Blocks/ice_block.tscn" id="9_6yrwc"]
 
 [node name="dungeon_level" type="Node2D" unique_id=526094986 node_paths=PackedStringArray("defaultSpawnPosition", "level_camera")]
 y_sort_enabled = true
@@ -22,7 +24,7 @@ zoom = Vector2(5, 5)
 y_sort_enabled = true
 
 [node name="Button Group" parent="Entrance" unique_id=1823490022 node_paths=PackedStringArray("buttons") instance=ExtResource("8_sxihp")]
-buttons = [NodePath("../PushButton"), NodePath("../PushButton2")]
+buttons = [NodePath("../PushButton"), NodePath("../PushButton2"), NodePath("../PushButtonLatch")]
 
 [node name="PushButton" parent="Entrance" unique_id=1106219846 instance=ExtResource("6_6yrwc")]
 position = Vector2(-72, -56)
@@ -38,6 +40,9 @@ position = Vector2(-56, -8)
 
 [node name="Door" parent="Entrance" unique_id=1675673477 instance=ExtResource("5_wjflc")]
 position = Vector2(8, -88)
+
+[node name="PushButtonLatch" parent="Entrance" unique_id=2001959644 instance=ExtResource("6_dq0f2")]
+position = Vector2(56, -56)
 
 [node name="Tilemap Layers" type="Node2D" parent="." unique_id=440146882]
 y_sort_enabled = true
@@ -61,6 +66,24 @@ position = Vector2(0, 93)
 scale = Vector2(1, 0.24000001)
 level = NodePath("../..")
 
+[node name="Ice Block Room" type="Node2D" parent="." unique_id=1385400219]
+y_sort_enabled = true
+
+[node name="Door" parent="Ice Block Room" unique_id=774128521 instance=ExtResource("5_wjflc")]
+position = Vector2(232, -72)
+
+[node name="IceBlock" parent="Ice Block Room" unique_id=55075806 instance=ExtResource("9_6yrwc")]
+position = Vector2(184, -8)
+
+[node name="PushButton" parent="Ice Block Room" unique_id=745419814 instance=ExtResource("6_6yrwc")]
+position = Vector2(312, 40)
+
+[node name="Button Group" parent="Ice Block Room" unique_id=1953350013 node_paths=PackedStringArray("buttons") instance=ExtResource("8_sxihp")]
+buttons = [NodePath("../PushButton")]
+
 [connection signal="on_all_buttons_pressed" from="Entrance/Button Group" to="Entrance/Door" method="open"]
 [connection signal="on_none_buttons_pressed" from="Entrance/Button Group" to="Entrance/Door" method="close"]
 [connection signal="on_some_buttons_pressed" from="Entrance/Button Group" to="Entrance/Door" method="close"]
+[connection signal="on_all_buttons_pressed" from="Ice Block Room/Button Group" to="Ice Block Room/Door" method="open"]
+[connection signal="on_none_buttons_pressed" from="Ice Block Room/Button Group" to="Ice Block Room/Door" method="close"]
+[connection signal="on_some_buttons_pressed" from="Ice Block Room/Button Group" to="Ice Block Room/Door" method="close"]

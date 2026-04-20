@@ -7,6 +7,8 @@ extends Area2D
 signal pressed
 signal unpressed
 
+@export var stays_pressed: bool = false
+
 var colliding_bodies: Dictionary[Node2D,bool]
 
 func _on_body_entered(body: Node2D) -> void:
@@ -16,6 +18,9 @@ func _on_body_entered(body: Node2D) -> void:
 		pressed.emit()
 
 func _on_body_exited(body: Node2D) -> void:
+	if stays_pressed:
+		return
+	
 	if (body is Player || body is PushableBlock):
 		colliding_bodies.erase(body)
 		if colliding_bodies.size() == 0:

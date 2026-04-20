@@ -11,11 +11,13 @@
 [ext_resource type="PackedScene" uid="uid://7dsm2sqde6p6" path="res://Src/BlockPuzzle/Blocks/ice_block.tscn" id="8_upm25"]
 
 [node name="Test Level" type="Node2D" unique_id=1816505977 node_paths=PackedStringArray("defaultSpawnPosition", "level_camera")]
+y_sort_enabled = true
 script = ExtResource("1_pkap3")
-defaultSpawnPosition = NodePath("Player Spawn")
+defaultSpawnPosition = NodePath("Player Locations/Player Spawn")
 level_camera = NodePath("Camera2D")
 
-[node name="Tilemap Layers" type="Node" parent="." unique_id=453888683]
+[node name="Tilemap Layers" type="Node2D" parent="." unique_id=1406968830]
+y_sort_enabled = true
 
 [node name="GrassLayer" type="TileMapLayer" parent="Tilemap Layers" unique_id=757122249]
 z_index = -100
@@ -39,15 +41,8 @@ limit_top = -154
 limit_right = 267
 limit_bottom = 190
 
-[node name="Player Spawn" type="Marker2D" parent="." unique_id=1916636675]
-position = Vector2(104, 13)
-
-[node name="Dungeon In" parent="." unique_id=1988916478 node_paths=PackedStringArray("level") instance=ExtResource("4_pkap3")]
-position = Vector2(200, 42)
-scale = Vector2(0.5, 0.5)
-level = NodePath("..")
-
-[node name="Test Puzzle" type="Node" parent="." unique_id=2110887923]
+[node name="Test Puzzle" type="Node2D" parent="." unique_id=1202998169]
+y_sort_enabled = true
 
 [node name="PushableBlock2" parent="Test Puzzle" unique_id=221227763 instance=ExtResource("5_v211m")]
 position = Vector2(40, -16)
@@ -59,6 +54,7 @@ position = Vector2(56, -16)
 position = Vector2(-24, -32)
 
 [node name="IceBlock" parent="Test Puzzle" unique_id=165347143 instance=ExtResource("8_upm25")]
+y_sort_enabled = false
 position = Vector2(88, -16)
 
 [node name="PushButton" parent="Test Puzzle" unique_id=1106219846 instance=ExtResource("6_0jdrx")]
@@ -69,6 +65,16 @@ position = Vector2(24, -32)
 
 [node name="Button Group" parent="Test Puzzle" unique_id=1823490022 node_paths=PackedStringArray("buttons") instance=ExtResource("8_nmpib")]
 buttons = [NodePath("../PushButton"), NodePath("../PushButton2")]
+
+[node name="Player Locations" type="Node" parent="." unique_id=2123455462]
+
+[node name="Player Spawn" type="Marker2D" parent="Player Locations" unique_id=1916636675]
+position = Vector2(104, 13)
+
+[node name="Dungeon In" parent="Player Locations" unique_id=1988916478 node_paths=PackedStringArray("level") instance=ExtResource("4_pkap3")]
+position = Vector2(200, 42)
+scale = Vector2(0.5, 0.5)
+level = NodePath("../..")
 
 [connection signal="on_all_buttons_pressed" from="Test Puzzle/Button Group" to="Test Puzzle/Door" method="open"]
 [connection signal="on_none_buttons_pressed" from="Test Puzzle/Button Group" to="Test Puzzle/Door" method="close"]

@@ -30,6 +30,7 @@ resource_local_to_scene = true
 size = Vector2(1, 1)
 
 [node name="PushableBlock" type="AnimatableBody2D" unique_id=1460572135 groups=["block_push_obstacle"]]
+y_sort_enabled = true
 script = ExtResource("1_l4qa5")
 push_distance = 16
 push_speed = 24.0

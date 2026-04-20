@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://c4ke1d2st6bdg" path="res://Src/BlockPuzzle/pushable_block.gd" id="1_l4qa5"]
 [ext_resource type="PackedScene" uid="uid://bejpclknsp3dd" path="res://Src/Helpers/raycaster_2d.tscn" id="3_hfnxp"]
 [ext_resource type="PackedScene" uid="uid://dylrvqssduaov" path="res://Src/Helpers/observable_area_2d.tscn" id="4_epq7o"]
+[ext_resource type="PackedScene" uid="uid://yeqsfabdix1" path="res://Src/Helpers/observable_shape_cast_2d.tscn" id="5_ripb1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l4qa5"]
 atlas = ExtResource("1_8qia3")
@@ -11,6 +12,22 @@ region = Rect2(128, 48, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hfnxp"]
 size = Vector2(14, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a71by"]
+resource_local_to_scene = true
+size = Vector2(1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pumf7"]
+resource_local_to_scene = true
+size = Vector2(1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5224e"]
+resource_local_to_scene = true
+size = Vector2(1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vu0re"]
+resource_local_to_scene = true
+size = Vector2(1, 1)
 
 [node name="PushableBlock" type="AnimatableBody2D" unique_id=1460572135 groups=["block_push_obstacle"]]
 script = ExtResource("1_l4qa5")
@@ -46,18 +63,26 @@ filter_groups = Array[String](["block_pusher"])
 
 [node name="ObstacleDetectors" type="Node2D" parent="." unique_id=1350449209]
 
-[node name="Right" parent="ObstacleDetectors" unique_id=891091562 instance=ExtResource("4_epq7o")]
-position = Vector2(9, 0)
-filter_groups = Array[String](["block_push_obstacle"])
+[node name="Right" parent="ObstacleDetectors" unique_id=1271287721 instance=ExtResource("5_ripb1")]
+position = Vector2(8, 0)
+shape = SubResource("RectangleShape2D_a71by")
+target_position = Vector2(20, 0)
+groups_to_collide = Array[String](["block_push_obstacle"])
 
-[node name="Bottom" parent="ObstacleDetectors" unique_id=1965488166 instance=ExtResource("4_epq7o")]
-position = Vector2(0, 9)
-filter_groups = Array[String](["block_push_obstacle"])
+[node name="Left" parent="ObstacleDetectors" unique_id=1891168453 instance=ExtResource("5_ripb1")]
+position = Vector2(-8, 0)
+shape = SubResource("RectangleShape2D_pumf7")
+target_position = Vector2(-9, 0)
+groups_to_collide = Array[String](["block_push_obstacle"])
 
-[node name="Left" parent="ObstacleDetectors" unique_id=505376186 instance=ExtResource("4_epq7o")]
-position = Vector2(-9, 0)
-filter_groups = Array[String](["block_push_obstacle"])
+[node name="Up" parent="ObstacleDetectors" unique_id=616694961 instance=ExtResource("5_ripb1")]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_5224e")
+target_position = Vector2(0, -7)
+groups_to_collide = Array[String](["block_push_obstacle"])
 
-[node name="Top" parent="ObstacleDetectors" unique_id=1130900233 instance=ExtResource("4_epq7o")]
-position = Vector2(0, -9)
-filter_groups = Array[String](["block_push_obstacle"])
+[node name="Down" parent="ObstacleDetectors" unique_id=1116816304 instance=ExtResource("5_ripb1")]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_vu0re")
+target_position = Vector2(0, 8)
+groups_to_collide = Array[String](["block_push_obstacle"])

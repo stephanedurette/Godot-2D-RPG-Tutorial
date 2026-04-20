@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://0eyajm4injha" path="res://Src/Helpers/observable_shape_cast_2d.gd" id="1_qoqfm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bgh8b"]
+resource_local_to_scene = true
+size = Vector2(1, 1)
 
 [node name="ObservableShapeCast2D" type="ShapeCast2D" unique_id=1271287721]
 shape = SubResource("RectangleShape2D_bgh8b")

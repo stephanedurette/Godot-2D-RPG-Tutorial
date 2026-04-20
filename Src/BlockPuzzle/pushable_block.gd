@@ -16,9 +16,9 @@ var pushing_state: PushingState
 var player: Player
 var player_direction: Vector2
 
-@onready var obstacle_colliders: Dictionary[Vector2, ObservableArea2D] = {
-	Vector2.UP: $ObstacleDetectors/Top,
-	Vector2.DOWN: $ObstacleDetectors/Bottom,
+@onready var obstacle_colliders: Dictionary[Vector2, ObservableShapeCast2D] = {
+	Vector2.UP: $ObstacleDetectors/Up,
+	Vector2.DOWN: $ObstacleDetectors/Down,
 	Vector2.LEFT: $ObstacleDetectors/Left,
 	Vector2.RIGHT: $ObstacleDetectors/Right
 }
@@ -31,14 +31,11 @@ func _ready() -> void:
 func _initialize_player_colliders():
 	for i in player_colliders.size():
 		player_colliders[i].connect("on_node_entered",func(node, _area): _on_player_entered_area(node, directions[i]))
-		player_colliders[i].connect("on_node_exited", func(node, _area): _on_player_exited_area())
+		player_colliders[i].connect("on_node_exited", func(_node, _area): _on_player_exited_area())
 	
 func _initialize_obstacle_colliders():
 	for k in obstacle_colliders.keys():
-		var size: Vector2 = Vector2(1 if k.x == 0 else push_distance, 1 if k.y == 0 else push_distance)
-		var offset: Vector2 = Vector2(k.x * push_distance / 2, k.y * push_distance / 2)
-		obstacle_colliders[k].set_size(size)
-		obstacle_colliders[k].set_offset(offset)
+		obstacle_colliders[k].target_position = k * push_distance
 
 func _initialize_state_machine():
 	idle_state = IdleState.new(self)
@@ -57,10 +54,10 @@ func move_distance(dir: Vector2) -> int:
 	if(!obstacle_colliders[dir].is_colliding()):
 		return push_distance
 	
-	var closest: Node2D = obstacle_colliders[dir].get_nearest(global_position)
-	print(closest.global_position.distance_to(global_position))
+	var distance: float = obstacle_colliders[dir].get_nearest_collision_distance()
+	print(min(push_distance, distance))
 	
-	return 0
+	return 0 if distance < push_distance else min(push_distance, distance)
 	
 
 func get_push_direction() -> Vector2:

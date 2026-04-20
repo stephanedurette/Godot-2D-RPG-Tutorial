@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://p5ytsp46jjf4"]
 
 [ext_resource type="Texture2D" uid="uid://belp7vrjxx3qi" path="res://Third Party/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetDungeon.png" id="1_8qia3"]
-[ext_resource type="Script" uid="uid://c4ke1d2st6bdg" path="res://Src/BlockPuzzle/pushable_block.gd" id="1_l4qa5"]
+[ext_resource type="Script" uid="uid://c4ke1d2st6bdg" path="res://Src/BlockPuzzle/Blocks/pushable_block.gd" id="1_l4qa5"]
 [ext_resource type="PackedScene" uid="uid://bejpclknsp3dd" path="res://Src/Helpers/raycaster_2d.tscn" id="3_hfnxp"]
 [ext_resource type="PackedScene" uid="uid://dylrvqssduaov" path="res://Src/Helpers/observable_area_2d.tscn" id="4_epq7o"]
 [ext_resource type="PackedScene" uid="uid://yeqsfabdix1" path="res://Src/Helpers/observable_shape_cast_2d.tscn" id="5_ripb1"]
@@ -13,19 +13,19 @@ region = Rect2(128, 48, 16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hfnxp"]
 size = Vector2(14, 14)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a71by"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_71fwk"]
 resource_local_to_scene = true
 size = Vector2(1, 1)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pumf7"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d7joy"]
 resource_local_to_scene = true
 size = Vector2(1, 1)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5224e"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p2yjj"]
 resource_local_to_scene = true
 size = Vector2(1, 1)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vu0re"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yqsoy"]
 resource_local_to_scene = true
 size = Vector2(1, 1)
 
@@ -65,24 +65,24 @@ filter_groups = Array[String](["block_pusher"])
 
 [node name="Right" parent="ObstacleDetectors" unique_id=1271287721 instance=ExtResource("5_ripb1")]
 position = Vector2(8, 0)
-shape = SubResource("RectangleShape2D_a71by")
+shape = SubResource("RectangleShape2D_71fwk")
 target_position = Vector2(8, 0)
 groups_to_collide = Array[String](["block_push_obstacle"])
 
 [node name="Left" parent="ObstacleDetectors" unique_id=1891168453 instance=ExtResource("5_ripb1")]
 position = Vector2(-8, 0)
-shape = SubResource("RectangleShape2D_pumf7")
+shape = SubResource("RectangleShape2D_d7joy")
 target_position = Vector2(-8, 0)
 groups_to_collide = Array[String](["block_push_obstacle"])
 
 [node name="Up" parent="ObstacleDetectors" unique_id=616694961 instance=ExtResource("5_ripb1")]
 position = Vector2(0, -8)
-shape = SubResource("RectangleShape2D_5224e")
+shape = SubResource("RectangleShape2D_p2yjj")
 target_position = Vector2(0, -8)
 groups_to_collide = Array[String](["block_push_obstacle"])
 
 [node name="Down" parent="ObstacleDetectors" unique_id=1116816304 instance=ExtResource("5_ripb1")]
 position = Vector2(0, 8)
-shape = SubResource("RectangleShape2D_vu0re")
+shape = SubResource("RectangleShape2D_yqsoy")
 target_position = Vector2(0, 8)
 groups_to_collide = Array[String](["block_push_obstacle"])

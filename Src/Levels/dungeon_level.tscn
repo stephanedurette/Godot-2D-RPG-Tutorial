@@ -5,9 +5,9 @@
 [ext_resource type="TileSet" uid="uid://bqk43syd0pab7" path="res://Src/TileSets/interior.tres" id="3_7dqcm"]
 [ext_resource type="TileSet" uid="uid://cm205fmsdx04d" path="res://Src/TileSets/interior_floor.tres" id="4_sy2ga"]
 [ext_resource type="PackedScene" uid="uid://bo1ew70s84j5n" path="res://Src/Door/door.tscn" id="5_wjflc"]
-[ext_resource type="PackedScene" uid="uid://bcx8sg748exxu" path="res://Src/BlockPuzzle/push_button.tscn" id="6_6yrwc"]
-[ext_resource type="PackedScene" uid="uid://p5ytsp46jjf4" path="res://Src/BlockPuzzle/pushable_block.tscn" id="7_dq0f2"]
-[ext_resource type="PackedScene" uid="uid://bdkw26ydj2kki" path="res://Src/BlockPuzzle/button_group.tscn" id="8_sxihp"]
+[ext_resource type="PackedScene" uid="uid://bcx8sg748exxu" path="res://Src/BlockPuzzle/Buttons/push_button.tscn" id="6_6yrwc"]
+[ext_resource type="PackedScene" uid="uid://p5ytsp46jjf4" path="res://Src/BlockPuzzle/Blocks/pushable_block.tscn" id="7_dq0f2"]
+[ext_resource type="PackedScene" uid="uid://bdkw26ydj2kki" path="res://Src/BlockPuzzle/Buttons/button_group.tscn" id="8_sxihp"]
 
 [node name="dungeon_level" type="Node2D" unique_id=526094986 node_paths=PackedStringArray("defaultSpawnPosition", "level_camera")]
 script = ExtResource("1_sy2ga")
@@ -43,9 +43,11 @@ position = Vector2(-40, -56)
 
 [node name="PushableBlock" parent="." unique_id=1460572135 instance=ExtResource("7_dq0f2")]
 position = Vector2(-56, 8)
+push_speed = 0.0
 
 [node name="PushableBlock2" parent="." unique_id=1941077275 instance=ExtResource("7_dq0f2")]
 position = Vector2(-56, -8)
+push_speed = 0.0
 
 [node name="Button Group" parent="." unique_id=1823490022 node_paths=PackedStringArray("buttons") instance=ExtResource("8_sxihp")]
 buttons = [NodePath("../PushButton"), NodePath("../PushButton2")]

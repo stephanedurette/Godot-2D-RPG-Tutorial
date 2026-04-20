@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bdkw26ydj2kki"]
 
-[ext_resource type="Script" uid="uid://cnabf5tv0h217" path="res://Src/BlockPuzzle/button_group.gd" id="1_jc0iw"]
+[ext_resource type="Script" uid="uid://cnabf5tv0h217" path="res://Src/BlockPuzzle/Buttons/button_group.gd" id="1_jc0iw"]
 
 [node name="Button Group" type="Node" unique_id=1823490022]
 script = ExtResource("1_jc0iw")

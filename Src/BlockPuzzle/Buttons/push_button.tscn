@@ -37,6 +37,7 @@ size = Vector2(16, 16)
 script = ExtResource("1_0gu08")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=710496948]
+z_index = -1
 sprite_frames = SubResource("SpriteFrames_bei8a")
 animation = &"unpressed"
 autoplay = "unpressed"

@@ -270,6 +270,7 @@ parameters/Move/blend_position = Vector2(-0.008921325, -0.6018957)
 libraries/ = SubResource("AnimationLibrary_0va8g")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1656632444]
+y_sort_enabled = true
 texture = ExtResource("3_i1ivj")
 hframes = 4
 vframes = 7

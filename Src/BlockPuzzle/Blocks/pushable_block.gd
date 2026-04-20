@@ -53,8 +53,6 @@ func move_distance(dir: Vector2) -> int:
 	
 	var distance: float = obstacle_colliders[dir].get_nearest_collision_distance()
 	
-	print(distance)
-	
 	if (distance == INF):
 		return push_distance
 	
@@ -63,7 +61,6 @@ func move_distance(dir: Vector2) -> int:
 	if (clamped_distance < GlobalVariables.GRID_PIXEL_SIZE):
 		return 0
 	
-	print(clamped_distance)
 	return min(push_distance, clamped_distance)
 	
 

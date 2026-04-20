@@ -53,6 +53,8 @@ func move_distance(dir: Vector2) -> int:
 	
 	var distance: float = obstacle_colliders[dir].get_nearest_collision_distance()
 	
+	print(distance)
+	
 	if (distance == INF):
 		return push_distance
 	

@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://7dsm2sqde6p6"]
+
+[ext_resource type="PackedScene" uid="uid://p5ytsp46jjf4" path="res://Src/BlockPuzzle/Blocks/pushable_block.tscn" id="1_f2apj"]
+[ext_resource type="Texture2D" uid="uid://belp7vrjxx3qi" path="res://Third Party/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetDungeon.png" id="2_ey3v4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ey3v4"]
+atlas = ExtResource("2_ey3v4")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ey3v4"]
+resource_local_to_scene = true
+size = Vector2(1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l3j22"]
+resource_local_to_scene = true
+size = Vector2(1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qwcpy"]
+resource_local_to_scene = true
+size = Vector2(1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_htnha"]
+resource_local_to_scene = true
+size = Vector2(1, 1)
+
+[node name="IceBlock" unique_id=1460572135 instance=ExtResource("1_f2apj")]
+push_distance = 160
+push_speed = 48.0
+first_push_time = 0.25
+
+[node name="Sprite" parent="." index="0" unique_id=925401951]
+texture = SubResource("AtlasTexture_ey3v4")
+
+[node name="Right" parent="ObstacleDetectors" parent_id_path=PackedInt32Array(1350449209) index="0" unique_id=1271287721]
+shape = SubResource("RectangleShape2D_ey3v4")
+
+[node name="Left" parent="ObstacleDetectors" parent_id_path=PackedInt32Array(1350449209) index="1" unique_id=1891168453]
+shape = SubResource("RectangleShape2D_l3j22")
+
+[node name="Up" parent="ObstacleDetectors" parent_id_path=PackedInt32Array(1350449209) index="2" unique_id=616694961]
+shape = SubResource("RectangleShape2D_qwcpy")
+
+[node name="Down" parent="ObstacleDetectors" parent_id_path=PackedInt32Array(1350449209) index="3" unique_id=1116816304]
+shape = SubResource("RectangleShape2D_htnha")

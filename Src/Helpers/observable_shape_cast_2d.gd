@@ -5,8 +5,10 @@ extends ShapeCast2D
 @export var groups_to_collide: Array[String]
 
 func get_nearest_collision_distance() -> float:
+	print(get_collision_count())
 	for i in get_collision_count():
 		var node = get_collider(i)
+		print(node)
 		if(_is_node_valid(node)):
 			return global_position.distance_to(get_collision_point(i))
 	return INF

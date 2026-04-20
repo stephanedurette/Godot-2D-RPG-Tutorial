@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bcx8sg748exxu" path="res://Src/BlockPuzzle/Buttons/push_button.tscn" id="6_0jdrx"]
 [ext_resource type="PackedScene" uid="uid://bo1ew70s84j5n" path="res://Src/Door/door.tscn" id="7_s1smv"]
 [ext_resource type="PackedScene" uid="uid://bdkw26ydj2kki" path="res://Src/BlockPuzzle/Buttons/button_group.tscn" id="8_nmpib"]
+[ext_resource type="PackedScene" uid="uid://7dsm2sqde6p6" path="res://Src/BlockPuzzle/Blocks/ice_block.tscn" id="8_upm25"]
 
 [node name="Test Level" type="Node2D" unique_id=1816505977 node_paths=PackedStringArray("defaultSpawnPosition", "level_camera")]
 script = ExtResource("1_pkap3")
@@ -42,13 +43,16 @@ scale = Vector2(0.5, 0.5)
 level = NodePath("../..")
 
 [node name="PushableBlock2" parent="ObstacleLayer" unique_id=221227763 instance=ExtResource("5_v211m")]
-position = Vector2(40, 0)
+position = Vector2(40, -16)
 
 [node name="PushableBlock3" parent="ObstacleLayer" unique_id=1460572135 instance=ExtResource("5_v211m")]
-position = Vector2(56, 0)
+position = Vector2(56, -16)
 
 [node name="Door" parent="ObstacleLayer" unique_id=1675673477 instance=ExtResource("7_s1smv")]
 position = Vector2(-24, -32)
+
+[node name="IceBlock" parent="ObstacleLayer" unique_id=165347143 instance=ExtResource("8_upm25")]
+position = Vector2(88, -16)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=22291798]
 zoom = Vector2(5, 5)

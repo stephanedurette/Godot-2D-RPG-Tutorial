@@ -11,5 +11,4 @@ func add_player(p: Player, positionNode: Node2D):
 	level_camera.reparent(p, false)
 		
 func remove_player():
-	#level_camera.owner = self
 	level_camera.reparent(self, false)

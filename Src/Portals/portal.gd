@@ -7,7 +7,7 @@ extends Area2D
 
 func _on_body_entered(body: Node2D) -> void:
 	if (body is Player):
-		EventBus.on_portal_entered.emit(self)
+		WorldEvents.on_portal_entered.emit(self)
 	else:
 		pass
 

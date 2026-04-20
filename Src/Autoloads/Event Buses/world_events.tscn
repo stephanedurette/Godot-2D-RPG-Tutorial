@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://1pryc2jho2uh"]
+
+[ext_resource type="Script" uid="uid://bi08d2fel7xsu" path="res://Src/Autoloads/Event Buses/world_events.gd" id="1_yi26p"]
+
+[node name="WorldEvents" type="Node" unique_id=1812198787]
+script = ExtResource("1_yi26p")

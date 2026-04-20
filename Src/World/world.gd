@@ -18,7 +18,7 @@ func unload_all_levels():
 			unload_level(l)
 
 func _ready() -> void:
-	EventBus.on_portal_entered.connect(on_portal_entered)
+	WorldEvents.on_portal_entered.connect(on_portal_entered)
 	
 	unload_all_levels()
 	

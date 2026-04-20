@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-EventBus="*uid://1pryc2jho2uh"
 GlobalVariables="*uid://b2q0h2oh78qea"
+WorldEvents="*uid://1pryc2jho2uh"
 
 [display]
 

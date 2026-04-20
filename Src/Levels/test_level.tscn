@@ -12,7 +12,7 @@
 
 [node name="Test Level" type="Node2D" unique_id=1816505977 node_paths=PackedStringArray("defaultSpawnPosition", "level_camera")]
 script = ExtResource("1_pkap3")
-defaultSpawnPosition = NodePath("DefaultPlayerSpawn")
+defaultSpawnPosition = NodePath("Player Spawn")
 level_camera = NodePath("Camera2D")
 
 [node name="Tilemap Layers" type="Node" parent="." unique_id=453888683]
@@ -39,10 +39,10 @@ limit_top = -154
 limit_right = 267
 limit_bottom = 190
 
-[node name="DefaultPlayerSpawn" type="Marker2D" parent="." unique_id=1916636675]
+[node name="Player Spawn" type="Marker2D" parent="." unique_id=1916636675]
 position = Vector2(104, 13)
 
-[node name="DungeonPortal" parent="." unique_id=1988916478 node_paths=PackedStringArray("level") instance=ExtResource("4_pkap3")]
+[node name="Dungeon In" parent="." unique_id=1988916478 node_paths=PackedStringArray("level") instance=ExtResource("4_pkap3")]
 position = Vector2(200, 42)
 scale = Vector2(0.5, 0.5)
 level = NodePath("..")

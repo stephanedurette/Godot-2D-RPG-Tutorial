@@ -17,7 +17,13 @@ levelParent = NodePath("Levels")
 
 [node name="Test Level" parent="Levels" unique_id=1816505977 instance=ExtResource("3_oqie5")]
 
+[node name="Dungeon In" parent="Levels/Test Level" index="3" unique_id=1988916478 node_paths=PackedStringArray("otherPortal")]
+otherPortal = NodePath("../../dungeon_level/Dungeon Out")
+
 [node name="dungeon_level" parent="Levels" unique_id=526094986 instance=ExtResource("4_8at5u")]
+
+[node name="Dungeon Out" parent="Levels/dungeon_level" index="4" unique_id=1988916478 node_paths=PackedStringArray("otherPortal")]
+otherPortal = NodePath("../../Test Level/Dungeon In")
 
 [editable path="Levels/Test Level"]
 [editable path="Levels/dungeon_level"]

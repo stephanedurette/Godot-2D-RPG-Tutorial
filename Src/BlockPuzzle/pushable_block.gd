@@ -122,7 +122,7 @@ class PushingState extends PushBlockState:
 	func enter():
 		var tween = pushable_block.get_tree().create_tween()
 		tween.tween_property(pushable_block, "global_position", pushable_block.global_position + push_vector, push_vector.length() / pushable_block.push_speed)\
-			.set_trans(Tween.TRANS_SINE)\
+			.set_trans(Tween.TRANS_QUAD)\
 			.set_ease(Tween.EASE_OUT)
 			
 		tween.tween_callback(on_push_finished)

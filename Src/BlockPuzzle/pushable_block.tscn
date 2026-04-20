@@ -32,8 +32,8 @@ size = Vector2(1, 1)
 [node name="PushableBlock" type="AnimatableBody2D" unique_id=1460572135 groups=["block_push_obstacle"]]
 script = ExtResource("1_l4qa5")
 push_distance = 16
-push_speed = 32.0
-first_push_time = 0.35
+push_speed = 24.0
+first_push_time = 0.3
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=925401951]
 texture = SubResource("AtlasTexture_l4qa5")
@@ -66,19 +66,19 @@ filter_groups = Array[String](["block_pusher"])
 [node name="Right" parent="ObstacleDetectors" unique_id=1271287721 instance=ExtResource("5_ripb1")]
 position = Vector2(8, 0)
 shape = SubResource("RectangleShape2D_a71by")
-target_position = Vector2(20, 0)
+target_position = Vector2(8, 0)
 groups_to_collide = Array[String](["block_push_obstacle"])
 
 [node name="Left" parent="ObstacleDetectors" unique_id=1891168453 instance=ExtResource("5_ripb1")]
 position = Vector2(-8, 0)
 shape = SubResource("RectangleShape2D_pumf7")
-target_position = Vector2(-9, 0)
+target_position = Vector2(-8, 0)
 groups_to_collide = Array[String](["block_push_obstacle"])
 
 [node name="Up" parent="ObstacleDetectors" unique_id=616694961 instance=ExtResource("5_ripb1")]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_5224e")
-target_position = Vector2(0, -7)
+target_position = Vector2(0, -8)
 groups_to_collide = Array[String](["block_push_obstacle"])
 
 [node name="Down" parent="ObstacleDetectors" unique_id=1116816304 instance=ExtResource("5_ripb1")]

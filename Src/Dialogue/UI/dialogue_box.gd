@@ -19,14 +19,20 @@ func _ready() -> void:
 	
 	open(false)
 
+func _skip_dialog_animation():
+	text_crawl_tween.kill()
+	text_crawl_tween = null
+	text.visible_ratio = 1
+	
+
 func _continue_dialog():
 	current_dialogue_index += 1	
-	
 	text.text = current_dialogue_npc.dialogue_data.lines[current_dialogue_index]
 	text.visible_ratio = 0
 	
 	text_crawl_tween = get_tree().create_tween()
 	text_crawl_tween.tween_property(text, "visible_ratio", 1, text.text.length() / characters_per_second)
+	text_crawl_tween.tween_callback(func(): text_crawl_tween = null)
 
 func _on_dialogue_end_request():
 	open(false)
@@ -36,6 +42,8 @@ func _on_npc_interacted(npc: NPC):
 	
 	if current_dialogue_npc == null:
 		_start_dialogue(npc)
+	elif text_crawl_tween:
+		_skip_dialog_animation()
 	elif current_dialogue_index >= current_dialogue_npc.dialogue_data.lines.size() - 1:
 		_on_dialogue_end_request()
 	else:

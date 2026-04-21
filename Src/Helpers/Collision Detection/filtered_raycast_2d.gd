@@ -10,7 +10,6 @@ func get_nearest_collision_distance() -> float:
 	force_raycast_update()
 	
 	while(is_colliding()):
-		print("f")
 		if (_is_node_valid(get_collider())):
 			return global_position.distance_to(get_collision_point())
 		else:

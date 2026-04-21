@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GlobalVariables="*uid://b2q0h2oh78qea"
 WorldEvents="*uid://1pryc2jho2uh"
+DialogueEvents="*uid://blqwyjkp1ulau"
 
 [display]
 

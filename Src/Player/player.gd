@@ -39,8 +39,12 @@ func _set_animation_blend_position(pos: Vector2):
 	animation_tree.set("parameters/Move/blend_position", pos)
 
 func _on_interact_input_on_pressed() -> void:
-	if(npc_raycast.is_filtered_colliding()):
-		print("interact")
+	var collision_data = npc_raycast.get_filtered_collision()
+	
+	if collision_data.is_empty():
+		return
+	
+	print(collision_data["collider"] as NPC)
 
 func _on_update_position_timer_timeout() -> void:
 	WorldEvents.on_player_position_updated.emit(global_position)

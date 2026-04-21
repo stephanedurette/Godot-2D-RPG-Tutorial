@@ -1,3 +1,5 @@
+class_name NPC
+
 extends StaticBody2D
 
 @onready var animation_tree: AnimationTree = $AnimationTree

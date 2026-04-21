@@ -4,22 +4,18 @@ extends RayCast2D
 
 @export var groups_to_collide: Array[String]
 
-func is_filtered_colliding():
-	return get_nearest_collision_distance() != INF
-
-func get_nearest_collision_distance() -> float:
+func get_filtered_collision() -> Dictionary:
 	clear_exceptions()
-	
 	force_raycast_update()
 	
 	while(is_colliding()):
 		if (_is_node_valid(get_collider())):
-			return global_position.distance_to(get_collision_point())
+			return { "distance": global_position.distance_to(get_collision_point()), "collider": get_collider() }
 		else:
 			add_exception(get_collider())
 			force_raycast_update()
 			
-	return INF
+	return {}
 		
 func _is_node_valid(n: Node2D) -> bool:
 	if (groups_to_collide.size() == 0):

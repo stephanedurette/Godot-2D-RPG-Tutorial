@@ -52,11 +52,14 @@ func _process(delta: float) -> void:
 func move_distance(dir: Vector2) -> int:
 	if (dir == Vector2.ZERO):
 		return 0
-	@warning_ignore("integer_division")
-	var distance: float = obstacle_colliders[dir].get_nearest_collision_distance() - GlobalVariables.GRID_PIXEL_SIZE / 2 #account for the fact the ray starts in the object
-
-	if (distance == INF):
+	
+	var collision_data = obstacle_colliders[dir].get_filtered_collision()
+	
+	if (collision_data.is_empty()):
 		return push_distance
+	
+	@warning_ignore("integer_division")
+	var distance: float = collision_data["distance"] - GlobalVariables.GRID_PIXEL_SIZE / 2 #account for the fact the ray starts in the object
 	
 	var clamped_distance = (int)(floor(distance / GlobalVariables.GRID_PIXEL_SIZE) * GlobalVariables.GRID_PIXEL_SIZE)
 	

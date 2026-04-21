@@ -11,8 +11,6 @@ var npc_raycast_magnitude: float
 var detected_npc_in_range: NPC
 var current_move_direction: Vector2
 
-var in_conversation: bool
-
 func _ready() -> void:
 	_set_animation_blend_position(Vector2.DOWN)
 	npc_raycast_magnitude = npc_raycast.target_position.length()
@@ -36,7 +34,6 @@ func _on_player_input_on_move_direction_changed(direction: Vector2) -> void:
 func _update_detected_npc():
 	if (!npc_raycast.is_colliding()):
 		detected_npc_in_range = null
-		in_conversation = false
 		DialogueEvents.on_dialogue_end_request.emit()
 		return
 	
@@ -54,11 +51,8 @@ func _on_interact_input_on_pressed() -> void:
 	if (detected_npc_in_range == null):
 		return
 	
-	if (!in_conversation):
-		DialogueEvents.on_dialogue_requested.emit(detected_npc_in_range.dialogue_data)
-	else:
-		DialogueEvents.on_dialogue_end_request.emit()
-	in_conversation = !in_conversation
+	DialogueEvents.on_npc_interacted.emit(detected_npc_in_range)
+
 
 func _on_update_position_timer_timeout() -> void:
 	WorldEvents.on_player_position_updated.emit(global_position)

@@ -8,9 +8,10 @@ extends CharacterBody2D
 @onready var npc_raycast: FilteredRaycast2D = $"NpcDetection"
 
 var npc_raycast_magnitude: float
-
+var detected_npc_in_range: NPC
 var current_move_direction: Vector2
 
+var in_conversation: bool
 
 func _ready() -> void:
 	_set_animation_blend_position(Vector2.DOWN)
@@ -20,6 +21,7 @@ func _process(_delta: float) -> void:
 	velocity = current_move_direction * move_speed
 	
 	move_and_slide()
+	_update_detected_npc()
 
 func _on_player_input_on_move_direction_changed(direction: Vector2) -> void:
 	current_move_direction = direction
@@ -31,20 +33,33 @@ func _on_player_input_on_move_direction_changed(direction: Vector2) -> void:
 	animation_tree.set("parameters/conditions/idle", current_move_direction == Vector2.ZERO);
 	animation_tree.set("parameters/conditions/moving", current_move_direction != Vector2.ZERO);
 
+func _update_detected_npc():
+	var collision_data = npc_raycast.get_filtered_collision()
+	if collision_data.is_empty():
+		detected_npc_in_range = null
+		in_conversation = false
+		DialogueEvents.on_dialogue_end_request.emit()
+		return
+
+	detected_npc_in_range = collision_data["collider"] as NPC
+
 func _update_raycast_direction(dir: Vector2):
 	npc_raycast.target_position = dir * npc_raycast_magnitude
+	
 
 func _set_animation_blend_position(pos: Vector2):
 	animation_tree.set("parameters/Idle/blend_position", pos)
 	animation_tree.set("parameters/Move/blend_position", pos)
 
 func _on_interact_input_on_pressed() -> void:
-	var collision_data = npc_raycast.get_filtered_collision()
-	
-	if collision_data.is_empty():
+	if (detected_npc_in_range == null):
 		return
 	
-	print(collision_data["collider"] as NPC)
+	if (!in_conversation):
+		DialogueEvents.on_dialogue_requested.emit(detected_npc_in_range.dialogue_data)
+	else:
+		DialogueEvents.on_dialogue_end_request.emit()
+	in_conversation = !in_conversation
 
 func _on_update_position_timer_timeout() -> void:
 	WorldEvents.on_player_position_updated.emit(global_position)

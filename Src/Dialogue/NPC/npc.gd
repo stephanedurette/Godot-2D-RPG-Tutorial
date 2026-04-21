@@ -5,6 +5,7 @@ extends StaticBody2D
 @onready var animation_tree: AnimationTree = $AnimationTree
 
 @export var player_react_distance: float
+@export var dialogue_data: DialogueLineData
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

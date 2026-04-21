@@ -16,7 +16,7 @@ func _on_dialogue_continue_requested():
 func _on_dialogue_end_request():
 	open(false)
 
-func _on_dialogue_requested():
+func _on_dialogue_requested(dialog: DialogueLineData):
 	open(true)
 
 func open(o: bool):

@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://fwrxec2o2ag2" path="res://Third Party/Ninja Adventure - Asset Pack/Actor/Characters/Cavegirl/SpriteSheet.png" id="1_lpcqq"]
 [ext_resource type="Script" uid="uid://c7vjwrigjaxei" path="res://Src/Dialogue/NPC/npc.gd" id="1_ncvls"]
+[ext_resource type="Resource" uid="uid://qa4ptliiapie" path="res://Src/GameData/test line 1.tres" id="2_hpw3w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ncvls"]
 size = Vector2(14, 14)
@@ -189,6 +190,7 @@ graph_offset = Vector2(-75, -19)
 [node name="NPC" type="StaticBody2D" unique_id=135851359 groups=["block_push_obstacle", "npc"]]
 script = ExtResource("1_ncvls")
 player_react_distance = 48.0
+dialogue_data = ExtResource("2_hpw3w")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1369939231]
 texture = ExtResource("1_lpcqq")

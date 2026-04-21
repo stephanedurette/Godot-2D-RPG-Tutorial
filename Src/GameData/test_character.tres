@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://bv6e3uuc6lgdi"]
+
+[ext_resource type="Script" uid="uid://fr1w20l8nd0t" path="res://Src/Dialogue/character_data.gd" id="1_ikgch"]
+[ext_resource type="Texture2D" uid="uid://ce8e8vwuyrwk8" path="res://Third Party/Ninja Adventure - Asset Pack/Actor/Characters/Cavegirl/Faceset.png" id="1_jutk7"]
+
+[resource]
+script = ExtResource("1_ikgch")
+name = "Jimmy"
+portrait = ExtResource("1_jutk7")
+metadata/_custom_type_script = "uid://fr1w20l8nd0t"

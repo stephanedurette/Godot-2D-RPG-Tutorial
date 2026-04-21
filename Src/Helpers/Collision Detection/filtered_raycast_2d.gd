@@ -12,7 +12,7 @@ func get_filtered_collision() -> Dictionary:
 		if (_is_node_valid(get_collider())):
 			return { "distance": global_position.distance_to(get_collision_point()), "collider": get_collider() }
 		else:
-			add_exception(get_collider())
+			add_exception(get_collider()) #HUGE BUG, sometimes the collider is another ray that can't be added to exception
 			force_raycast_update()
 			
 	return {}

@@ -52,8 +52,8 @@ func move_distance(dir: Vector2) -> int:
 	if (dir == Vector2.ZERO):
 		return 0
 	
-	var distance: float = obstacle_colliders[dir].get_nearest_collision_distance()
-	
+	var distance: float = obstacle_colliders[dir].get_nearest_collision_distance() - GlobalVariables.GRID_PIXEL_SIZE / 2 #account for the fact the ray starts in the object
+
 	if (distance == INF):
 		return push_distance
 	

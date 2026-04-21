@@ -6,8 +6,12 @@ extends CanvasLayer
 @onready var text: RichTextLabel = $Control/Background/Text
 @onready var name_text: RichTextLabel = $Control/Background/Name
 
+@export var characters_per_second: float
+
 var current_dialogue_npc: NPC
 var current_dialogue_index: int
+
+var text_crawl_tween: Tween
 
 func _ready() -> void:
 	DialogueEvents.on_npc_interacted.connect(_on_npc_interacted)
@@ -17,12 +21,7 @@ func _ready() -> void:
 
 func _continue_dialog():
 	current_dialogue_index += 1
-	
-	if current_dialogue_index >= current_dialogue_npc.dialogue_data.lines.size():
-		_on_dialogue_end_request()
-		return
-	
-	_update_dialogue(current_dialogue_index)	
+	_update_dialogue_text(current_dialogue_index)	
 	
 
 func _on_dialogue_end_request():
@@ -32,17 +31,26 @@ func _on_dialogue_end_request():
 func _on_npc_interacted(npc: NPC):
 	
 	if current_dialogue_npc == null:
-		current_dialogue_npc = npc
-		open(true)	
-		current_dialogue_index = 0
-		portrait.texture = current_dialogue_npc.dialogue_data.character.portrait
-		name_text.text = current_dialogue_npc.dialogue_data.character.name
-		_update_dialogue(current_dialogue_index)
+		_start_dialogue(npc)
+	elif current_dialogue_index >= current_dialogue_npc.dialogue_data.lines.size() - 1:
+		_on_dialogue_end_request()
 	else:
 		_continue_dialog()
 	
-func _update_dialogue(index: int):
+func _start_dialogue(npc: NPC):
+	current_dialogue_npc = npc
+	open(true)	
+	current_dialogue_index = 0
+	portrait.texture = current_dialogue_npc.dialogue_data.character.portrait
+	name_text.text = current_dialogue_npc.dialogue_data.character.name
+	_update_dialogue_text(current_dialogue_index)
+	
+func _update_dialogue_text(index: int):
 	text.text = current_dialogue_npc.dialogue_data.lines[index]
+	text.visible_ratio = 0
+	text_crawl_tween = get_tree().create_tween()
+	text_crawl_tween.tween_property(text, "visible_ratio", 1, text.text.length() / characters_per_second)
+	
 
 func open(o: bool):
 	parent_object.visible = o

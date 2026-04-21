@@ -6,6 +6,7 @@
 [node name="DialogueBox" type="CanvasLayer" unique_id=453387408 node_paths=PackedStringArray("parent_object")]
 script = ExtResource("1_a6un4")
 parent_object = NodePath("Control")
+characters_per_second = 1.0
 
 [node name="Control" type="MarginContainer" parent="." unique_id=752480437]
 anchors_preset = 12

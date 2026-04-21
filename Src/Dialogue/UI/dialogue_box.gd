@@ -20,9 +20,13 @@ func _ready() -> void:
 	open(false)
 
 func _continue_dialog():
-	current_dialogue_index += 1
-	_update_dialogue_text(current_dialogue_index)	
+	current_dialogue_index += 1	
 	
+	text.text = current_dialogue_npc.dialogue_data.lines[current_dialogue_index]
+	text.visible_ratio = 0
+	
+	text_crawl_tween = get_tree().create_tween()
+	text_crawl_tween.tween_property(text, "visible_ratio", 1, text.text.length() / characters_per_second)
 
 func _on_dialogue_end_request():
 	open(false)
@@ -40,17 +44,10 @@ func _on_npc_interacted(npc: NPC):
 func _start_dialogue(npc: NPC):
 	current_dialogue_npc = npc
 	open(true)	
-	current_dialogue_index = 0
+	current_dialogue_index = -1
 	portrait.texture = current_dialogue_npc.dialogue_data.character.portrait
 	name_text.text = current_dialogue_npc.dialogue_data.character.name
-	_update_dialogue_text(current_dialogue_index)
-	
-func _update_dialogue_text(index: int):
-	text.text = current_dialogue_npc.dialogue_data.lines[index]
-	text.visible_ratio = 0
-	text_crawl_tween = get_tree().create_tween()
-	text_crawl_tween.tween_property(text, "visible_ratio", 1, text.text.length() / characters_per_second)
-	
+	_continue_dialog()	
 
 func open(o: bool):
 	parent_object.visible = o

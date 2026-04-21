@@ -348,7 +348,7 @@ down_input_name = "move_down"
 wait_time = 0.2
 autostart = true
 
-[node name="NpcDetection" type="RayCast2D" parent="." unique_id=1790213997]
+[node name="InteractableDetector" type="RayCast2D" parent="." unique_id=1790213997]
 target_position = Vector2(0, 12)
 collision_mask = 4
 

@@ -24,6 +24,8 @@ func _on_player_position_updated(player_position: Vector2):
 	else:
 		animation_tree.set("parameters/Idle/blend_position", Vector2.DOWN)
 
+func interact():
+	DialogueEvents.on_npc_interacted.emit(self)
 
 func _get_closest_cardinal_direction(direction: Vector2) -> Vector2:
 	var highest_dot: float = -INF

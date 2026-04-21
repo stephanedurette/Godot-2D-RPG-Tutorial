@@ -5,10 +5,10 @@ extends CharacterBody2D
 @export var move_speed : float = 10
 
 @onready var animation_tree: AnimationTree = $"AnimationTree"
-@onready var npc_raycast: RayCast2D = $"NpcDetection"
+@onready var npc_raycast: RayCast2D = $"InteractableDetector"
 
 var npc_raycast_magnitude: float
-var detected_npc_in_range: NPC
+var interactable_in_range: Node2D
 var current_move_direction: Vector2
 
 func _ready() -> void:
@@ -33,11 +33,11 @@ func _on_player_input_on_move_direction_changed(direction: Vector2) -> void:
 
 func _update_detected_npc():
 	if (!npc_raycast.is_colliding()):
-		detected_npc_in_range = null
+		interactable_in_range = null
 		DialogueEvents.on_dialogue_end_request.emit()
 		return
 	
-	detected_npc_in_range = npc_raycast.get_collider() as NPC
+	interactable_in_range = npc_raycast.get_collider() as Node2D
 
 func _update_raycast_direction(dir: Vector2):
 	npc_raycast.target_position = dir * npc_raycast_magnitude
@@ -48,10 +48,11 @@ func _set_animation_blend_position(pos: Vector2):
 	animation_tree.set("parameters/Move/blend_position", pos)
 
 func _on_interact_input_on_pressed() -> void:
-	if (detected_npc_in_range == null):
+	if (interactable_in_range == null):
 		return
 	
-	DialogueEvents.on_npc_interacted.emit(detected_npc_in_range)
+	if (interactable_in_range.has_method("interact")):
+		interactable_in_range.interact()
 
 
 func _on_update_position_timer_timeout() -> void:

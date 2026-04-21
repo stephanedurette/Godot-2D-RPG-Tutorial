@@ -187,7 +187,7 @@ states/Idle/position = Vector2(358, 91)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_fgdc5")]
 graph_offset = Vector2(-75, -19)
 
-[node name="NPC" type="StaticBody2D" unique_id=135851359 groups=["block_push_obstacle", "npc"]]
+[node name="NPC" type="StaticBody2D" unique_id=135851359]
 collision_layer = 6
 collision_mask = 0
 script = ExtResource("1_ncvls")

@@ -49,14 +49,14 @@ y_sort_enabled = true
 position = Vector2(40, -16)
 
 [node name="PushableBlock3" parent="Test Puzzle" unique_id=1460572135 instance=ExtResource("5_v211m")]
-position = Vector2(56, -16)
+position = Vector2(56, -24)
 
 [node name="Door" parent="Test Puzzle" unique_id=1675673477 instance=ExtResource("7_s1smv")]
 position = Vector2(-24, -32)
 
 [node name="IceBlock" parent="Test Puzzle" unique_id=165347143 instance=ExtResource("8_upm25")]
 y_sort_enabled = false
-position = Vector2(88, -16)
+position = Vector2(96, -16)
 
 [node name="PushButton" parent="Test Puzzle" unique_id=1106219846 instance=ExtResource("6_0jdrx")]
 position = Vector2(8, -16)

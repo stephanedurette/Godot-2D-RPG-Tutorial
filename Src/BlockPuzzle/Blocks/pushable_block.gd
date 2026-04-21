@@ -16,7 +16,7 @@ var pushing_state: PushingState
 var player: Player
 var player_direction: Vector2
 
-@onready var obstacle_colliders: Dictionary[Vector2, ObservableShapeCast2D] = {
+@onready var obstacle_colliders: Dictionary[Vector2, FilteredRaycast2D] = {
 	Vector2.UP: $ObstacleDetectors/Up,
 	Vector2.DOWN: $ObstacleDetectors/Down,
 	Vector2.LEFT: $ObstacleDetectors/Left,
@@ -35,7 +35,8 @@ func _initialize_player_colliders():
 	
 func _initialize_obstacle_colliders():
 	for k in obstacle_colliders.keys():
-		obstacle_colliders[k].target_position = k * (push_distance - 1)
+		obstacle_colliders[k].target_position = k * (push_distance + GlobalVariables.GRID_PIXEL_SIZE / 2 - 1)
+		obstacle_colliders[k].position = Vector2.ZERO
 
 func _initialize_state_machine():
 	idle_state = IdleState.new(self)

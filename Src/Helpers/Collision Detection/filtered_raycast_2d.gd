@@ -1,18 +1,21 @@
-class_name ObservableShapeCast2D
+class_name FilteredRaycast2D
 
-extends ShapeCast2D
+extends RayCast2D
 
 @export var groups_to_collide: Array[String]
 
 func get_nearest_collision_distance() -> float:
 	clear_exceptions()
 	
+	force_raycast_update()
+	
 	while(is_colliding()):
-		force_shapecast_update()
-		if (_is_node_valid(get_collider(0))):
-			return global_position.distance_to(get_collision_point(0))
+		print("f")
+		if (_is_node_valid(get_collider())):
+			return global_position.distance_to(get_collision_point())
 		else:
-			add_exception(get_collider(0))
+			add_exception(get_collider())
+			force_raycast_update()
 			
 	return INF
 		

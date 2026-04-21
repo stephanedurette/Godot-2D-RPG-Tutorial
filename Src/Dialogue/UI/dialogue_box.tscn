@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dc4dardoanxs8"]
+
+[ext_resource type="Texture2D" uid="uid://cioaejxq8m7ck" path="res://Third Party/Ninja Adventure - Asset Pack/Ui/Dialog/DialogBoxFaceset.png" id="1_sco3y"]
+
+[node name="DialogueBox" type="CanvasLayer" unique_id=453387408]
+
+[node name="Control" type="MarginContainer" parent="." unique_id=752480437]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -220.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TextureRect" type="TextureRect" parent="Control" unique_id=995587711]
+layout_mode = 2
+texture = ExtResource("1_sco3y")
+stretch_mode = 5

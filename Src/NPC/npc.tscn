@@ -186,7 +186,7 @@ states/Idle/position = Vector2(358, 91)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_fgdc5")]
 graph_offset = Vector2(-75, -19)
 
-[node name="NPC" type="StaticBody2D" unique_id=135851359]
+[node name="NPC" type="StaticBody2D" unique_id=135851359 groups=["block_push_obstacle"]]
 script = ExtResource("1_ncvls")
 player_react_distance = 48.0
 

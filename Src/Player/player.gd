@@ -9,7 +9,7 @@ extends CharacterBody2D
 var current_move_direction: Vector2
 
 func _ready() -> void:
-	animation_tree.set("parameters/Idle/blend_position", Vector2.DOWN)
+	_set_animation_blend_position(Vector2.DOWN)
 
 func _process(_delta: float) -> void:
 	velocity = current_move_direction * move_speed
@@ -20,12 +20,15 @@ func _on_player_input_on_move_direction_changed(direction: Vector2) -> void:
 	current_move_direction = direction
 	
 	if (current_move_direction != Vector2.ZERO):
-		animation_tree.set("parameters/Idle/blend_position", current_move_direction)
-		animation_tree.set("parameters/Move/blend_position", current_move_direction)
+		_set_animation_blend_position(current_move_direction)
 	
 	animation_tree.set("parameters/conditions/idle", current_move_direction == Vector2.ZERO);
 	animation_tree.set("parameters/conditions/moving", current_move_direction != Vector2.ZERO);
 
+
+func _set_animation_blend_position(pos: Vector2):
+	animation_tree.set("parameters/Idle/blend_position", pos)
+	animation_tree.set("parameters/Move/blend_position", pos)
 
 func _on_interact_input_on_pressed() -> void:
 	print("interact")

@@ -35,6 +35,7 @@ func _initialize_player_colliders():
 	
 func _initialize_obstacle_colliders():
 	for k in obstacle_colliders.keys():
+		@warning_ignore("integer_division")
 		obstacle_colliders[k].target_position = k * (push_distance + GlobalVariables.GRID_PIXEL_SIZE / 2 - 1)
 		obstacle_colliders[k].position = Vector2.ZERO
 
@@ -51,7 +52,7 @@ func _process(delta: float) -> void:
 func move_distance(dir: Vector2) -> int:
 	if (dir == Vector2.ZERO):
 		return 0
-	
+	@warning_ignore("integer_division")
 	var distance: float = obstacle_colliders[dir].get_nearest_collision_distance() - GlobalVariables.GRID_PIXEL_SIZE / 2 #account for the fact the ray starts in the object
 
 	if (distance == INF):

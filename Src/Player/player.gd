@@ -25,3 +25,7 @@ func _on_player_input_on_move_direction_changed(direction: Vector2) -> void:
 	
 	animation_tree.set("parameters/conditions/idle", current_move_direction == Vector2.ZERO);
 	animation_tree.set("parameters/conditions/moving", current_move_direction != Vector2.ZERO);
+
+
+func _on_interact_input_on_pressed() -> void:
+	print("interact")

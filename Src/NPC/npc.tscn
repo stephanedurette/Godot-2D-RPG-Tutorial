@@ -155,13 +155,13 @@ _data = {
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lpcqq"]
-animation = &"Idle_Down"
+animation = &"Idle_Up"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ncvls"]
 animation = &"Idle_Left"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3w2ou"]
-animation = &"Idle_Up"
+animation = &"Idle_Down"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7phq5"]
 animation = &"Idle_Right"
@@ -188,6 +188,7 @@ graph_offset = Vector2(-75, -19)
 
 [node name="NPC" type="StaticBody2D" unique_id=135851359]
 script = ExtResource("1_ncvls")
+player_react_distance = 48.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1369939231]
 texture = ExtResource("1_lpcqq")
@@ -204,4 +205,4 @@ libraries/ = SubResource("AnimationLibrary_3w2ou")
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=2104704811]
 tree_root = SubResource("AnimationNodeStateMachine_t3bwd")
 anim_player = NodePath("../AnimationPlayer")
-parameters/Idle/blend_position = Vector2(0.0051282644, -0.3933649)
+parameters/Idle/blend_position = Vector2(0.23418808, -0.09952605)

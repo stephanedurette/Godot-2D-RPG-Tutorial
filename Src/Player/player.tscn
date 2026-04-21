@@ -343,5 +343,10 @@ right_input_name = "move_right"
 up_input_name = "move_up"
 down_input_name = "move_down"
 
+[node name="UpdatePositionTimer" type="Timer" parent="." unique_id=876875253]
+wait_time = 0.2
+autostart = true
+
 [connection signal="on_pressed" from="Inputs/Interact Input" to="." method="_on_interact_input_on_pressed"]
 [connection signal="on_value_changed" from="Inputs/Move Vector Input" to="." method="_on_player_input_on_move_direction_changed"]
+[connection signal="timeout" from="UpdatePositionTimer" to="." method="_on_update_position_timer_timeout"]

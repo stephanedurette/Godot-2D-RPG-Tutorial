@@ -9,7 +9,7 @@ signal on_released
 
 var value: bool
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	var new_value = Input.is_action_pressed(input)
 	if (new_value == value):
 		return

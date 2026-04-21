@@ -35,6 +35,7 @@ folder_colors={
 
 block_push_obstacle=""
 block_pusher=""
+npc=""
 
 [input]
 

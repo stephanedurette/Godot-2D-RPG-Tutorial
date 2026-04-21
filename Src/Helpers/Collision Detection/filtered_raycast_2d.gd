@@ -4,6 +4,9 @@ extends RayCast2D
 
 @export var groups_to_collide: Array[String]
 
+func is_filtered_colliding():
+	return get_nearest_collision_distance() != INF
+
 func get_nearest_collision_distance() -> float:
 	clear_exceptions()
 	

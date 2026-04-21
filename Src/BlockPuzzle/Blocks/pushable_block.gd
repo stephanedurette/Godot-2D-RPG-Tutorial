@@ -6,7 +6,7 @@ extends AnimatableBody2D
 @export var push_speed: float
 @export var first_push_time: float
 
-@onready var player_colliders: Array[ObservableArea2D] = [$PlayerDetectors/Bottom, $PlayerDetectors/Top, $PlayerDetectors/Left, $PlayerDetectors/Right]
+@onready var player_colliders: Array[Area2D] = [$PlayerDetectors/Down, $PlayerDetectors/Up, $PlayerDetectors/Left, $PlayerDetectors/Right]
 @onready var directions: Array[Vector2] = [Vector2.DOWN, Vector2.UP, Vector2.LEFT, Vector2.RIGHT]
 
 var state_machine: State_Machine
@@ -16,7 +16,7 @@ var pushing_state: PushingState
 var player: Player
 var player_direction: Vector2
 
-@onready var obstacle_colliders: Dictionary[Vector2, FilteredRaycast2D] = {
+@onready var obstacle_colliders: Dictionary[Vector2, RayCast2D] = {
 	Vector2.UP: $ObstacleDetectors/Up,
 	Vector2.DOWN: $ObstacleDetectors/Down,
 	Vector2.LEFT: $ObstacleDetectors/Left,
@@ -30,8 +30,8 @@ func _ready() -> void:
 
 func _initialize_player_colliders():
 	for i in player_colliders.size():
-		player_colliders[i].connect("on_node_entered",func(node, _area): _on_player_entered_area(node, directions[i]))
-		player_colliders[i].connect("on_node_exited", func(_node, _area): _on_player_exited_area())
+		player_colliders[i].connect("body_entered",func(node): _on_player_entered_area(node, directions[i]))
+		player_colliders[i].connect("body_exited", func(_node): _on_player_exited_area())
 	
 func _initialize_obstacle_colliders():
 	for k in obstacle_colliders.keys():
@@ -53,13 +53,13 @@ func move_distance(dir: Vector2) -> int:
 	if (dir == Vector2.ZERO):
 		return 0
 	
-	var collision_data = obstacle_colliders[dir].get_filtered_collision()
-	
-	if (collision_data.is_empty()):
+	if(!obstacle_colliders[dir].is_colliding()):
 		return push_distance
 	
+	var collision_point = obstacle_colliders[dir].get_collision_point()
+	
 	@warning_ignore("integer_division")
-	var distance: float = collision_data["distance"] - GlobalVariables.GRID_PIXEL_SIZE / 2 #account for the fact the ray starts in the object
+	var distance: float = (global_position.distance_to(collision_point)) - GlobalVariables.GRID_PIXEL_SIZE / 2 #account for the fact the ray starts in the object
 	
 	var clamped_distance = (int)(floor(distance / GlobalVariables.GRID_PIXEL_SIZE) * GlobalVariables.GRID_PIXEL_SIZE)
 	

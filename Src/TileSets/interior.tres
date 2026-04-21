@@ -245,7 +245,7 @@ texture = ExtResource("1_0q4l8")
 1:8/0/terrains_peering_bit/top_right_corner = 1
 
 [resource]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 2
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Wall"
 terrain_set_0/terrain_0/color = Color(0.5019608, 0.6745098, 0.2509804, 1)

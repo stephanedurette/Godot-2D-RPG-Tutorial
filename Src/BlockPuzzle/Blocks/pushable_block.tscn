@@ -2,9 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://belp7vrjxx3qi" path="res://Third Party/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetDungeon.png" id="1_8qia3"]
 [ext_resource type="Script" uid="uid://c4ke1d2st6bdg" path="res://Src/BlockPuzzle/Blocks/pushable_block.gd" id="1_l4qa5"]
-[ext_resource type="PackedScene" uid="uid://bejpclknsp3dd" path="res://Src/Helpers/Collision Detection/raycaster_2d.tscn" id="3_hfnxp"]
-[ext_resource type="PackedScene" uid="uid://dylrvqssduaov" path="res://Src/Helpers/Collision Detection/observable_area_2d.tscn" id="4_epq7o"]
-[ext_resource type="PackedScene" uid="uid://d3jm2lmrodekc" path="res://Src/Helpers/Collision Detection/filtered_raycast_2d.tscn" id="5_71fwk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l4qa5"]
 atlas = ExtResource("1_8qia3")
@@ -13,8 +10,13 @@ region = Rect2(128, 48, 16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hfnxp"]
 size = Vector2(14, 14)
 
-[node name="PushableBlock" type="AnimatableBody2D" unique_id=1460572135 groups=["block_push_obstacle"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k71p3"]
+size = Vector2(1, 1)
+
+[node name="PushableBlock" type="AnimatableBody2D" unique_id=1460572135]
 y_sort_enabled = true
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("1_l4qa5")
 push_distance = 16
 push_speed = 24.0
@@ -26,36 +28,54 @@ texture = SubResource("AtlasTexture_l4qa5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=294457718]
 shape = SubResource("RectangleShape2D_hfnxp")
 
-[node name="Raycaster2D" parent="." unique_id=1590234572 instance=ExtResource("3_hfnxp")]
-
 [node name="PlayerDetectors" type="Node2D" parent="." unique_id=2142872998]
 
-[node name="Right" parent="PlayerDetectors" unique_id=1909048769 instance=ExtResource("4_epq7o")]
+[node name="Right" type="Area2D" parent="PlayerDetectors" unique_id=489838827]
 position = Vector2(9, 0)
-filter_groups = Array[String](["block_pusher"])
+collision_layer = 0
 
-[node name="Bottom" parent="PlayerDetectors" unique_id=1203242175 instance=ExtResource("4_epq7o")]
-position = Vector2(0, 9)
-filter_groups = Array[String](["block_pusher"])
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectors/Right" unique_id=282611197]
+shape = SubResource("RectangleShape2D_k71p3")
 
-[node name="Left" parent="PlayerDetectors" unique_id=163214342 instance=ExtResource("4_epq7o")]
+[node name="Left" type="Area2D" parent="PlayerDetectors" unique_id=356484125]
 position = Vector2(-9, 0)
-filter_groups = Array[String](["block_pusher"])
+collision_layer = 0
 
-[node name="Top" parent="PlayerDetectors" unique_id=539388297 instance=ExtResource("4_epq7o")]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectors/Left" unique_id=1207597259]
+shape = SubResource("RectangleShape2D_k71p3")
+
+[node name="Up" type="Area2D" parent="PlayerDetectors" unique_id=1439886785]
 position = Vector2(0, -9)
-filter_groups = Array[String](["block_pusher"])
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectors/Up" unique_id=343062867]
+shape = SubResource("RectangleShape2D_k71p3")
+
+[node name="Down" type="Area2D" parent="PlayerDetectors" unique_id=995837415]
+position = Vector2(0, 9)
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectors/Down" unique_id=297827467]
+shape = SubResource("RectangleShape2D_k71p3")
 
 [node name="ObstacleDetectors" type="Node2D" parent="." unique_id=1350449209]
 
-[node name="Up" parent="ObstacleDetectors" unique_id=209811789 instance=ExtResource("5_71fwk")]
-groups_to_collide = Array[String](["block_push_obstacle"])
+[node name="Up" type="RayCast2D" parent="ObstacleDetectors" unique_id=167671865]
+target_position = Vector2(0, 12)
+collision_mask = 2
+collide_with_areas = true
 
-[node name="Left" parent="ObstacleDetectors" unique_id=202678711 instance=ExtResource("5_71fwk")]
-groups_to_collide = Array[String](["block_push_obstacle"])
+[node name="Down" type="RayCast2D" parent="ObstacleDetectors" unique_id=2110340562]
+target_position = Vector2(0, 12)
+collision_mask = 2
+collide_with_areas = true
 
-[node name="Right" parent="ObstacleDetectors" unique_id=1961497020 instance=ExtResource("5_71fwk")]
-groups_to_collide = Array[String](["block_push_obstacle"])
+[node name="Left" type="RayCast2D" parent="ObstacleDetectors" unique_id=1802175845]
+target_position = Vector2(0, 12)
+collision_mask = 2
+collide_with_areas = true
 
-[node name="Down" parent="ObstacleDetectors" unique_id=132012060 instance=ExtResource("5_71fwk")]
-groups_to_collide = Array[String](["block_push_obstacle"])
+[node name="Right" type="RayCast2D" parent="ObstacleDetectors" unique_id=996764512]
+target_position = Vector2(0, 12)
+collision_mask = 2
+collide_with_areas = true

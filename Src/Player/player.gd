@@ -5,7 +5,7 @@ extends CharacterBody2D
 @export var move_speed : float = 10
 
 @onready var animation_tree: AnimationTree = $"AnimationTree"
-@onready var npc_raycast: FilteredRaycast2D = $"NpcDetection"
+@onready var npc_raycast: RayCast2D = $"NpcDetection"
 
 var npc_raycast_magnitude: float
 var detected_npc_in_range: NPC
@@ -34,14 +34,13 @@ func _on_player_input_on_move_direction_changed(direction: Vector2) -> void:
 	animation_tree.set("parameters/conditions/moving", current_move_direction != Vector2.ZERO);
 
 func _update_detected_npc():
-	var collision_data = npc_raycast.get_filtered_collision()
-	if collision_data.is_empty():
+	if (!npc_raycast.is_colliding()):
 		detected_npc_in_range = null
 		in_conversation = false
 		DialogueEvents.on_dialogue_end_request.emit()
 		return
-
-	detected_npc_in_range = collision_data["collider"] as NPC
+	
+	detected_npc_in_range = npc_raycast.get_collider() as NPC
 
 func _update_raycast_direction(dir: Vector2):
 	npc_raycast.target_position = dir * npc_raycast_magnitude

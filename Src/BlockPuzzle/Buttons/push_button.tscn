@@ -34,6 +34,8 @@ animations = [{
 size = Vector2(16, 16)
 
 [node name="PushButton" type="Area2D" unique_id=1106219846]
+collision_layer = 0
+collision_mask = 3
 script = ExtResource("1_0gu08")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=710496948]

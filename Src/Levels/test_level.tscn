@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bdkw26ydj2kki" path="res://Src/BlockPuzzle/Buttons/button_group.tscn" id="8_nmpib"]
 [ext_resource type="PackedScene" uid="uid://7dsm2sqde6p6" path="res://Src/BlockPuzzle/Blocks/ice_block.tscn" id="8_upm25"]
 [ext_resource type="PackedScene" uid="uid://dsyyds25m7f6p" path="res://Src/BlockPuzzle/invisible_block_wall.tscn" id="9_p8d7q"]
+[ext_resource type="PackedScene" uid="uid://bkx5uh6a7uddm" path="res://Src/NPC/npc.tscn" id="11_6lhx7"]
 
 [node name="Test Level" type="Node2D" unique_id=1816505977 node_paths=PackedStringArray("defaultSpawnPosition", "level_camera")]
 y_sort_enabled = true
@@ -79,6 +80,9 @@ position = Vector2(104, 13)
 position = Vector2(200, 42)
 scale = Vector2(0.5, 0.5)
 level = NodePath("../..")
+
+[node name="NPC" parent="." unique_id=135851359 instance=ExtResource("11_6lhx7")]
+position = Vector2(120, 0)
 
 [connection signal="on_all_buttons_pressed" from="Test Puzzle/Button Group" to="Test Puzzle/Door" method="open"]
 [connection signal="on_none_buttons_pressed" from="Test Puzzle/Button Group" to="Test Puzzle/Door" method="close"]

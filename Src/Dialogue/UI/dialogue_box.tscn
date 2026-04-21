@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://dc4dardoanxs8"]
 
+[ext_resource type="Script" uid="uid://dvgw0tyvgx6n1" path="res://Src/Dialogue/UI/dialogue_box.gd" id="1_a6un4"]
 [ext_resource type="Texture2D" uid="uid://cioaejxq8m7ck" path="res://Third Party/Ninja Adventure - Asset Pack/Ui/Dialog/DialogBoxFaceset.png" id="1_sco3y"]
 
 [node name="DialogueBox" type="CanvasLayer" unique_id=453387408]
+script = ExtResource("1_a6un4")
 
 [node name="Control" type="MarginContainer" parent="." unique_id=752480437]
 anchors_preset = 12

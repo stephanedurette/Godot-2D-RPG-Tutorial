@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bkx5uh6a7uddm"]
 
 [ext_resource type="Texture2D" uid="uid://fwrxec2o2ag2" path="res://Third Party/Ninja Adventure - Asset Pack/Actor/Characters/Cavegirl/SpriteSheet.png" id="1_lpcqq"]
-[ext_resource type="Script" uid="uid://c7vjwrigjaxei" path="res://Src/NPC/npc.gd" id="1_ncvls"]
+[ext_resource type="Script" uid="uid://c7vjwrigjaxei" path="res://Src/Dialogue/NPC/npc.gd" id="1_ncvls"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ncvls"]
 size = Vector2(14, 14)

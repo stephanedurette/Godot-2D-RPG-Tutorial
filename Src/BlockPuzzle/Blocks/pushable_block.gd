@@ -35,7 +35,7 @@ func _initialize_player_colliders():
 	
 func _initialize_obstacle_colliders():
 	for k in obstacle_colliders.keys():
-		obstacle_colliders[k].target_position = k * push_distance
+		obstacle_colliders[k].target_position = k * (push_distance - 1)
 
 func _initialize_state_machine():
 	idle_state = IdleState.new(self)

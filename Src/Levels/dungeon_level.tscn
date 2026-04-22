@@ -43,6 +43,7 @@ scale = Vector2(1, 0.24000001)
 level = NodePath("../..")
 
 [node name="Rooms" type="Node2D" parent="." unique_id=1458338464]
+y_sort_enabled = true
 
 [node name="Secret Room" type="Node2D" parent="Rooms" unique_id=733568631]
 

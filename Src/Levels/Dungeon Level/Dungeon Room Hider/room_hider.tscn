@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://ri58pjilpb6e"]
+
+[ext_resource type="Script" uid="uid://dpivc14alhhh3" path="res://Src/Levels/Dungeon Level/Dungeon Room Hider/room_hider.gd" id="1_28pum"]
+[ext_resource type="TileSet" uid="uid://cm205fmsdx04d" path="res://Src/TileSets/interior_floor.tres" id="1_epr51"]
+[ext_resource type="TileSet" uid="uid://bqk43syd0pab7" path="res://Src/TileSets/interior.tres" id="2_28pum"]
+
+[node name="Room Hider" type="Node2D" unique_id=229946106 node_paths=PackedStringArray("collision_tilemap")]
+z_index = 1000
+y_sort_enabled = true
+script = ExtResource("1_28pum")
+collision_tilemap = NodePath("WallLayer")
+
+[node name="FloorLayer" type="TileMapLayer" parent="." unique_id=490757159]
+z_index = -100
+z_as_relative = false
+tile_set = ExtResource("1_epr51")
+
+[node name="WallLayer" type="TileMapLayer" parent="." unique_id=371347168]
+z_index = -200
+y_sort_enabled = true
+tile_set = ExtResource("2_28pum")

@@ -86,6 +86,9 @@ position = Vector2(-72, -56)
 [node name="PushButton2" parent="Rooms/Entrance" unique_id=914356217 instance=ExtResource("6_6yrwc")]
 position = Vector2(-40, -56)
 
+[node name="PushButton3" parent="Rooms/Entrance" unique_id=1009328072 instance=ExtResource("6_6yrwc")]
+position = Vector2(-40, -8)
+
 [node name="PushableBlock" parent="Rooms/Entrance" unique_id=1460572135 instance=ExtResource("7_dq0f2")]
 position = Vector2(-8, -40)
 
@@ -104,5 +107,7 @@ position = Vector2(56, -56)
 [connection signal="on_all_buttons_pressed" from="Rooms/Entrance/Button Group" to="Rooms/Entrance/Door" method="open"]
 [connection signal="on_none_buttons_pressed" from="Rooms/Entrance/Button Group" to="Rooms/Entrance/Door" method="close"]
 [connection signal="on_some_buttons_pressed" from="Rooms/Entrance/Button Group" to="Rooms/Entrance/Door" method="close"]
+[connection signal="pressed" from="Rooms/Entrance/PushButton3" to="Rooms/Secret Room/Room Hider" method="show_room"]
+[connection signal="unpressed" from="Rooms/Entrance/PushButton3" to="Rooms/Secret Room/Room Hider" method="hide_room"]
 
 [editable path="Rooms/Secret Room/Room Hider"]

@@ -2,9 +2,11 @@
 
 [ext_resource type="Script" uid="uid://fr1w20l8nd0t" path="res://Src/Dialogue/character_data.gd" id="1_ikgch"]
 [ext_resource type="Texture2D" uid="uid://ce8e8vwuyrwk8" path="res://Third Party/Ninja Adventure - Asset Pack/Actor/Characters/Cavegirl/Faceset.png" id="1_jutk7"]
+[ext_resource type="AudioStream" uid="uid://blbso15w2k1wp" path="res://Third Party/FreeSoundEvRetro/494921__evretro__text-scroll-d-3-3-225.wav" id="3_s02d5"]
 
 [resource]
 script = ExtResource("1_ikgch")
 name = "Jimmy"
 portrait = ExtResource("1_jutk7")
+text_scroll_sound = ExtResource("3_s02d5")
 metadata/_custom_type_script = "uid://fr1w20l8nd0t"

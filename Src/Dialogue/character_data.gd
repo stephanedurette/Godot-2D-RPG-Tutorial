@@ -3,3 +3,4 @@ extends Resource
 
 @export var name: String
 @export var portrait: Texture2D
+@export var text_scroll_sound: AudioStream

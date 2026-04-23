@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://blbso15w2k1wp"
+path="res://.godot/imported/494921__evretro__text-scroll-d-3-3-225.wav-07c6d7ff3c3d30cf908614bd1b6b42b2.sample"
+
+[deps]
+
+source_file="res://Third Party/FreeSoundEvRetro/494921__evretro__text-scroll-d-3-3-225.wav"
+dest_files=["res://.godot/imported/494921__evretro__text-scroll-d-3-3-225.wav-07c6d7ff3c3d30cf908614bd1b6b42b2.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

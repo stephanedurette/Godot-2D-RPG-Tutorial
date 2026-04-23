@@ -68,3 +68,5 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "DEBUG_NAME"
 horizontal_alignment = 1
+
+[node name="TextScrollSound" type="AudioStreamPlayer" parent="." unique_id=225173927]

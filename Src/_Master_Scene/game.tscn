@@ -2,9 +2,12 @@
 
 [ext_resource type="PackedScene" uid="uid://e47c880nge53" path="res://Src/World/world.tscn" id="1_n60f8"]
 [ext_resource type="PackedScene" uid="uid://dc4dardoanxs8" path="res://Src/Dialogue/UI/dialogue_box.tscn" id="2_cqojo"]
+[ext_resource type="PackedScene" uid="uid://c2l0kvgcuee31" path="res://Src/Inventory/inventory_ui.tscn" id="3_pglyg"]
 
 [node name="Game" type="Node2D" unique_id=2079944452]
 
 [node name="World" parent="." unique_id=749782370 instance=ExtResource("1_n60f8")]
 
 [node name="DialogueBox" parent="." unique_id=453387408 instance=ExtResource("2_cqojo")]
+
+[node name="Inventory UI" parent="." unique_id=14504721 instance=ExtResource("3_pglyg")]

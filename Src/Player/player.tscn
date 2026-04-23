@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dfm0brnpvhdyf" path="res://Src/Helpers/Input/input_vector_component.gd" id="2_nms7q"]
 [ext_resource type="Texture2D" uid="uid://b042he7gaty05" path="res://Third Party/Ninja Adventure - Asset Pack/Actor/Characters/Knight/SpriteSheet.png" id="3_i1ivj"]
 [ext_resource type="Script" uid="uid://d1pirblm5ldgv" path="res://Src/Helpers/Input/input_value_component.gd" id="4_srngh"]
+[ext_resource type="PackedScene" uid="uid://ba8m8qoqjbpmu" path="res://Src/Inventory/inventory.tscn" id="5_lagon"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i1ivj"]
 animation = &"idle_down"
@@ -351,6 +352,8 @@ autostart = true
 [node name="InteractableDetector" type="RayCast2D" parent="." unique_id=1790213997]
 target_position = Vector2(0, 12)
 collision_mask = 4
+
+[node name="Inventory" parent="." unique_id=563118470 instance=ExtResource("5_lagon")]
 
 [connection signal="on_pressed" from="Inputs/Interact Input" to="." method="_on_interact_input_on_pressed"]
 [connection signal="on_value_changed" from="Inputs/Move Vector Input" to="." method="_on_player_input_on_move_direction_changed"]

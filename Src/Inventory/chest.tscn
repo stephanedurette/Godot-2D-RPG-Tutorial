@@ -2,6 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://kr40of2ygol2" path="res://Third Party/Ninja Adventure - Asset Pack/Items/Treasure/BigTreasureChest.png" id="1_b1kvl"]
 [ext_resource type="Script" uid="uid://ukm2hkmkfkey" path="res://Src/Inventory/chest.gd" id="1_gmixu"]
+[ext_resource type="Resource" uid="uid://coanb3u2efn0o" path="res://Src/GameData/Items/scroll_fire.tres" id="2_rdtm0"]
+[ext_resource type="Texture2D" uid="uid://divjqbiy8h3jp" path="res://Third Party/Ninja Adventure - Asset Pack/Items/Scroll/ScrollFire.png" id="4_umdpn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gmixu"]
 atlas = ExtResource("1_b1kvl")
@@ -40,6 +42,7 @@ size = Vector2(8, 5)
 collision_layer = 6
 collision_mask = 0
 script = ExtResource("1_gmixu")
+item = ExtResource("2_rdtm0")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=457451537]
 sprite_frames = SubResource("SpriteFrames_umdpn")
@@ -57,5 +60,16 @@ collision_layer = 0
 position = Vector2(0, 8.5)
 shape = SubResource("RectangleShape2D_gmixu")
 
+[node name="ItemImage" type="Sprite2D" parent="." unique_id=52551093]
+visible = false
+position = Vector2(0, -14)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_umdpn")
+
+[node name="ItemDisplayTimer" type="Timer" parent="." unique_id=1722574961]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="body_entered" from="PlayerArea" to="." method="_on_player_area_body_entered"]
 [connection signal="body_exited" from="PlayerArea" to="." method="_on_player_area_body_exited"]
+[connection signal="timeout" from="ItemDisplayTimer" to="." method="_on_item_display_timer_timeout"]

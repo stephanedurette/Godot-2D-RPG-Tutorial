@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://c2l0kvgcuee31"]
+
+[ext_resource type="Script" uid="uid://ba1hq1h4rl5f6" path="res://Src/Inventory/inventory_ui.gd" id="1_fq5gp"]
+[ext_resource type="PackedScene" uid="uid://b1itg0qkm4dbl" path="res://Src/Inventory/item_ui.tscn" id="2_fq5gp"]
+
+[node name="Inventory UI" type="CanvasLayer" unique_id=14504721 node_paths=PackedStringArray("item_ui_container")]
+script = ExtResource("1_fq5gp")
+item_ui_scene = ExtResource("2_fq5gp")
+item_ui_container = NodePath("MarginContainer/VBoxContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1171888390]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=765777914]
+layout_mode = 2

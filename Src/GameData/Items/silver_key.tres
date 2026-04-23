@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://cmn4ig2q44fbd"]
+
+[ext_resource type="Texture2D" uid="uid://bipfbyplkg6qy" path="res://Third Party/Ninja Adventure - Asset Pack/Items/Treasure/SilverKey.png" id="1_4ncbe"]
+[ext_resource type="Script" uid="uid://6mlo1p0q43y7" path="res://Src/Inventory/item_data.gd" id="1_8v7b2"]
+
+[resource]
+script = ExtResource("1_8v7b2")
+name = "Silver Key"
+image = ExtResource("1_4ncbe")
+metadata/_custom_type_script = "uid://6mlo1p0q43y7"

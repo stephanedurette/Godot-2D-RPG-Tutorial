@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://b1itg0qkm4dbl"]
+
+[ext_resource type="Script" uid="uid://b8vv1v4en4bu8" path="res://Src/Inventory/item_ui.gd" id="1_2g8we"]
+[ext_resource type="Texture2D" uid="uid://c5amtr1txblm0" path="res://Third Party/Ninja Adventure - Asset Pack/Items/Scroll/ScrollPlant.png" id="1_mgxnh"]
+
+[node name="Item UI" type="Control" unique_id=1171686675]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 79.265
+offset_bottom = 40.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("1_2g8we")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2006883845]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.29411766)
+
+[node name="Image" type="TextureRect" parent="ColorRect" unique_id=375672637]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_mgxnh")
+stretch_mode = 4
+
+[node name="Count" type="Label" parent="ColorRect" unique_id=1096546305]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 44.985
+offset_top = -11.5
+offset_right = 67.985
+offset_bottom = 11.5
+grow_vertical = 2
+text = "x 2"
+vertical_alignment = 2

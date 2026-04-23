@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://c3x5e8pww7s5o" path="res://Src/BlockPuzzle/Switches/switch.tscn" id="12_pye4m"]
 [ext_resource type="PackedScene" uid="uid://btkv2umvuaea8" path="res://Src/BlockPuzzle/Switches/switch_puzzle.tscn" id="13_tfdwq"]
 [ext_resource type="PackedScene" uid="uid://bw5r6kaqpeabr" path="res://Src/Inventory/chest.tscn" id="14_uaxxg"]
+[ext_resource type="Resource" uid="uid://cmn4ig2q44fbd" path="res://Src/GameData/Items/silver_key.tres" id="15_u0aaj"]
 
 [node name="dungeon_level" type="Node2D" unique_id=526094986 node_paths=PackedStringArray("defaultSpawnPosition", "level_camera")]
 y_sort_enabled = true
@@ -126,6 +127,13 @@ one_shot_puzzle = true
 
 [node name="Chest" parent="Rooms/Entrance" unique_id=707568509 instance=ExtResource("14_uaxxg")]
 position = Vector2(0, 40)
+
+[node name="Chest2" parent="Rooms/Entrance" unique_id=1090671581 instance=ExtResource("14_uaxxg")]
+position = Vector2(-16, 40)
+
+[node name="Chest3" parent="Rooms/Entrance" unique_id=694931392 instance=ExtResource("14_uaxxg")]
+position = Vector2(-32, 40)
+item = ExtResource("15_u0aaj")
 
 [connection signal="on_all_buttons_pressed" from="Rooms/Ice Block Room/Button Group" to="Rooms/Ice Block Room/Door" method="open"]
 [connection signal="on_none_buttons_pressed" from="Rooms/Ice Block Room/Button Group" to="Rooms/Ice Block Room/Door" method="close"]

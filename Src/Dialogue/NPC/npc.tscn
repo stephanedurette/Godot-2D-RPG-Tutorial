@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://fwrxec2o2ag2" path="res://Third Party/Ninja Adventure - Asset Pack/Actor/Characters/Cavegirl/SpriteSheet.png" id="1_lpcqq"]
 [ext_resource type="Script" uid="uid://c7vjwrigjaxei" path="res://Src/Dialogue/NPC/npc.gd" id="1_ncvls"]
-[ext_resource type="Resource" uid="uid://qa4ptliiapie" path="res://Src/GameData/test line 1.tres" id="2_hpw3w"]
+[ext_resource type="Resource" uid="uid://qa4ptliiapie" path="res://Src/GameData/Dialogue/test line 1.tres" id="2_hpw3w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ncvls"]
 size = Vector2(14, 14)

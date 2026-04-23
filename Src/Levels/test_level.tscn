@@ -3,6 +3,7 @@
 [ext_resource type="TileSet" uid="uid://b1g4f7wi42og6" path="res://Src/TileSets/outdoor_ground.tres" id="1_kok8v"]
 [ext_resource type="Script" uid="uid://djetji2mmda2e" path="res://Src/Levels/level.gd" id="1_pkap3"]
 [ext_resource type="TileSet" uid="uid://c7ia7r7tkv15f" path="res://Src/TileSets/obstacles.tres" id="2_3x3l4"]
+[ext_resource type="AudioStream" uid="uid://d2hbrfgfu3a0r" path="res://Third Party/Ninja Adventure - Asset Pack/Musics/5 - Peaceful.ogg" id="2_k4hcr"]
 [ext_resource type="TileSet" uid="uid://sj5y6cf326nw" path="res://Src/TileSets/invisible_wall.tres" id="4_4ol15"]
 [ext_resource type="PackedScene" uid="uid://dlf033cp5wtxe" path="res://Src/Portals/portal.tscn" id="4_pkap3"]
 [ext_resource type="PackedScene" uid="uid://p5ytsp46jjf4" path="res://Src/BlockPuzzle/Blocks/pushable_block.tscn" id="5_v211m"]
@@ -18,6 +19,7 @@ y_sort_enabled = true
 script = ExtResource("1_pkap3")
 defaultSpawnPosition = NodePath("Player Locations/Player Spawn")
 level_camera = NodePath("Camera2D")
+level_music = ExtResource("2_k4hcr")
 
 [node name="Tilemap Layers" type="Node2D" parent="." unique_id=1406968830]
 y_sort_enabled = true

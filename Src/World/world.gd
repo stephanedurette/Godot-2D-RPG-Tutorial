@@ -4,10 +4,15 @@ extends Node2D
 @export var startingLevel: Level
 @export var levelParent: Node
 
+@onready var music_player: AudioStreamPlayer = $MusicPlayer
+
 var is_player_teleporting: bool
 
 func load_level(level: Level):
 	levelParent.add_child.call_deferred(level)
+	if (level.level_music != null):
+		music_player.stream = level.level_music
+		music_player.play()
 
 func unload_level(level: Level):
 	levelParent.remove_child.call_deferred(level)

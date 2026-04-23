@@ -4,6 +4,7 @@ extends Node2D
 
 @export var defaultSpawnPosition: Marker2D
 @export var level_camera: Camera2D
+@export var level_music: AudioStream
 		
 func add_player(p: Player, positionNode: Node2D):
 	p.global_position = positionNode.global_position

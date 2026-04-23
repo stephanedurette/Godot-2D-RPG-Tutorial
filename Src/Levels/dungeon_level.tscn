@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://bjp8ugwrh3m4g"]
 
 [ext_resource type="Script" uid="uid://djetji2mmda2e" path="res://Src/Levels/level.gd" id="1_sy2ga"]
+[ext_resource type="AudioStream" uid="uid://0c4lfs7wu60b" path="res://Third Party/Ninja Adventure - Asset Pack/Musics/2 - The Cave.ogg" id="2_o40iw"]
 [ext_resource type="PackedScene" uid="uid://dlf033cp5wtxe" path="res://Src/Portals/portal.tscn" id="2_sy2ga"]
 [ext_resource type="TileSet" uid="uid://bqk43syd0pab7" path="res://Src/TileSets/interior.tres" id="3_7dqcm"]
 [ext_resource type="TileSet" uid="uid://cm205fmsdx04d" path="res://Src/TileSets/interior_floor.tres" id="4_sy2ga"]
@@ -21,6 +22,7 @@ y_sort_enabled = true
 script = ExtResource("1_sy2ga")
 defaultSpawnPosition = NodePath("Player Locations/Player Spawn")
 level_camera = NodePath("Camera2D")
+level_music = ExtResource("2_o40iw")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=578256712]
 zoom = Vector2(5, 5)

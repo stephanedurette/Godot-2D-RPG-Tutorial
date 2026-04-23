@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://p5ytsp46jjf4" path="res://Src/BlockPuzzle/Blocks/pushable_block.tscn" id="7_dq0f2"]
 [ext_resource type="PackedScene" uid="uid://bdkw26ydj2kki" path="res://Src/BlockPuzzle/Buttons/button_group.tscn" id="8_sxihp"]
 [ext_resource type="PackedScene" uid="uid://7dsm2sqde6p6" path="res://Src/BlockPuzzle/Blocks/ice_block.tscn" id="9_6yrwc"]
+[ext_resource type="PackedScene" uid="uid://c3x5e8pww7s5o" path="res://Src/BlockPuzzle/Switches/switch.tscn" id="12_pye4m"]
 
 [node name="dungeon_level" type="Node2D" unique_id=526094986 node_paths=PackedStringArray("defaultSpawnPosition", "level_camera")]
 y_sort_enabled = true
@@ -100,6 +101,9 @@ position = Vector2(8, -88)
 
 [node name="PushButtonLatch" parent="Rooms/Entrance" unique_id=2001959644 instance=ExtResource("6_dq0f2")]
 position = Vector2(56, -56)
+
+[node name="Switch" parent="Rooms/Entrance" unique_id=446452515 instance=ExtResource("12_pye4m")]
+position = Vector2(-24, 8)
 
 [connection signal="on_all_buttons_pressed" from="Rooms/Ice Block Room/Button Group" to="Rooms/Ice Block Room/Door" method="open"]
 [connection signal="on_none_buttons_pressed" from="Rooms/Ice Block Room/Button Group" to="Rooms/Ice Block Room/Door" method="close"]

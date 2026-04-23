@@ -10,19 +10,25 @@ signal on_toggled_off
 var on: bool
 
 func _ready() -> void:
-	_toggle(on_at_start)
+	on = on_at_start
+	_update_animation()
 
 func interact():
 	_toggle(!on)
 
-func _toggle(_on: bool):
-	if (_on == on):
-		return
-	
-	on = _on
-	
-	animated_sprite.play("on" if on else "off")
+func _emit_state():
 	if on:
 		on_toggled_on.emit()
 	else:
 		on_toggled_off.emit()
+func _update_animation():
+	animated_sprite.play("on" if on else "off")
+
+func _toggle(_on: bool):
+	if (_on == on):
+		return
+		
+	on = _on
+		
+	_update_animation()
+	_emit_state()

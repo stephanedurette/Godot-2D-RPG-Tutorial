@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://bw5r6kaqpeabr"]
+
+[ext_resource type="Texture2D" uid="uid://kr40of2ygol2" path="res://Third Party/Ninja Adventure - Asset Pack/Items/Treasure/BigTreasureChest.png" id="1_b1kvl"]
+[ext_resource type="Script" uid="uid://ukm2hkmkfkey" path="res://Src/Inventory/chest.gd" id="1_gmixu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmixu"]
+atlas = ExtResource("1_b1kvl")
+region = Rect2(0, 0, 16, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rdtm0"]
+atlas = ExtResource("1_b1kvl")
+region = Rect2(16, 0, 16, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_umdpn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gmixu")
+}],
+"loop": true,
+"name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rdtm0")
+}],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rc1q8"]
+size = Vector2(16, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gmixu"]
+size = Vector2(8, 5)
+
+[node name="Chest" type="StaticBody2D" unique_id=446452515]
+collision_layer = 6
+collision_mask = 0
+script = ExtResource("1_gmixu")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=457451537]
+sprite_frames = SubResource("SpriteFrames_umdpn")
+animation = &"closed"
+autoplay = "closed"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1012761543]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_rc1q8")
+
+[node name="PlayerArea" type="Area2D" parent="." unique_id=1447200287]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerArea" unique_id=383389227]
+position = Vector2(0, 8.5)
+shape = SubResource("RectangleShape2D_gmixu")
+
+[connection signal="body_entered" from="PlayerArea" to="." method="_on_player_area_body_entered"]
+[connection signal="body_exited" from="PlayerArea" to="." method="_on_player_area_body_exited"]

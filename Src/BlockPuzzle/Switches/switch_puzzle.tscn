@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://btkv2umvuaea8"]
+
+[ext_resource type="Script" uid="uid://0lcjpw170po1" path="res://Src/BlockPuzzle/Switches/switch_puzzle.gd" id="1_g5n7o"]
+
+[node name="SwitchPuzzle" type="Node" unique_id=1222273492]
+script = ExtResource("1_g5n7o")

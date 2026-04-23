@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bdkw26ydj2kki" path="res://Src/BlockPuzzle/Buttons/button_group.tscn" id="8_sxihp"]
 [ext_resource type="PackedScene" uid="uid://7dsm2sqde6p6" path="res://Src/BlockPuzzle/Blocks/ice_block.tscn" id="9_6yrwc"]
 [ext_resource type="PackedScene" uid="uid://c3x5e8pww7s5o" path="res://Src/BlockPuzzle/Switches/switch.tscn" id="12_pye4m"]
+[ext_resource type="PackedScene" uid="uid://btkv2umvuaea8" path="res://Src/BlockPuzzle/Switches/switch_puzzle.tscn" id="13_tfdwq"]
 
 [node name="dungeon_level" type="Node2D" unique_id=526094986 node_paths=PackedStringArray("defaultSpawnPosition", "level_camera")]
 y_sort_enabled = true
@@ -99,11 +100,28 @@ position = Vector2(-56, -40)
 [node name="Door" parent="Rooms/Entrance" unique_id=1675673477 instance=ExtResource("5_wjflc")]
 position = Vector2(8, -88)
 
+[node name="Door2" parent="Rooms/Entrance" unique_id=1036303095 instance=ExtResource("5_wjflc")]
+position = Vector2(104, -8)
+
 [node name="PushButtonLatch" parent="Rooms/Entrance" unique_id=2001959644 instance=ExtResource("6_dq0f2")]
 position = Vector2(56, -56)
 
-[node name="Switch" parent="Rooms/Entrance" unique_id=446452515 instance=ExtResource("12_pye4m")]
-position = Vector2(-24, 8)
+[node name="switch 2" parent="Rooms/Entrance" unique_id=446452515 instance=ExtResource("12_pye4m")]
+position = Vector2(48, -7)
+
+[node name="switch 4" parent="Rooms/Entrance" unique_id=1666034747 instance=ExtResource("12_pye4m")]
+position = Vector2(48, 24)
+
+[node name="switch 3" parent="Rooms/Entrance" unique_id=934064754 instance=ExtResource("12_pye4m")]
+position = Vector2(16, 24)
+
+[node name="switch 1" parent="Rooms/Entrance" unique_id=1799210937 instance=ExtResource("12_pye4m")]
+position = Vector2(16, -8)
+
+[node name="SwitchPuzzle" parent="Rooms/Entrance" unique_id=1222273492 node_paths=PackedStringArray("switches") instance=ExtResource("13_tfdwq")]
+switches = [NodePath("../switch 1"), NodePath("../switch 2"), NodePath("../switch 3"), NodePath("../switch 4")]
+solve_states = Array[bool]([true, false, false, true])
+one_shot_puzzle = true
 
 [connection signal="on_all_buttons_pressed" from="Rooms/Ice Block Room/Button Group" to="Rooms/Ice Block Room/Door" method="open"]
 [connection signal="on_none_buttons_pressed" from="Rooms/Ice Block Room/Button Group" to="Rooms/Ice Block Room/Door" method="close"]
@@ -113,5 +131,7 @@ position = Vector2(-24, 8)
 [connection signal="on_some_buttons_pressed" from="Rooms/Entrance/Button Group" to="Rooms/Entrance/Door" method="close"]
 [connection signal="pressed" from="Rooms/Entrance/PushButton3" to="Rooms/Secret Room/Room Hider" method="show_room"]
 [connection signal="unpressed" from="Rooms/Entrance/PushButton3" to="Rooms/Secret Room/Room Hider" method="hide_room"]
+[connection signal="puzzle_solved" from="Rooms/Entrance/SwitchPuzzle" to="Rooms/Entrance/Door2" method="open"]
+[connection signal="puzzle_unsolved" from="Rooms/Entrance/SwitchPuzzle" to="Rooms/Entrance/Door2" method="close"]
 
 [editable path="Rooms/Secret Room/Room Hider"]

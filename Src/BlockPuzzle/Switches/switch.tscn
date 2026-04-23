@@ -37,6 +37,7 @@ size = Vector2(16, 8)
 collision_layer = 6
 collision_mask = 0
 script = ExtResource("1_d2emi")
+can_interact_at_start = true
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=457451537]
 sprite_frames = SubResource("SpriteFrames_w6q2q")

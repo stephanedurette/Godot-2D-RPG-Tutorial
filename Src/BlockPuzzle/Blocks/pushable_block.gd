@@ -16,6 +16,8 @@ var pushing_state: PushingState
 var player: Player
 var player_direction: Vector2
 
+var starting_position: Vector2
+
 @onready var obstacle_colliders: Dictionary[Vector2, RayCast2D] = {
 	Vector2.UP: $ObstacleDetectors/Up,
 	Vector2.DOWN: $ObstacleDetectors/Down,
@@ -23,7 +25,12 @@ var player_direction: Vector2
 	Vector2.RIGHT: $ObstacleDetectors/Right
 }
 
+func reset():
+	state_machine.change_state(idle_state)
+	global_position = starting_position
+
 func _ready() -> void:
+	starting_position = global_position
 	_initialize_state_machine()
 	_initialize_player_colliders()
 	_initialize_obstacle_colliders()
@@ -123,19 +130,21 @@ class IdleState extends PushBlockState:
 class PushingState extends PushBlockState:
 	var push_vector: Vector2
 	
+	var push_tween: Tween
+	
 	func enter():
-		var tween = pushable_block.get_tree().create_tween()
-		tween.tween_property(pushable_block, "global_position", pushable_block.global_position + push_vector, push_vector.length() / pushable_block.push_speed)\
+		push_tween = pushable_block.get_tree().create_tween()
+		push_tween.tween_property(pushable_block, "global_position", pushable_block.global_position + push_vector, push_vector.length() / pushable_block.push_speed)\
 			.set_trans(Tween.TRANS_QUAD)\
 			.set_ease(Tween.EASE_OUT)
 			
-		tween.tween_callback(on_push_finished)
+		push_tween.tween_callback(on_push_finished)
 	
 	func process(_delta):
 		pass
 		
 	func exit():
-		pass
+		push_tween.kill()
 	
 	func on_push_finished():
 		pushable_block.idle_state.current_push_time = pushable_block.first_push_time

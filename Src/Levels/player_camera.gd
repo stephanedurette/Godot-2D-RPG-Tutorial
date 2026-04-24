@@ -1,4 +1,4 @@
-class_name LevelCamera
+class_name PlayerCamera
 
 extends Camera2D
 
@@ -6,6 +6,9 @@ extends Camera2D
 @onready var player_detect_area_collider: CollisionShape2D = $PlayerDetectArea/CollisionShape2D
 
 var following_body: Node2D
+
+signal on_player_left
+signal on_player_entered
 
 func _ready() -> void:
 	_setup_collider()
@@ -25,6 +28,8 @@ func _setup_collider():
 func _on_player_detect_area_body_entered(body: Node2D) -> void:
 	following_body = body
 	make_current()
+	on_player_entered.emit()
 
 func _on_player_detect_area_body_exited(_body: Node2D) -> void:
 	following_body = null
+	on_player_left.emit()

@@ -9,6 +9,10 @@ extends StaticBody2D
 
 var tween: Tween
 
+func reset():
+	collider.disabled = false
+	sprite.self_modulate = Color.WHITE
+
 func open():
 	_animate_door_open.call_deferred(true)
 	

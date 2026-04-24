@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bdkw26ydj2kki" path="res://Src/BlockPuzzle/Buttons/button_group.tscn" id="11_kx47d"]
 [ext_resource type="PackedScene" uid="uid://p5ytsp46jjf4" path="res://Src/BlockPuzzle/Blocks/pushable_block.tscn" id="12_gcyb6"]
 [ext_resource type="PackedScene" uid="uid://c3x5e8pww7s5o" path="res://Src/BlockPuzzle/Switches/switch.tscn" id="13_km7y6"]
+[ext_resource type="PackedScene" uid="uid://qj7mlpxrhjd6" path="res://Src/Levels/room.tscn" id="13_o6lw4"]
 [ext_resource type="PackedScene" uid="uid://btkv2umvuaea8" path="res://Src/BlockPuzzle/Switches/switch_puzzle.tscn" id="14_aawb7"]
 [ext_resource type="PackedScene" uid="uid://bw5r6kaqpeabr" path="res://Src/Inventory/chest.tscn" id="15_ro7m6"]
 [ext_resource type="Resource" uid="uid://cmn4ig2q44fbd" path="res://Src/GameData/Items/silver_key.tres" id="16_ptcq6"]
@@ -84,6 +85,10 @@ limit_left = 154
 limit_top = -143
 limit_right = 485
 limit_bottom = 132
+
+[node name="Room" parent="Rooms/Ice Block Room" unique_id=1186205798 node_paths=PackedStringArray("player_camera", "reset_objects") instance=ExtResource("13_o6lw4")]
+player_camera = NodePath("../RoomCamera")
+reset_objects = [NodePath("../IceBlock"), NodePath("../Door")]
 
 [node name="Entrance" type="Node2D" parent="Rooms" unique_id=1005217321]
 y_sort_enabled = true

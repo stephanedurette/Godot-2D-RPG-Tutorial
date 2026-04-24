@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dcu641uplyey"]
+
+[ext_resource type="Script" uid="uid://bk6s1m7045jld" path="res://Src/Levels/player_camera.gd" id="1_1tond"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fq2is"]
+resource_local_to_scene = true
+
+[node name="PlayerCamera" type="Camera2D" unique_id=29058151]
+limit_left = 0
+limit_top = 0
+limit_right = 0
+limit_bottom = 0
+script = ExtResource("1_1tond")
+
+[node name="PlayerDetectArea" type="Area2D" parent="." unique_id=2135779557]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectArea" unique_id=1829349784]
+shape = SubResource("RectangleShape2D_fq2is")
+
+[connection signal="body_entered" from="PlayerDetectArea" to="." method="_on_player_detect_area_body_entered"]
+[connection signal="body_exited" from="PlayerDetectArea" to="." method="_on_player_detect_area_body_exited"]

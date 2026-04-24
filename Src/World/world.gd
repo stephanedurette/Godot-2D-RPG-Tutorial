@@ -28,7 +28,7 @@ func _ready() -> void:
 	unload_all_levels()
 	
 	load_level(startingLevel)
-	startingLevel.add_player(player, startingLevel.defaultSpawnPosition)
+	player.global_position = startingLevel.defaultSpawnPosition.global_position
 			
 	
 func on_portal_entered(p: Portal):
@@ -43,8 +43,5 @@ func on_portal_entered(p: Portal):
 	
 	if (from != to):
 		load_level(to)
-		from.remove_player()
-		to.add_player(player, p.otherPortal)
 		unload_level(from)
-	else:
-		player.global_position = p.otherPortal.global_position
+	player.global_position = p.otherPortal.global_position

@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://532g1iuq0yg2" path="res://Src/World/world.gd" id="1_uxffa"]
 [ext_resource type="PackedScene" uid="uid://ck5hpl4hrdipu" path="res://Src/Player/player.tscn" id="2_8pn1l"]
-[ext_resource type="PackedScene" uid="uid://dnsyiu1qm1ykk" path="res://Src/Levels/test_level.tscn" id="3_oqie5"]
-[ext_resource type="PackedScene" uid="uid://bjp8ugwrh3m4g" path="res://Src/Levels/dungeon_level.tscn" id="4_8at5u"]
+[ext_resource type="PackedScene" uid="uid://dnsyiu1qm1ykk" path="res://Src/Levels/Test Level/test_level.tscn" id="3_oqie5"]
+[ext_resource type="PackedScene" uid="uid://bjp8ugwrh3m4g" path="res://Src/Levels/Dungeon Level/dungeon_level.tscn" id="4_8at5u"]
 
 [node name="World" type="Node2D" unique_id=749782370 node_paths=PackedStringArray("player", "startingLevel", "levelParent")]
 y_sort_enabled = true

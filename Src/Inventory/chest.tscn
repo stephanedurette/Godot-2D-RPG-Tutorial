@@ -62,8 +62,7 @@ shape = SubResource("RectangleShape2D_gmixu")
 
 [node name="ItemImage" type="Sprite2D" parent="." unique_id=52551093]
 visible = false
-position = Vector2(0, -14)
-scale = Vector2(0.5, 0.5)
+position = Vector2(0, -16)
 texture = ExtResource("4_umdpn")
 
 [node name="ItemDisplayTimer" type="Timer" parent="." unique_id=1722574961]

@@ -24,10 +24,7 @@ func _setup_collider():
 
 func _on_player_detect_area_body_entered(body: Node2D) -> void:
 	following_body = body
-	global_position = following_body.global_position
 	make_current()
-	print("entered")
 
 func _on_player_detect_area_body_exited(_body: Node2D) -> void:
 	following_body = null
-	print("exited")

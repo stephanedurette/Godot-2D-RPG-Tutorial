@@ -11,3 +11,9 @@ signal on_item_collected(item: ItemData)
 
 @warning_ignore("unused_signal")
 signal on_player_inventory_updated(items: Dictionary[ItemData, int])
+
+@warning_ignore("unused_signal")
+signal on_player_health_changed(new_health)
+
+@warning_ignore("unused_signal")
+signal on_player_health_depleted

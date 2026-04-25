@@ -12,6 +12,9 @@ signal on_value_depleted
 
 var health: float
 
+func _ready() -> void:
+	health = starting_value
+
 func heal(amount: float):
 	_add_health(amount)
 	

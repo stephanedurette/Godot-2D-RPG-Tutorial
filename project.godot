@@ -65,7 +65,8 @@ interact={
 2d_physics/layer_1="block_pusher"
 2d_physics/layer_2="block_push_obstacle"
 2d_physics/layer_3="interactable"
-2d_physics/layer_4="hurtbox"
+2d_physics/layer_4="hitbox"
+2d_physics/layer_5="hurtbox"
 
 [physics]
 

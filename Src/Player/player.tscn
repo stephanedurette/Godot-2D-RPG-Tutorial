@@ -5,6 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://b042he7gaty05" path="res://Third Party/Ninja Adventure - Asset Pack/Actor/Characters/Knight/SpriteSheet.png" id="3_i1ivj"]
 [ext_resource type="Script" uid="uid://d1pirblm5ldgv" path="res://Src/Helpers/Input/input_value_component.gd" id="4_srngh"]
 [ext_resource type="PackedScene" uid="uid://ba8m8qoqjbpmu" path="res://Src/Inventory/inventory.tscn" id="5_lagon"]
+[ext_resource type="PackedScene" uid="uid://n2hawu3rrxyc" path="res://Src/Combat/hurtbox.tscn" id="6_v0kqs"]
+[ext_resource type="Resource" uid="uid://b70ific2gdvpw" path="res://Src/GameData/Teams/player_team.tres" id="7_0va8g"]
+[ext_resource type="PackedScene" uid="uid://bq2n6v22jn42p" path="res://Src/Combat/health.tscn" id="8_0va8g"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i1ivj"]
 animation = &"idle_down"
@@ -304,7 +307,11 @@ _data = {
 radius = 6.0
 height = 12.0
 
-[node name="Player" type="CharacterBody2D" unique_id=1937175503 groups=["block_pusher"]]
+[sub_resource type="CircleShape2D" id="CircleShape2D_0va8g"]
+resource_local_to_scene = true
+radius = 6.0
+
+[node name="Player" type="CharacterBody2D" unique_id=1937175503]
 y_sort_enabled = true
 collision_mask = 3
 motion_mode = 1
@@ -355,6 +362,21 @@ collision_mask = 4
 
 [node name="Inventory" parent="." unique_id=563118470 instance=ExtResource("5_lagon")]
 
+[node name="Hurtbox" parent="." unique_id=1901210049 instance=ExtResource("6_v0kqs")]
+team = ExtResource("7_0va8g")
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0" unique_id=1253945749]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_0va8g")
+
+[node name="Health" parent="." unique_id=516885994 instance=ExtResource("8_0va8g")]
+starting_value = 3.0
+max_value = 3.0
+
 [connection signal="on_pressed" from="Inputs/Interact Input" to="." method="_on_interact_input_on_pressed"]
 [connection signal="on_value_changed" from="Inputs/Move Vector Input" to="." method="_on_player_input_on_move_direction_changed"]
 [connection signal="timeout" from="UpdatePositionTimer" to="." method="_on_update_position_timer_timeout"]
+[connection signal="on_damage_taken" from="Hurtbox" to="Health" method="take_damage"]
+[connection signal="on_value_depleted" from="Health" to="." method="_on_health_on_value_depleted"]
+
+[editable path="Hurtbox"]

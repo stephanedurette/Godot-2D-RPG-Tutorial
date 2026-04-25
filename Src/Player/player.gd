@@ -62,3 +62,7 @@ func _on_update_position_timer_timeout() -> void:
 	
 func _on_item_collected(item: ItemData):
 	inventory.add(item, 1)
+
+
+func _on_health_on_value_depleted() -> void:
+	print("dead")

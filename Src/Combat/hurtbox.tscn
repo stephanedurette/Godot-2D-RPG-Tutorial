@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://n2hawu3rrxyc"]
+
+[ext_resource type="Script" uid="uid://c4s40x1jsgfrb" path="res://Src/Combat/hurtbox.gd" id="1_vb0mb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ybxw3"]
+resource_local_to_scene = true
+
+[node name="Hurtbox" type="Area2D" unique_id=1901210049]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_vb0mb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1253945749]
+shape = SubResource("CircleShape2D_ybxw3")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -31,7 +31,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8k8xr"]
-size = Vector2(16, 16)
+size = Vector2(14, 14)
 
 [node name="PushButton" type="Area2D" unique_id=1106219846]
 collision_layer = 0

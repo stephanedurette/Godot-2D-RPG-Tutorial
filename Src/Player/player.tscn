@@ -370,8 +370,6 @@ position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_0va8g")
 
 [node name="Health" parent="." unique_id=516885994 instance=ExtResource("8_0va8g")]
-starting_value = 3.0
-max_value = 3.0
 
 [connection signal="on_pressed" from="Inputs/Interact Input" to="." method="_on_interact_input_on_pressed"]
 [connection signal="on_value_changed" from="Inputs/Move Vector Input" to="." method="_on_player_input_on_move_direction_changed"]

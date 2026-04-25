@@ -4,3 +4,4 @@
 
 [node name="Health" type="Node" unique_id=516885994]
 script = ExtResource("1_y88vo")
+max_value = 12

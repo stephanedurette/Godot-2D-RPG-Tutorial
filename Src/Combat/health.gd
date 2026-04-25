@@ -2,26 +2,25 @@ class_name Health
 
 extends Node
 
-signal on_value_changed(new_value: float)
-signal on_damage_taken(damage: float)
-signal on_healed(heal_amount: float)
+signal on_value_changed(new_value: int)
+signal on_damage_taken(damage: int)
+signal on_healed(heal_amount: int)
 signal on_value_depleted
 
-@export var starting_value: float
-@export var max_value: float
+@export var max_value: int
 
-var health: float
+var health: int
 
 func _ready() -> void:
-	health = starting_value
+	health = max_value
 
-func heal(amount: float):
+func heal(amount: int):
 	_add_health(amount)
 	
-func take_damage(amount: float):
+func take_damage(amount: int):
 	_add_health(-amount)
 
-func _add_health(amount: float):
+func _add_health(amount: int):
 	var new_health = clamp(health + amount, 0, max_value)
 	if (new_health == health):
 		return

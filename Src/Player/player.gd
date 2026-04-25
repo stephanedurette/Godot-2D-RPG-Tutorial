@@ -25,11 +25,6 @@ func _ready() -> void:
 	health.on_health_changed.connect(func(h): WorldEvents.on_player_health_changed.emit(h))
 	health.on_health_depleted.connect(func(): WorldEvents.on_player_health_depleted.emit())
 	health.on_max_health_changed.connect(func(mh): WorldEvents.on_player_max_health_changed.emit(mh))
-	
-	
-	await get_tree().process_frame #call signals when all values are set
-	health.on_health_changed.emit(health.health)
-	health.on_max_health_changed.emit(health.max_health)
 
 func _process(_delta: float) -> void:
 	velocity = current_move_direction * move_speed
@@ -75,7 +70,3 @@ func _on_update_position_timer_timeout() -> void:
 	
 func _on_item_collected(item: ItemData):
 	inventory.add(item, 1)
-
-
-func _on_health_on_value_depleted() -> void:
-	print("dead")

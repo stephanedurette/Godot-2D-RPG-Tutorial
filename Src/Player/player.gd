@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var animation_tree: AnimationTree = $"AnimationTree"
 @onready var npc_raycast: RayCast2D = $"InteractableDetector"
 @onready var inventory: Inventory = $Inventory
+@onready var health: Health = $Health
 
 var npc_raycast_magnitude: float
 var interactable_in_range: Node2D
@@ -14,9 +15,17 @@ var current_move_direction: Vector2
 
 func _ready() -> void:
 	_set_animation_blend_position(Vector2.DOWN)
+	
 	npc_raycast_magnitude = npc_raycast.target_position.length()
+	
 	WorldEvents.on_item_collected.connect(_on_item_collected)
+	
 	inventory.on_inventory_updated.connect(func(items): WorldEvents.on_player_inventory_updated.emit(items))
+	
+	health.on_value_changed.connect(func(new_value): WorldEvents.on_player_health_changed.emit(new_value))
+	health.on_value_depleted.connect(func(): WorldEvents.on_player_health_depleted.emit())
+	health.on_value_changed.emit(health.health)
+	
 
 func _process(_delta: float) -> void:
 	velocity = current_move_direction * move_speed

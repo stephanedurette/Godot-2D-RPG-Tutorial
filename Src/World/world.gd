@@ -37,7 +37,9 @@ func on_portal_entered(p: Portal):
 	var from : Level = p.level
 	var to : Level = p.otherPortal.level
 	
+	player.global_position = p.otherPortal.global_position
+	await get_tree().process_frame #process the player teleportation to prevent room colliders on overlapping levels from triggering 
+	
 	if (from != to):
 		load_level(to)
 		unload_level(from)
-	player.global_position = p.otherPortal.global_position

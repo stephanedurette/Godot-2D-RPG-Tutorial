@@ -17,6 +17,7 @@ extends CharacterBody2D
 @export var on_item_collected: SignalOneArg
 
 @export_group("References")
+@export var body_sprite: Sprite2D
 @export var sword: PlayerSword
 @export var animation_tree: AnimationTree
 @export var npc_raycast: RayCast2D
@@ -50,13 +51,18 @@ func _on_player_input_on_move_direction_changed(direction: Vector2) -> void:
 	current_move_direction = direction
 	
 	if (current_move_direction != Vector2.ZERO):
-		print(current_move_direction)
-		sword.look_at(sword.global_position + Vector2Utils.get_closest_cardinal_direction(current_move_direction))
+		_update_sword()
 		_set_animation_blend_position(current_move_direction)
 		_update_raycast_direction(current_move_direction)
 	
 	animation_tree.set("parameters/conditions/idle", current_move_direction == Vector2.ZERO);
 	animation_tree.set("parameters/conditions/moving", current_move_direction != Vector2.ZERO);
+
+func _update_sword():
+	var cardinal_direction = Vector2Utils.get_closest_cardinal_direction(current_move_direction)
+	sword.look_at(sword.global_position + cardinal_direction)
+	
+	move_child(sword, body_sprite.get_index() + (1 if cardinal_direction == Vector2.DOWN else -1))
 
 func _update_detected_npc():
 	if (!npc_raycast.is_colliding()):

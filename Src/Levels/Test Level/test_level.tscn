@@ -14,13 +14,13 @@
 [ext_resource type="PackedScene" uid="uid://dsyyds25m7f6p" path="res://Src/BlockPuzzle/invisible_block_wall.tscn" id="9_p8d7q"]
 [ext_resource type="PackedScene" uid="uid://bkx5uh6a7uddm" path="res://Src/Dialogue/NPC/npc.tscn" id="11_6lhx7"]
 [ext_resource type="PackedScene" uid="uid://dcu641uplyey" path="res://Src/Levels/player_camera.tscn" id="14_7iv6h"]
+[ext_resource type="PackedScene" uid="uid://qj7mlpxrhjd6" path="res://Src/Levels/room.tscn" id="15_618h6"]
 [ext_resource type="PackedScene" uid="uid://b78opevkcbqc8" path="res://Src/Enemies/slime_enemy.tscn" id="15_gsoca"]
 
 [node name="Test Level" type="Node2D" unique_id=1816505977 node_paths=PackedStringArray("defaultSpawnPosition")]
 y_sort_enabled = true
 script = ExtResource("1_pkap3")
 defaultSpawnPosition = NodePath("Player Locations/Player Spawn")
-level_music = ExtResource("2_k4hcr")
 
 [node name="Tilemap Layers" type="Node2D" parent="." unique_id=1406968830]
 y_sort_enabled = true
@@ -95,6 +95,10 @@ limit_bottom = 190
 
 [node name="SlimeEnemy" parent="." unique_id=875786846 instance=ExtResource("15_gsoca")]
 position = Vector2(56, 0)
+
+[node name="Room" parent="." unique_id=1186205798 node_paths=PackedStringArray("player_camera") instance=ExtResource("15_618h6")]
+player_camera = NodePath("../PlayerCamera")
+room_music = ExtResource("2_k4hcr")
 
 [connection signal="on_all_buttons_pressed" from="Test Puzzle/Button Group" to="Test Puzzle/Door" method="open"]
 [connection signal="on_none_buttons_pressed" from="Test Puzzle/Button Group" to="Test Puzzle/Door" method="close"]

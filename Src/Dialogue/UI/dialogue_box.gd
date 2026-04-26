@@ -52,7 +52,6 @@ func _on_dialogue_end_request():
 	current_dialogue_npc = null
 
 func _on_npc_interacted(npc: NPC):
-	
 	if current_dialogue_npc == null:
 		_start_dialogue(npc)
 	elif text_crawl_tween:

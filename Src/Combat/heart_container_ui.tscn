@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://c688gi7s0edkd"]
+
+[ext_resource type="Texture2D" uid="uid://cqa2gcefiu1vk" path="res://Third Party/Ninja Adventure - Asset Pack/Ui/LifeReceptacle/heart.png" id="1_q6isr"]
+[ext_resource type="Script" uid="uid://dntuqaqbnq1ge" path="res://Src/Combat/heart_container_ui.gd" id="2_svy75"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2lun5"]
+resource_local_to_scene = true
+atlas = ExtResource("1_q6isr")
+region = Rect2(0, 0, 16, 16)
+
+[node name="HeartContainerUI" type="TextureRect" unique_id=633437464]
+custom_minimum_size = Vector2(64, 64)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = SubResource("AtlasTexture_2lun5")
+stretch_mode = 4
+script = ExtResource("2_svy75")

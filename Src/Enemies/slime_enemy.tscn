@@ -8,7 +8,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_n56d6"]
 radius = 6.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_r0ikl"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_ljqf6"]
 resource_local_to_scene = true
 radius = 6.0
 
@@ -31,10 +31,10 @@ shape = SubResource("CircleShape2D_n56d6")
 collision_layer = 8
 collision_mask = 16
 team = ExtResource("4_cvp7n")
-damage = 4
+damage = 2
 
 [node name="CollisionShape2D" parent="Hitbox" index="0" unique_id=698613081]
 position = Vector2(0, 1)
-shape = SubResource("CircleShape2D_r0ikl")
+shape = SubResource("CircleShape2D_ljqf6")
 
 [editable path="Hitbox"]

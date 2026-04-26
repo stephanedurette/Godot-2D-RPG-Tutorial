@@ -7,7 +7,6 @@ func _ready() -> void:
 	on_music_play_requested.connect_signal(_on_music_play_requested)
 
 func _on_music_play_requested(music: AudioStream):
-	print("f")
 	if (music == self.stream):
 		return
 	

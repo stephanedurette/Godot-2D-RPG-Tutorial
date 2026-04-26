@@ -26,6 +26,7 @@ func _setup_collider():
 	shape.size = Vector2((limit_right - limit_left), (limit_bottom - limit_top))
 
 func _on_player_detect_area_body_entered(body: Node2D) -> void:
+	print("entered") #BUG Rooms being entered even though their collider has moved
 	following_body = body
 	make_current()
 	on_player_entered.emit()

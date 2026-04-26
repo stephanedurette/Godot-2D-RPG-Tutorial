@@ -8,16 +8,23 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fx4c7"]
 size = Vector2(4, 16)
 
-[node name="PlayerSword" type="Node2D" unique_id=1156660066]
+[node name="PlayerSword" type="Node2D" unique_id=1156660066 node_paths=PackedStringArray("hitbox", "swing_pivot")]
 script = ExtResource("1_luxnm")
+swing_time = 0.25
+hitbox = NodePath("SwingPivot/Hitbox")
+swing_pivot = NodePath("SwingPivot")
 
-[node name="Sprite" type="Sprite2D" parent="." unique_id=1117948503]
+[node name="SwingPivot" type="Node2D" parent="." unique_id=699691663]
+
+[node name="Sprite" type="Sprite2D" parent="SwingPivot" unique_id=1117948503]
+position = Vector2(0, -8)
 texture = ExtResource("2_umnhr")
 
-[node name="Hitbox" parent="." unique_id=1293110571 instance=ExtResource("3_elxud")]
+[node name="Hitbox" parent="SwingPivot" unique_id=1293110571 instance=ExtResource("3_elxud")]
+position = Vector2(0, -8)
 team = ExtResource("4_gyn7f")
 
-[node name="CollisionShape2D" parent="Hitbox" index="0" unique_id=698613081]
+[node name="CollisionShape2D" parent="SwingPivot/Hitbox" index="0" unique_id=698613081]
 shape = SubResource("RectangleShape2D_fx4c7")
 
-[editable path="Hitbox"]
+[editable path="SwingPivot/Hitbox"]

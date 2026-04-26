@@ -15,6 +15,7 @@
 [ext_resource type="Resource" uid="uid://21r8ps76nvsd" path="res://Src/Player/on_player_max_health_changed.tres" id="7_hndyn"]
 [ext_resource type="Resource" uid="uid://cldyhw41d2ify" path="res://Src/Dialogue/on_dialogue_end_request.tres" id="7_wfo1s"]
 [ext_resource type="PackedScene" uid="uid://bq2n6v22jn42p" path="res://Src/Combat/health.tscn" id="8_0va8g"]
+[ext_resource type="PackedScene" uid="uid://b255bljwf5sf7" path="res://Src/Combat/player_sword.tscn" id="16_hndyn"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i1ivj"]
 animation = &"idle_down"
@@ -318,7 +319,7 @@ height = 12.0
 resource_local_to_scene = true
 radius = 6.0
 
-[node name="Player" type="CharacterBody2D" unique_id=1937175503]
+[node name="Player" type="CharacterBody2D" unique_id=1937175503 node_paths=PackedStringArray("sword", "animation_tree", "npc_raycast", "inventory", "health")]
 y_sort_enabled = true
 collision_mask = 2
 motion_mode = 1
@@ -331,6 +332,11 @@ on_player_position_updated = ExtResource("2_out1w")
 on_player_inventory_udpated = ExtResource("4_uc31e")
 on_dialogue_end_request = ExtResource("7_wfo1s")
 on_item_collected = ExtResource("3_ya03o")
+sword = NodePath("PlayerSword")
+animation_tree = NodePath("AnimationTree")
+npc_raycast = NodePath("InteractableDetector")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=879248044]
 tree_root = SubResource("AnimationNodeStateMachine_srngh")
@@ -390,10 +396,14 @@ shape = SubResource("CircleShape2D_wfo1s")
 [node name="Health" parent="." unique_id=516885994 instance=ExtResource("8_0va8g")]
 starting_max_health = 20
 
+[node name="PlayerSword" parent="." unique_id=1156660066 instance=ExtResource("16_hndyn")]
+
 [connection signal="on_pressed" from="Inputs/Interact Input" to="." method="_on_interact_input_on_pressed"]
 [connection signal="on_pressed" from="Inputs/Attack Input" to="." method="_on_attack_input_on_pressed"]
 [connection signal="on_value_changed" from="Inputs/Move Vector Input" to="." method="_on_player_input_on_move_direction_changed"]
 [connection signal="timeout" from="UpdatePositionTimer" to="." method="_on_update_position_timer_timeout"]
 [connection signal="on_damage_taken" from="Hurtbox" to="Health" method="take_damage"]
+[connection signal="attack_finished" from="PlayerSword" to="." method="_on_player_sword_attack_finished"]
+[connection signal="attack_started" from="PlayerSword" to="." method="_on_player_sword_attack_started"]
 
 [editable path="Hurtbox"]

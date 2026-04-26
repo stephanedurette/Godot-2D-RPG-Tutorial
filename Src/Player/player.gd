@@ -2,6 +2,7 @@ class_name Player
 
 extends CharacterBody2D
 
+@export_group("Settings")
 @export var move_speed : float = 10
 
 @export_group("Events")
@@ -15,10 +16,12 @@ extends CharacterBody2D
 @export_group("Subscribed")
 @export var on_item_collected: SignalOneArg
 
-@onready var animation_tree: AnimationTree = $"AnimationTree"
-@onready var npc_raycast: RayCast2D = $"InteractableDetector"
-@onready var inventory: Inventory = $Inventory
-@onready var health: Health = $Health
+@export_group("References")
+@export var sword: PlayerSword
+@export var animation_tree: AnimationTree
+@export var npc_raycast: RayCast2D
+@export var inventory: Inventory
+@export var health: Health
 
 var npc_raycast_magnitude: float
 var interactable_in_range: Node2D
@@ -84,4 +87,12 @@ func _on_item_collected(item: ItemData):
 
 
 func _on_attack_input_on_pressed() -> void:
-	print("attack")
+	sword.attack()
+
+
+func _on_player_sword_attack_finished() -> void:
+	pass # Replace with function body.
+
+
+func _on_player_sword_attack_started() -> void:
+	pass # Replace with function body.

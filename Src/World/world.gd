@@ -5,15 +5,10 @@ extends Node2D
 @export var levelParent: Node
 @export var on_portal_entered_signal: SignalOneArg
 
-@onready var music_player: AudioStreamPlayer = $MusicPlayer
-
 var is_player_teleporting: bool
 
 func load_level(level: Level):
 	levelParent.add_child.call_deferred(level)
-	if (level.level_music != null):
-		music_player.stream = level.level_music
-		music_player.play()
 
 func unload_level(level: Level):
 	levelParent.remove_child.call_deferred(level)

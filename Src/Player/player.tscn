@@ -314,13 +314,13 @@ _data = {
 radius = 6.0
 height = 12.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ya03o"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_wfo1s"]
 resource_local_to_scene = true
 radius = 6.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1937175503]
 y_sort_enabled = true
-collision_mask = 3
+collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_i1ivj")
 move_speed = 50.0
@@ -381,7 +381,7 @@ team = ExtResource("7_0va8g")
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0" unique_id=1253945749]
 position = Vector2(0, 2)
-shape = SubResource("CircleShape2D_ya03o")
+shape = SubResource("CircleShape2D_wfo1s")
 
 [node name="Health" parent="." unique_id=516885994 instance=ExtResource("8_0va8g")]
 starting_max_health = 20

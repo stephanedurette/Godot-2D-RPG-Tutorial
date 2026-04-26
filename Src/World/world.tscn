@@ -29,8 +29,6 @@ otherPortal = NodePath("../../../dungeon_level/Player Locations/Dungeon Out")
 [node name="Dungeon Out" parent="Levels/dungeon_level/Player Locations" parent_id_path=PackedInt32Array(526094986, 69059549) index="1" unique_id=1988916478 node_paths=PackedStringArray("otherPortal")]
 otherPortal = NodePath("../../../Test Level/Player Locations/Dungeon In")
 
-[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=2129407681]
-
 [editable path="Levels/Test Level"]
 [editable path="Levels/dungeon_level"]
 [editable path="Levels/dungeon_level/Rooms/Secret Room/Room Hider"]

@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dc4dardoanxs8" path="res://Src/Dialogue/UI/dialogue_box.tscn" id="2_cqojo"]
 [ext_resource type="PackedScene" uid="uid://c2l0kvgcuee31" path="res://Src/Inventory/inventory_ui.tscn" id="3_pglyg"]
 [ext_resource type="PackedScene" uid="uid://byrjittmtinmx" path="res://Src/Combat/health_ui.tscn" id="4_gh06l"]
+[ext_resource type="PackedScene" uid="uid://icg8cmfc418b" path="res://Src/Audio Playing/music_player.tscn" id="5_xa2lm"]
 
 [node name="Game" type="Node2D" unique_id=2079944452]
 
@@ -14,3 +15,5 @@
 [node name="Inventory UI" parent="." unique_id=14504721 instance=ExtResource("3_pglyg")]
 
 [node name="HealthUI" parent="." unique_id=932766384 instance=ExtResource("4_gh06l")]
+
+[node name="MusicPlayer" parent="." unique_id=48833235 instance=ExtResource("5_xa2lm")]

@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://qj7mlpxrhjd6"]
 
 [ext_resource type="Script" uid="uid://cyo0d6hxvva3o" path="res://Src/Levels/room.gd" id="1_knn0k"]
+[ext_resource type="Resource" uid="uid://jano7ycg8lid" path="res://Src/Audio Playing/on_play_music_requested.tres" id="2_lblw5"]
 
 [node name="Room" type="Node" unique_id=1186205798]
 script = ExtResource("1_knn0k")
+on_play_music_requested = ExtResource("2_lblw5")

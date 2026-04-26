@@ -23,7 +23,6 @@
 y_sort_enabled = true
 script = ExtResource("1_ol71g")
 defaultSpawnPosition = NodePath("Player Locations/Player Spawn")
-level_music = ExtResource("2_xedc2")
 
 [node name="Tilemap Layers" type="Node2D" parent="." unique_id=440146882]
 y_sort_enabled = true
@@ -153,6 +152,10 @@ limit_left = -217
 limit_top = -174
 limit_right = 143
 limit_bottom = 114
+
+[node name="Room" parent="Rooms/Entrance" unique_id=21479066 node_paths=PackedStringArray("player_camera") instance=ExtResource("13_o6lw4")]
+player_camera = NodePath("../RoomCamera")
+room_music = ExtResource("2_xedc2")
 
 [connection signal="on_all_buttons_pressed" from="Rooms/Ice Block Room/Button Group" to="Rooms/Ice Block Room/Door" method="open"]
 [connection signal="on_none_buttons_pressed" from="Rooms/Ice Block Room/Button Group" to="Rooms/Ice Block Room/Door" method="close"]

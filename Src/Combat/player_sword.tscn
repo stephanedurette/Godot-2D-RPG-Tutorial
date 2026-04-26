@@ -17,11 +17,11 @@ swing_pivot = NodePath("SwingPivot")
 [node name="SwingPivot" type="Node2D" parent="." unique_id=699691663]
 
 [node name="Sprite" type="Sprite2D" parent="SwingPivot" unique_id=1117948503]
-position = Vector2(0, -8)
+position = Vector2(0, -11)
 texture = ExtResource("2_umnhr")
 
 [node name="Hitbox" parent="SwingPivot" unique_id=1293110571 instance=ExtResource("3_elxud")]
-position = Vector2(0, -8)
+position = Vector2(0, -11)
 team = ExtResource("4_gyn7f")
 
 [node name="CollisionShape2D" parent="SwingPivot/Hitbox" index="0" unique_id=698613081]

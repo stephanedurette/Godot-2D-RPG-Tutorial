@@ -50,6 +50,8 @@ func _on_player_input_on_move_direction_changed(direction: Vector2) -> void:
 	current_move_direction = direction
 	
 	if (current_move_direction != Vector2.ZERO):
+		print(current_move_direction)
+		sword.look_at(sword.global_position + Vector2Utils.get_closest_cardinal_direction(current_move_direction))
 		_set_animation_blend_position(current_move_direction)
 		_update_raycast_direction(current_move_direction)
 	

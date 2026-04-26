@@ -26,10 +26,10 @@ func attack():
 	attack_started.emit()
 	
 	is_attacking.Value = true
-	swing_pivot.rotation_degrees = -90
+	swing_pivot.rotation_degrees = 0
 	
 	var tween = get_tree().create_tween()
-	tween.tween_property(swing_pivot, "rotation_degrees", 0, swing_time)\
+	tween.tween_property(swing_pivot, "rotation_degrees", 90, swing_time)\
 		.set_trans(Tween.TRANS_QUAD)\
 		.set_ease(Tween.EASE_OUT)
 			

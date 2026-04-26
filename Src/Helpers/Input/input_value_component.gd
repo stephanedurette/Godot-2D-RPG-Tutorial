@@ -17,3 +17,4 @@ func _ready() -> void:
 func _input(_event: InputEvent) -> void:
 	pressed.Value = Input.is_action_pressed(input)
 	
+	

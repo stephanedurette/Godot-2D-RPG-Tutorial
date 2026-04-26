@@ -17,8 +17,8 @@ func _ready() -> void:
 	health.max_value.on_changed.connect(func(mh): on_max_health_changed.emit(mh))
 	
 	await get_tree().process_frame #call signals when all ready functions have been executed
-	health.value.notify()
 	health.max_value.notify()
+	health.value.notify()
 	
 func heal(amount: int):
 	health.Value += amount

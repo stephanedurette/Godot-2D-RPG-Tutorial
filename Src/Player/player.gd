@@ -162,8 +162,7 @@ class WalkingState extends PlayerState:
 			player.animation_tree.set("parameters/Move/blend_position", dir)
 			player._update_raycast_direction(dir)
 			player._update_sword()
-			
-		
+					
 class AttackState extends PlayerState:
 	func enter():
 		pass

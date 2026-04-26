@@ -7,15 +7,13 @@ extends Node
 signal on_pressed
 signal on_released
 
-var value: bool
+var pressed: ObservableBool
+
+func _ready() -> void:
+	pressed = ObservableBool.new(false)
+	pressed.on_set_to_true.connect(func(): on_pressed.emit())
+	pressed.on_set_to_false.connect(func(): on_released.emit())
 
 func _input(_event: InputEvent) -> void:
-	var new_value = Input.is_action_pressed(input)
-	if (new_value == value):
-		return
-	value = new_value
-	if (value):
-		on_pressed.emit()
-	else :
-		on_released.emit()
+	pressed.Value = Input.is_action_pressed(input)
 	

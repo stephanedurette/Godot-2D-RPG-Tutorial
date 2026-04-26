@@ -1,4 +1,4 @@
-extends Observable
+class_name ObservableBool extends Observable
 
 signal on_set_to_true
 signal on_set_to_false

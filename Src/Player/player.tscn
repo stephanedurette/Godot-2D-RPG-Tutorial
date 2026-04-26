@@ -359,6 +359,10 @@ shape = SubResource("CapsuleShape2D_nms7q")
 script = ExtResource("4_srngh")
 input = "interact"
 
+[node name="Attack Input" type="Node" parent="Inputs" unique_id=989919399]
+script = ExtResource("4_srngh")
+input = "attack"
+
 [node name="Move Vector Input" type="Node" parent="Inputs" unique_id=445702645]
 script = ExtResource("2_nms7q")
 left_input_name = "move_left"
@@ -387,6 +391,7 @@ shape = SubResource("CircleShape2D_wfo1s")
 starting_max_health = 20
 
 [connection signal="on_pressed" from="Inputs/Interact Input" to="." method="_on_interact_input_on_pressed"]
+[connection signal="on_pressed" from="Inputs/Attack Input" to="." method="_on_attack_input_on_pressed"]
 [connection signal="on_value_changed" from="Inputs/Move Vector Input" to="." method="_on_player_input_on_move_direction_changed"]
 [connection signal="timeout" from="UpdatePositionTimer" to="." method="_on_update_position_timer_timeout"]
 [connection signal="on_damage_taken" from="Hurtbox" to="Health" method="take_damage"]

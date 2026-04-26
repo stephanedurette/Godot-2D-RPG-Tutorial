@@ -81,3 +81,7 @@ func _on_update_position_timer_timeout() -> void:
 	
 func _on_item_collected(item: ItemData):
 	inventory.add(item, 1)
+
+
+func _on_attack_input_on_pressed() -> void:
+	print("attack")

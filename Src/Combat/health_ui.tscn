@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dm5h4grn2mk18" path="res://Src/Combat/health_ui.gd" id="1_35lhn"]
 [ext_resource type="Texture2D" uid="uid://cqa2gcefiu1vk" path="res://Third Party/Ninja Adventure - Asset Pack/Ui/LifeReceptacle/heart.png" id="2_4sjtm"]
+[ext_resource type="Resource" uid="uid://c6n2gn442bw0v" path="res://Src/Player/on_player_health_changed.tres" id="2_n0kjb"]
+[ext_resource type="Resource" uid="uid://21r8ps76nvsd" path="res://Src/Player/on_player_max_health_changed.tres" id="3_cqxid"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2lun5"]
 resource_local_to_scene = true
@@ -10,6 +12,8 @@ region = Rect2(0, 0, 16, 16)
 
 [node name="HealthUI" type="CanvasLayer" unique_id=932766384]
 script = ExtResource("1_35lhn")
+on_health_changed = ExtResource("2_n0kjb")
+on_max_health_changed = ExtResource("3_cqxid")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=439901295]
 anchors_preset = 15

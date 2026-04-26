@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://kr40of2ygol2" path="res://Third Party/Ninja Adventure - Asset Pack/Items/Treasure/BigTreasureChest.png" id="1_b1kvl"]
 [ext_resource type="Script" uid="uid://ukm2hkmkfkey" path="res://Src/Inventory/chest.gd" id="1_gmixu"]
 [ext_resource type="Resource" uid="uid://coanb3u2efn0o" path="res://Src/GameData/Items/scroll_fire.tres" id="2_rdtm0"]
+[ext_resource type="Resource" uid="uid://dd1iqkgaailb" path="res://Src/Inventory/on_item_collected.tres" id="3_rc1q8"]
 [ext_resource type="Texture2D" uid="uid://divjqbiy8h3jp" path="res://Third Party/Ninja Adventure - Asset Pack/Items/Scroll/ScrollFire.png" id="4_umdpn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gmixu"]
@@ -43,6 +44,7 @@ collision_layer = 6
 collision_mask = 0
 script = ExtResource("1_gmixu")
 item = ExtResource("2_rdtm0")
+on_item_collected = ExtResource("3_rc1q8")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=457451537]
 sprite_frames = SubResource("SpriteFrames_umdpn")

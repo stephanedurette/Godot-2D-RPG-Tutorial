@@ -3,9 +3,9 @@ extends CanvasLayer
 @export var item_ui_scene: PackedScene
 
 @export var item_ui_container: Control
-
+@export var on_inventory_updated: SignalOneArg
 func _ready() -> void:
-	WorldEvents.on_player_inventory_updated.connect(_on_player_inventory_updated)
+	on_inventory_updated.connect_signal(_on_player_inventory_updated)
 	
 func _on_player_inventory_updated(items: Dictionary[ItemData, int]):
 	_show_inventory(items)

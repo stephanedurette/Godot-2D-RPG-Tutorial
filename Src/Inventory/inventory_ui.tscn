@@ -2,11 +2,13 @@
 
 [ext_resource type="Script" uid="uid://ba1hq1h4rl5f6" path="res://Src/Inventory/inventory_ui.gd" id="1_fq5gp"]
 [ext_resource type="PackedScene" uid="uid://b1itg0qkm4dbl" path="res://Src/Inventory/item_ui.tscn" id="2_fq5gp"]
+[ext_resource type="Resource" uid="uid://cfjtjiptsexr" path="res://Src/Player/on_player_inventory_updated.tres" id="3_bs7y7"]
 
 [node name="Inventory UI" type="CanvasLayer" unique_id=14504721 node_paths=PackedStringArray("item_ui_container")]
 script = ExtResource("1_fq5gp")
 item_ui_scene = ExtResource("2_fq5gp")
 item_ui_container = NodePath("MarginContainer/VBoxContainer")
+on_inventory_updated = ExtResource("3_bs7y7")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1171888390]
 anchors_preset = 15

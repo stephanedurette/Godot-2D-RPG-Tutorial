@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://belp7vrjxx3qi" path="res://Third Party/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetDungeon.png" id="1_8qia3"]
 [ext_resource type="Script" uid="uid://c4ke1d2st6bdg" path="res://Src/BlockPuzzle/Blocks/pushable_block.gd" id="1_l4qa5"]
+[ext_resource type="Resource" uid="uid://cf0e1t0aae3b2" path="res://Src/GameVariables/grid_square_size.tres" id="2_k71p3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l4qa5"]
 atlas = ExtResource("1_8qia3")
@@ -21,6 +22,7 @@ script = ExtResource("1_l4qa5")
 push_distance = 16
 push_speed = 24.0
 first_push_time = 0.3
+GRID_PIXEL_SIZE = ExtResource("2_k71p3")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=925401951]
 texture = SubResource("AtlasTexture_l4qa5")

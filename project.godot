@@ -15,12 +15,6 @@ run/main_scene="uid://c8xw7yg21aqaj"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
-[autoload]
-
-GlobalVariables="*uid://b2q0h2oh78qea"
-WorldEvents="*uid://1pryc2jho2uh"
-DialogueEvents="*uid://blqwyjkp1ulau"
-
 [display]
 
 window/stretch/mode="canvas_items"

@@ -6,6 +6,9 @@ extends AnimatableBody2D
 @export var push_speed: float
 @export var first_push_time: float
 
+@export_group("Constants")
+@export var GRID_PIXEL_SIZE: GlobalConstantInt
+
 @onready var player_colliders: Array[Area2D] = [$PlayerDetectors/Down, $PlayerDetectors/Up, $PlayerDetectors/Left, $PlayerDetectors/Right]
 @onready var directions: Array[Vector2] = [Vector2.DOWN, Vector2.UP, Vector2.LEFT, Vector2.RIGHT]
 
@@ -43,7 +46,7 @@ func _initialize_player_colliders():
 func _initialize_obstacle_colliders():
 	for k in obstacle_colliders.keys():
 		@warning_ignore("integer_division")
-		obstacle_colliders[k].target_position = k * (push_distance + GlobalVariables.GRID_PIXEL_SIZE / 2 - 1)
+		obstacle_colliders[k].target_position = k * (push_distance + GRID_PIXEL_SIZE.value / 2 - 1)
 		obstacle_colliders[k].position = Vector2.ZERO
 
 func _initialize_state_machine():
@@ -66,11 +69,11 @@ func move_distance(dir: Vector2) -> int:
 	var collision_point = obstacle_colliders[dir].get_collision_point()
 	
 	@warning_ignore("integer_division")
-	var distance: float = (global_position.distance_to(collision_point)) - GlobalVariables.GRID_PIXEL_SIZE / 2 #account for the fact the ray starts in the object
+	var distance: float = (global_position.distance_to(collision_point)) - GRID_PIXEL_SIZE.value / 2 #account for the fact the ray starts in the object
 	
-	var clamped_distance = (int)(floor(distance / GlobalVariables.GRID_PIXEL_SIZE) * GlobalVariables.GRID_PIXEL_SIZE)
+	var clamped_distance = (int)(floor(distance / GRID_PIXEL_SIZE.value) * GRID_PIXEL_SIZE.value)
 	
-	if (clamped_distance < GlobalVariables.GRID_PIXEL_SIZE):
+	if (clamped_distance < GRID_PIXEL_SIZE.value):
 		return 0
 	
 	return min(push_distance, clamped_distance)

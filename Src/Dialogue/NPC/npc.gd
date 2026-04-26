@@ -7,9 +7,14 @@ extends StaticBody2D
 @export var player_react_distance: float
 @export var dialogue_data: DialogueLineData
 
-# Called when the node enters the scene tree for the first time.
+@export_group("Subscribed")
+@export var on_player_position_updated: SignalOneArg
+
+@export_group("Events")
+@export var on_npc_interacted: SignalOneArg
+
 func _ready() -> void:
-	WorldEvents.on_player_position_updated.connect(_on_player_position_updated)
+	on_player_position_updated.connect_signal(_on_player_position_updated)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -25,7 +30,7 @@ func _on_player_position_updated(player_position: Vector2):
 		animation_tree.set("parameters/Idle/blend_position", Vector2.DOWN)
 
 func interact():
-	DialogueEvents.on_npc_interacted.emit(self)
+	on_npc_interacted.emit(self)
 
 func _get_closest_cardinal_direction(direction: Vector2) -> Vector2:
 	var highest_dot: float = -INF

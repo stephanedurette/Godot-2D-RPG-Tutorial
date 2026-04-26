@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="GlobalConstantInt" format=3 uid="uid://cf0e1t0aae3b2"]
+
+[ext_resource type="Script" uid="uid://bh7j62sc32a6l" path="res://Src/Helpers/Constants/global_constant_int.gd" id="1_jh3qd"]
+
+[resource]
+script = ExtResource("1_jh3qd")
+value = 16
+metadata/_custom_type_script = "uid://bh7j62sc32a6l"

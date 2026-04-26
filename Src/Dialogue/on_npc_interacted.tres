@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="SignalOneArg" format=3 uid="uid://cjjwnxh22ef3m"]
+
+[ext_resource type="Script" uid="uid://bc00bn7afmes2" path="res://Src/Helpers/Signal Bus/signal_one_arg.gd" id="1_q5y2q"]
+
+[resource]
+script = ExtResource("1_q5y2q")
+metadata/_custom_type_script = "uid://bc00bn7afmes2"

@@ -4,6 +4,17 @@ extends CharacterBody2D
 
 @export var move_speed : float = 10
 
+@export_group("Events")
+@export var on_health_changed: SignalOneArg
+@export var on_health_depleted: SignalNoArgs
+@export var on_max_health_changed: SignalOneArg
+@export var on_player_position_updated: SignalOneArg
+@export var on_player_inventory_udpated: SignalOneArg
+@export var on_dialogue_end_request: SignalNoArgs
+
+@export_group("Subscribed")
+@export var on_item_collected: SignalOneArg
+
 @onready var animation_tree: AnimationTree = $"AnimationTree"
 @onready var npc_raycast: RayCast2D = $"InteractableDetector"
 @onready var inventory: Inventory = $Inventory
@@ -18,13 +29,13 @@ func _ready() -> void:
 	
 	npc_raycast_magnitude = npc_raycast.target_position.length()
 	
-	WorldEvents.on_item_collected.connect(_on_item_collected)
+	on_item_collected.connect_signal(_on_item_collected)
 	
-	inventory.on_inventory_updated.connect(func(items): WorldEvents.on_player_inventory_updated.emit(items))
+	inventory.on_inventory_updated.connect(func(items): on_player_inventory_udpated.emit(items))
 	
-	health.on_health_changed.connect(func(h): WorldEvents.on_player_health_changed.emit(h))
-	health.on_health_depleted.connect(func(): WorldEvents.on_player_health_depleted.emit())
-	health.on_max_health_changed.connect(func(mh): WorldEvents.on_player_max_health_changed.emit(mh))
+	health.on_health_changed.connect(func(h): on_health_changed.emit(h))
+	health.on_health_depleted.connect(func(): on_health_depleted.emit())
+	health.on_max_health_changed.connect(func(mh): on_max_health_changed.emit(mh))
 
 func _process(_delta: float) -> void:
 	velocity = current_move_direction * move_speed
@@ -45,7 +56,7 @@ func _on_player_input_on_move_direction_changed(direction: Vector2) -> void:
 func _update_detected_npc():
 	if (!npc_raycast.is_colliding()):
 		interactable_in_range = null
-		DialogueEvents.on_dialogue_end_request.emit()
+		on_dialogue_end_request.emit()
 		return
 	
 	interactable_in_range = npc_raycast.get_collider() as Node2D
@@ -66,7 +77,7 @@ func _on_interact_input_on_pressed() -> void:
 		interactable_in_range.interact()
 
 func _on_update_position_timer_timeout() -> void:
-	WorldEvents.on_player_position_updated.emit(global_position)
+	on_player_position_updated.emit(global_position)
 	
 func _on_item_collected(item: ItemData):
 	inventory.add(item, 1)

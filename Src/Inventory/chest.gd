@@ -3,6 +3,7 @@ class_name Chest
 extends StaticBody2D
 
 @export var item: ItemData
+@export var on_item_collected: SignalOneArg
 
 @onready var animated_sprite: AnimatedSprite2D= $"Sprite"
 @onready var item_sprite: Sprite2D = $ItemImage
@@ -25,7 +26,7 @@ func _collect_item():
 	animated_sprite.play("open")
 	item_sprite.visible = true
 	item_display_timer.start()
-	WorldEvents.on_item_collected.emit(item)
+	on_item_collected.emit(item)
 
 func _on_player_area_body_entered(_body: Node2D) -> void:
 	player_in_position = true

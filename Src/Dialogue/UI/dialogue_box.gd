@@ -9,14 +9,18 @@ extends CanvasLayer
 
 @export var characters_per_second: float
 
+@export_group("Subscribed")
+@export var on_npc_interacted: SignalOneArg
+@export var on_dialogue_end_request: SignalNoArgs
+
 var current_dialogue_npc: NPC
 var current_dialogue_index: int
 
 var text_crawl_tween: Tween
 
 func _ready() -> void:
-	DialogueEvents.on_npc_interacted.connect(_on_npc_interacted)
-	DialogueEvents.on_dialogue_end_request.connect(_on_dialogue_end_request)
+	on_npc_interacted.connect_signal(_on_npc_interacted)
+	on_dialogue_end_request.connect_signal(_on_dialogue_end_request)
 	
 	open(false)
 

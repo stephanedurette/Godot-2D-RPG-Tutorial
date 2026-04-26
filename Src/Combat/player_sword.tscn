@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://b255bljwf5sf7"]
+
+[ext_resource type="Script" uid="uid://cdfbfo5g0u428" path="res://Src/Combat/player_sword.gd" id="1_luxnm"]
+[ext_resource type="Texture2D" uid="uid://cywmmtsaiv78" path="res://Third Party/Ninja Adventure - Asset Pack/Items/Weapons/BigSword/Sprite.png" id="2_umnhr"]
+[ext_resource type="PackedScene" uid="uid://kss0loehi0t6" path="res://Src/Combat/hitbox.tscn" id="3_elxud"]
+[ext_resource type="Resource" uid="uid://b70ific2gdvpw" path="res://Src/GameData/Teams/player_team.tres" id="4_gyn7f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fx4c7"]
+size = Vector2(4, 16)
+
+[node name="PlayerSword" type="Node2D" unique_id=1156660066]
+script = ExtResource("1_luxnm")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1117948503]
+texture = ExtResource("2_umnhr")
+
+[node name="Hitbox" parent="." unique_id=1293110571 instance=ExtResource("3_elxud")]
+team = ExtResource("4_gyn7f")
+
+[node name="CollisionShape2D" parent="Hitbox" index="0" unique_id=698613081]
+shape = SubResource("RectangleShape2D_fx4c7")
+
+[editable path="Hitbox"]

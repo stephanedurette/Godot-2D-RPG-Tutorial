@@ -2,7 +2,7 @@ extends CanvasLayer
 
 @export var heart_container_ui: PackedScene
 
-@export_group("Events")
+@export_group("Subscribed")
 @export var on_health_changed: SignalOneArg
 @export var on_max_health_changed: SignalOneArg
 

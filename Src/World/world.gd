@@ -3,6 +3,7 @@ extends Node2D
 @export var player: Player
 @export var startingLevel: Level
 @export var levelParent: Node
+@export var on_portal_entered_signal: SignalOneArg
 
 @onready var music_player: AudioStreamPlayer = $MusicPlayer
 
@@ -23,7 +24,7 @@ func unload_all_levels():
 			unload_level(l)
 
 func _ready() -> void:
-	WorldEvents.on_portal_entered.connect(on_portal_entered)
+	on_portal_entered_signal.connect_signal(on_portal_entered)
 	
 	unload_all_levels()
 	

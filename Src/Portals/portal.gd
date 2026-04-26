@@ -5,9 +5,11 @@ extends Area2D
 @export var otherPortal: Portal
 @export var level: Level
 
+@export var signal_bus: SignalOneArg
+
 func _on_body_entered(body: Node2D) -> void:
 	if (body is Player):
-		WorldEvents.on_portal_entered.emit(self)
+		signal_bus.emit(self)
 	else:
 		pass
 

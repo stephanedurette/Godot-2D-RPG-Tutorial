@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://532g1iuq0yg2" path="res://Src/World/world.gd" id="1_uxffa"]
 [ext_resource type="PackedScene" uid="uid://ck5hpl4hrdipu" path="res://Src/Player/player.tscn" id="2_8pn1l"]
+[ext_resource type="Resource" uid="uid://tt8wgf8wkyb5" path="res://Src/World/on_portal_entered.tres" id="2_oqie5"]
 [ext_resource type="PackedScene" uid="uid://dnsyiu1qm1ykk" path="res://Src/Levels/Test Level/test_level.tscn" id="3_oqie5"]
 [ext_resource type="PackedScene" uid="uid://bjp8ugwrh3m4g" path="res://Src/Levels/Dungeon Level/dungeon_level.tscn" id="4_8at5u"]
 
@@ -11,6 +12,7 @@ script = ExtResource("1_uxffa")
 player = NodePath("Player")
 startingLevel = NodePath("Levels/Test Level")
 levelParent = NodePath("Levels")
+on_portal_entered_signal = ExtResource("2_oqie5")
 
 [node name="Player" parent="." unique_id=1937175503 instance=ExtResource("2_8pn1l")]
 

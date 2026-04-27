@@ -142,6 +142,7 @@ class IdleState extends PlayerState:
 	
 class WalkingState extends PlayerState:
 	func enter():
+		player._update_raycast_direction(player.current_move_direction)
 		player.animation_tree.set("parameters/Move/blend_position", player.current_move_direction)
 		player.animation_tree.set("parameters/conditions/moving", true);
 	

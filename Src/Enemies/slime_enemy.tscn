@@ -4,11 +4,17 @@
 [ext_resource type="Texture2D" uid="uid://gstx2eauviwi" path="res://Third Party/Ninja Adventure - Asset Pack/Actor/Monsters/Slime3/Slime3.png" id="2_omci2"]
 [ext_resource type="PackedScene" uid="uid://kss0loehi0t6" path="res://Src/Combat/hitbox.tscn" id="3_ljqf6"]
 [ext_resource type="Resource" uid="uid://bfr1km7j56tni" path="res://Src/GameData/Teams/enemy_team.tres" id="4_cvp7n"]
+[ext_resource type="PackedScene" uid="uid://n2hawu3rrxyc" path="res://Src/Combat/hurtbox.tscn" id="5_cvp7n"]
+[ext_resource type="PackedScene" uid="uid://bq2n6v22jn42p" path="res://Src/Combat/health.tscn" id="6_n56d6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n56d6"]
 radius = 6.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ljqf6"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_r0ikl"]
+resource_local_to_scene = true
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5r0m6"]
 resource_local_to_scene = true
 radius = 6.0
 
@@ -28,13 +34,26 @@ position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_n56d6")
 
 [node name="Hitbox" parent="." unique_id=1293110571 instance=ExtResource("3_ljqf6")]
-collision_layer = 8
-collision_mask = 16
 team = ExtResource("4_cvp7n")
 damage = 2
 
 [node name="CollisionShape2D" parent="Hitbox" index="0" unique_id=698613081]
 position = Vector2(0, 1)
-shape = SubResource("CircleShape2D_ljqf6")
+shape = SubResource("CircleShape2D_r0ikl")
+
+[node name="Hurtbox" parent="." unique_id=1901210049 instance=ExtResource("5_cvp7n")]
+team = ExtResource("4_cvp7n")
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0" unique_id=1253945749]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_5r0m6")
+
+[node name="Health" parent="." unique_id=516885994 instance=ExtResource("6_n56d6")]
+starting_max_health = 3
+
+[connection signal="on_damage_taken" from="Hurtbox" to="Health" method="take_damage"]
+[connection signal="on_health_changed" from="Health" to="." method="_on_health_on_health_changed"]
+[connection signal="on_health_depleted" from="Health" to="." method="_on_health_on_health_depleted"]
 
 [editable path="Hitbox"]
+[editable path="Hurtbox"]

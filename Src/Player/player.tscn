@@ -31,13 +31,13 @@ animation = &"idle_up"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_i1ivj"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_i1ivj")
-blend_point_0/pos = Vector2(0, 1)
+blend_point_0/pos = Vector2(0, 0.90000004)
 blend_point_1/node = SubResource("AnimationNodeAnimation_srngh")
 blend_point_1/pos = Vector2(-1, 0)
 blend_point_2/node = SubResource("AnimationNodeAnimation_lagon")
 blend_point_2/pos = Vector2(1, 0)
 blend_point_3/node = SubResource("AnimationNodeAnimation_xk721")
-blend_point_3/pos = Vector2(0, -1)
+blend_point_3/pos = Vector2(0, -0.90000004)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v0kqs"]
@@ -54,13 +54,13 @@ animation = &"move_up"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_uc31e"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_v0kqs")
-blend_point_0/pos = Vector2(0, 1)
+blend_point_0/pos = Vector2(0, 0.90000004)
 blend_point_1/node = SubResource("AnimationNodeAnimation_0va8g")
 blend_point_1/pos = Vector2(-1, 0)
 blend_point_2/node = SubResource("AnimationNodeAnimation_out1w")
 blend_point_2/pos = Vector2(1, 0)
 blend_point_3/node = SubResource("AnimationNodeAnimation_ya03o")
-blend_point_3/pos = Vector2(0, -1)
+blend_point_3/pos = Vector2(0, -0.90000004)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_srngh"]
@@ -81,7 +81,7 @@ states/Move/node = SubResource("AnimationNodeBlendSpace2D_uc31e")
 states/Move/position = Vector2(452, 206)
 states/Start/position = Vector2(312, 88)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_srngh"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_lagon"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_xk721")]
-graph_offset = Vector2(-92, -25)
+graph_offset = Vector2(-114, 29)
 
 [sub_resource type="Animation" id="Animation_i1ivj"]
 length = 0.001

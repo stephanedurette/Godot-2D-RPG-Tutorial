@@ -27,6 +27,7 @@ extends CharacterBody2D
 var npc_raycast_magnitude: float
 var interactable_in_range: Node2D
 var current_move_direction: Vector2
+var facing_direction: Vector2
 
 var state_machine: State_Machine
 var idle_state: IdleState
@@ -69,7 +70,7 @@ func _on_player_input_on_move_direction_changed(direction: Vector2) -> void:
 	(state_machine.current_state as PlayerState).on_move_direction_changed(direction)
 
 func _update_sword():
-	var cardinal_direction = Vector2Utils.get_closest_cardinal_direction(current_move_direction)
+	var cardinal_direction = Vector2Utils.get_closest_cardinal_direction(facing_direction)
 	sword.look_at(sword.global_position + cardinal_direction)
 	
 	move_child(sword, body_sprite.get_index() + (1 if cardinal_direction == Vector2.DOWN else -1))
@@ -98,18 +99,12 @@ func _on_update_position_timer_timeout() -> void:
 func _on_item_collected(item: ItemData):
 	inventory.add(item, 1)
 
-
 func _on_attack_input_on_pressed() -> void:
-	sword.attack()
-
+	(state_machine.current_state as PlayerState).on_attack_input_pressed()
 
 func _on_player_sword_attack_finished() -> void:
-	pass # Replace with function body.
+	(state_machine.current_state as PlayerState).on_attack_finished()
 
-
-func _on_player_sword_attack_started() -> void:
-	pass # Replace with function body.
-	
 	
 class PlayerState extends State:
 	var player: Player
@@ -120,9 +115,15 @@ class PlayerState extends State:
 	func on_move_direction_changed(dir: Vector2):
 		player.current_move_direction = dir
 		if (dir != Vector2.ZERO):
+			player.facing_direction = dir
 			player.animation_tree.set("parameters/Idle/blend_position", dir)
-			player._update_sword()
-
+	
+	func on_attack_input_pressed():
+		player.state_machine.change_state(player.attack_state)
+		
+	func on_attack_finished():
+		pass
+	
 class IdleState extends PlayerState:
 	func enter():
 		player.animation_tree.set("parameters/conditions/idle", true);
@@ -166,10 +167,21 @@ class WalkingState extends PlayerState:
 					
 class AttackState extends PlayerState:
 	func enter():
-		pass
+		player._update_sword()
+		player.velocity = Vector2.ZERO
+		player.sword.attack()
 	
 	func process(_delta):
-		pass
+		player.move_and_slide()
 		
 	func exit():
 		pass
+		
+	func on_attack_input_pressed():
+		pass
+		
+	func on_move_direction_changed(dir: Vector2):
+		super.on_move_direction_changed(dir)
+		
+	func on_attack_finished():
+		player.state_machine.change_state(player.idle_state if player.current_move_direction == Vector2.ZERO else player.walk_state)

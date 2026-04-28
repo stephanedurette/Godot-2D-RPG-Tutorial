@@ -39,9 +39,9 @@ func attack():
 	)
 		
 func _on_attacking_true():
-	hitbox.set_deferred("monitoring", true)
+	hitbox.set_deferred("monitorable", true)
 	swing_pivot.visible = true
 	
 func _on_attacking_false():
-	hitbox.set_deferred("monitoring", false)
+	hitbox.set_deferred("monitorable", false)
 	swing_pivot.visible = false

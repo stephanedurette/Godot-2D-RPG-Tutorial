@@ -186,4 +186,4 @@ class AttackState extends PlayerState:
 		super.on_move_direction_changed(dir)
 		
 	func on_attack_finished():
-		player.state_machine.change_state(player.idle_state if player.current_move_direction == Vector2.ZERO else player.walk_state)
+		player.state_machine.change_state(player.idle_state as State if player.current_move_direction == Vector2.ZERO else player.walk_state as State)

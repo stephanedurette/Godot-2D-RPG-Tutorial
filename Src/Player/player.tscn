@@ -38,6 +38,7 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_cb6f2")
 blend_point_2/pos = Vector2(1, 0)
 blend_point_3/node = SubResource("AnimationNodeAnimation_cpfbt")
 blend_point_3/pos = Vector2(0, -0.90000004)
+blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i1ivj"]
 animation = &"idle_down"

@@ -10,7 +10,7 @@ size = Vector2(4, 16)
 
 [node name="PlayerSword" type="Node2D" unique_id=1156660066 node_paths=PackedStringArray("hitbox", "swing_pivot")]
 script = ExtResource("1_luxnm")
-swing_time = 0.25
+swing_time = 0.2
 hitbox = NodePath("SwingPivot/Hitbox")
 swing_pivot = NodePath("SwingPivot")
 

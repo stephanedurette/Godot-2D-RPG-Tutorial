@@ -167,6 +167,8 @@ class WalkingState extends PlayerState:
 					
 class AttackState extends PlayerState:
 	func enter():
+		player.animation_tree.set("parameters/Attack/blend_position", player.facing_direction)
+		player.animation_tree.set("parameters/conditions/attacking", true);
 		player._update_sword()
 		player.velocity = Vector2.ZERO
 		player.sword.attack()
@@ -175,7 +177,7 @@ class AttackState extends PlayerState:
 		player.move_and_slide()
 		
 	func exit():
-		pass
+		player.animation_tree.set("parameters/conditions/attacking", false);
 		
 	func on_attack_input_pressed():
 		pass

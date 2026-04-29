@@ -4,6 +4,8 @@ extends CharacterBody2D
 
 @export_group("Settings")
 @export var move_speed : float = 10
+@export var move_accel: float
+@export var knockback_speed: float
 
 @export_group("Events")
 @export var on_health_changed: SignalOneArg
@@ -133,6 +135,7 @@ class IdleState extends PlayerState:
 		player.animation_tree.set("parameters/conditions/idle", false);
 		
 	func process(_delta):
+		player.velocity = player.velocity.move_toward(Vector2.ZERO, player.move_accel)
 		player.move_and_slide()
 	
 	func on_move_direction_changed(dir: Vector2):
@@ -151,7 +154,7 @@ class WalkingState extends PlayerState:
 		player.animation_tree.set("parameters/conditions/moving", false);
 	
 	func process(_delta):
-		player.velocity = player.current_move_direction * player.move_speed
+		player.velocity = player.velocity.move_toward(player.current_move_direction * player.move_speed, player.move_accel)
 		player.move_and_slide()
 		player._update_detected_npc()
 	
@@ -187,3 +190,6 @@ class AttackState extends PlayerState:
 		
 	func on_attack_finished():
 		player.state_machine.change_state(player.idle_state as State if player.current_move_direction == Vector2.ZERO else player.walk_state as State)
+
+func _on_hurtbox_hit(hitbox: Hitbox) -> void:
+	velocity = (global_position - hitbox.global_position).normalized() * knockback_speed

@@ -60,7 +60,6 @@ func _on_navigation_target_refresh_timer_timeout() -> void:
 
 func _on_hurtbox_hit(hitbox: Hitbox) -> void:
 	velocity = (global_position - hitbox.global_position).normalized() * knockback_speed
-	print("hit")
 	
 class SlimeState extends State:
 	var my_owner: SlimeEnemy

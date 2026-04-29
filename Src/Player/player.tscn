@@ -437,6 +437,8 @@ collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_i1ivj")
 move_speed = 50.0
+move_accel = 10.0
+knockback_speed = 200.0
 on_health_changed = ExtResource("5_m0c0r")
 on_health_depleted = ExtResource("6_wfo1s")
 on_max_health_changed = ExtResource("7_hndyn")
@@ -521,5 +523,6 @@ starting_max_health = 20
 [connection signal="on_value_changed" from="Inputs/Move Vector Input" to="." method="_on_player_input_on_move_direction_changed"]
 [connection signal="timeout" from="UpdatePositionTimer" to="." method="_on_update_position_timer_timeout"]
 [connection signal="on_damage_taken" from="Hurtbox" to="Health" method="take_damage"]
+[connection signal="on_hit" from="Hurtbox" to="." method="_on_hurtbox_hit"]
 
 [editable path="Hurtbox"]

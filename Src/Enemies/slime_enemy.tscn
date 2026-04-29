@@ -137,6 +137,51 @@ _data = {
 &"move_up": SubResource("Animation_7o1w4")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n56d6"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r0ikl"]
+animation = &"move_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5r0m6"]
+animation = &"move_down"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tv5bc"]
+animation = &"move_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1c367"]
+animation = &"move_up"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_7o1w4"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_r0ikl")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_5r0m6")
+blend_point_1/pos = Vector2(0, 0.90000004)
+blend_point_2/node = SubResource("AnimationNodeAnimation_tv5bc")
+blend_point_2/pos = Vector2(1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_1c367")
+blend_point_3/pos = Vector2(0, -0.90000004)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4tsvw"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_e4862"]
+advance_mode = 2
+advance_condition = &"moving"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x8usq"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_u18we"]
+states/idle/node = SubResource("AnimationNodeAnimation_n56d6")
+states/idle/position = Vector2(309, 100)
+states/moving/node = SubResource("AnimationNodeBlendSpace2D_7o1w4")
+states/moving/position = Vector2(451, 100)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_4tsvw"), "idle", "moving", SubResource("AnimationNodeStateMachineTransition_e4862"), "moving", "idle", SubResource("AnimationNodeStateMachineTransition_x8usq")]
+graph_offset = Vector2(-126, 8)
+
 [node name="SlimeEnemy" type="CharacterBody2D" unique_id=875786846 node_paths=PackedStringArray("player_detector", "player_detect_collision_shape", "navigation_agent", "navigation_timer")]
 collision_layer = 0
 collision_mask = 2
@@ -201,6 +246,13 @@ one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2074460078]
 libraries/ = SubResource("AnimationLibrary_7o1w4")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=2103750296]
+tree_root = SubResource("AnimationNodeStateMachine_u18we")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/idle = false
+parameters/conditions/moving = false
+parameters/moving/blend_position = Vector2(0, 0)
 
 [connection signal="on_damage_taken" from="Hurtbox" to="Health" method="take_damage"]
 [connection signal="on_health_changed" from="Health" to="." method="_on_health_on_health_changed"]

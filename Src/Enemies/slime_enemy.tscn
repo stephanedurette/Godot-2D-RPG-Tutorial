@@ -21,15 +21,18 @@ radius = 6.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_tv5bc"]
 resource_local_to_scene = true
 
-[node name="SlimeEnemy" type="CharacterBody2D" unique_id=875786846 node_paths=PackedStringArray("player_detect_collision_shape")]
+[node name="SlimeEnemy" type="CharacterBody2D" unique_id=875786846 node_paths=PackedStringArray("player_detect_collision_shape", "navigation_agent", "navigation_timer")]
 collision_layer = 0
 collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_jtwg2")
+move_speed = 40.0
 min_patrol_time = 0.1
 max_patrol_time = 0.5
 player_detect_distance = 60.0
 player_detect_collision_shape = NodePath("PlayerDetector/CollisionShape2D")
+navigation_agent = NodePath("NavigationAgent2D")
+navigation_timer = NodePath("NavigationTargetRefreshTimer")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1824732155]
 texture = ExtResource("2_omci2")
@@ -65,10 +68,22 @@ collision_layer = 0
 position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_tv5bc")
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=160940513]
+path_desired_distance = 5.0
+target_desired_distance = 5.0
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+
+[node name="NavigationTargetRefreshTimer" type="Timer" parent="." unique_id=94760116]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="on_damage_taken" from="Hurtbox" to="Health" method="take_damage"]
 [connection signal="on_health_changed" from="Health" to="." method="_on_health_on_health_changed"]
 [connection signal="on_health_depleted" from="Health" to="." method="_on_health_on_health_depleted"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
+[connection signal="timeout" from="NavigationTargetRefreshTimer" to="." method="_on_navigation_target_refresh_timer_timeout"]
 
 [editable path="Hitbox"]
 [editable path="Hurtbox"]

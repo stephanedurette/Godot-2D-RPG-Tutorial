@@ -11,6 +11,7 @@ class_name SlimeEnemy extends CharacterBody2D
 @export var player_detect_collision_shape: CollisionShape2D
 @export var navigation_agent: NavigationAgent2D
 @export var navigation_timer: Timer
+@export var animation_tree: AnimationTree
 
 var idle_state: IdleState
 var chasing_state: ChasingState
@@ -26,6 +27,7 @@ func _ready() -> void:
 
 func _on_move_velocity_changed(vel: Vector2):
 	velocity = vel
+	animation_tree.set("parameters/moving/blend_position", vel.normalized())
 
 func _physics_process(delta: float) -> void:
 	state_machine.current_state.process(delta)
@@ -68,6 +70,12 @@ class SlimeState extends State:
 	
 class IdleState extends SlimeState:
 	
+	func enter():
+		my_owner.animation_tree.set("parameters/conditions/idle", true);
+	
+	func exit():
+		my_owner.animation_tree.set("parameters/conditions/idle", false);
+	
 	func on_player_detected(body: Player):
 		my_owner.chasing_state.chase_target = body
 		my_owner.state_machine.change_state(my_owner.chasing_state)
@@ -85,10 +93,14 @@ class ChasingState extends SlimeState:
 		
 	
 	func enter():
-		print("enter")
+		my_owner.animation_tree.set("parameters/conditions/moving", true);
 		navigation_agent.target_position = chase_target.global_position
 		print(navigation_agent.get_next_path_position())
 		my_owner.navigation_timer.start()
+		
+	func exit():
+		my_owner.animation_tree.set("parameters/conditions/moving", false);
+		
 		
 	func process(_delta):
 		if (!_at_target()):

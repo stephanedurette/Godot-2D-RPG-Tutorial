@@ -18,11 +18,18 @@ radius = 6.0
 resource_local_to_scene = true
 radius = 6.0
 
-[node name="SlimeEnemy" type="CharacterBody2D" unique_id=875786846]
+[sub_resource type="CircleShape2D" id="CircleShape2D_tv5bc"]
+resource_local_to_scene = true
+
+[node name="SlimeEnemy" type="CharacterBody2D" unique_id=875786846 node_paths=PackedStringArray("player_detect_collision_shape")]
 collision_layer = 0
 collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_jtwg2")
+min_patrol_time = 0.1
+max_patrol_time = 0.5
+player_detect_distance = 60.0
+player_detect_collision_shape = NodePath("PlayerDetector/CollisionShape2D")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1824732155]
 texture = ExtResource("2_omci2")
@@ -51,9 +58,17 @@ shape = SubResource("CircleShape2D_5r0m6")
 [node name="Health" parent="." unique_id=516885994 instance=ExtResource("6_n56d6")]
 starting_max_health = 3
 
+[node name="PlayerDetector" type="Area2D" parent="." unique_id=1961770356]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=312805078]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_tv5bc")
+
 [connection signal="on_damage_taken" from="Hurtbox" to="Health" method="take_damage"]
 [connection signal="on_health_changed" from="Health" to="." method="_on_health_on_health_changed"]
 [connection signal="on_health_depleted" from="Health" to="." method="_on_health_on_health_depleted"]
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
 
 [editable path="Hitbox"]
 [editable path="Hurtbox"]

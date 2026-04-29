@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bpfhkhiwdl4kj"]
+
+[ext_resource type="Script" uid="uid://co8go1sduvp16" path="res://Src/Combat/hit_flasher.gd" id="1_grnm7"]
+
+[node name="HitFlasher" type="Node" unique_id=1457983810]
+script = ExtResource("1_grnm7")
+
+[node name="Timer" type="Timer" parent="." unique_id=1362555154]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

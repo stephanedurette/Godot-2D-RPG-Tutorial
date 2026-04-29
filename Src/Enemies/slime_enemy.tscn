@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://bfr1km7j56tni" path="res://Src/GameData/Teams/enemy_team.tres" id="4_cvp7n"]
 [ext_resource type="PackedScene" uid="uid://n2hawu3rrxyc" path="res://Src/Combat/hurtbox.tscn" id="5_cvp7n"]
 [ext_resource type="PackedScene" uid="uid://bq2n6v22jn42p" path="res://Src/Combat/health.tscn" id="6_n56d6"]
+[ext_resource type="PackedScene" uid="uid://bpfhkhiwdl4kj" path="res://Src/Combat/hit_flasher.tscn" id="7_r0ikl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n56d6"]
 radius = 6.0
@@ -180,9 +181,9 @@ states/idle/position = Vector2(309, 100)
 states/moving/node = SubResource("AnimationNodeBlendSpace2D_7o1w4")
 states/moving/position = Vector2(451, 100)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_4tsvw"), "idle", "moving", SubResource("AnimationNodeStateMachineTransition_e4862"), "moving", "idle", SubResource("AnimationNodeStateMachineTransition_x8usq")]
-graph_offset = Vector2(-126, 8)
+graph_offset = Vector2(-202, 35)
 
-[node name="SlimeEnemy" type="CharacterBody2D" unique_id=875786846 node_paths=PackedStringArray("player_detector", "player_detect_collision_shape", "navigation_agent", "navigation_timer", "animation_tree")]
+[node name="SlimeEnemy" type="CharacterBody2D" unique_id=875786846 node_paths=PackedStringArray("player_detector", "player_detect_collision_shape", "navigation_agent", "navigation_timer", "animation_tree", "hit_flasher")]
 collision_layer = 0
 collision_mask = 2
 motion_mode = 1
@@ -199,6 +200,7 @@ player_detect_collision_shape = NodePath("PlayerDetector/CollisionShape2D")
 navigation_agent = NodePath("NavigationAgent2D")
 navigation_timer = NodePath("NavigationTargetRefreshTimer")
 animation_tree = NodePath("AnimationTree")
+hit_flasher = NodePath("HitFlasher")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1824732155]
 texture = ExtResource("2_omci2")
@@ -256,6 +258,11 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/idle = false
 parameters/conditions/moving = false
 parameters/moving/blend_position = Vector2(0, 0)
+
+[node name="HitFlasher" parent="." unique_id=1457983810 node_paths=PackedStringArray("sprite") instance=ExtResource("7_r0ikl")]
+flash_time = 0.1
+flash_color = Color(17.316446, 0.0048299213, 0.0006899888, 1)
+sprite = NodePath("../Sprite")
 
 [connection signal="on_damage_taken" from="Hurtbox" to="Health" method="take_damage"]
 [connection signal="on_hit" from="Hurtbox" to="." method="_on_hurtbox_hit"]

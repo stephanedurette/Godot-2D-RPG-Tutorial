@@ -14,6 +14,7 @@ class_name SlimeEnemy extends CharacterBody2D
 @export var navigation_agent: NavigationAgent2D
 @export var navigation_timer: Timer
 @export var animation_tree: AnimationTree
+@export var hit_flasher: HitFlasher
 
 var idle_state: IdleState
 var chasing_state: ChasingState
@@ -59,6 +60,7 @@ func _on_navigation_target_refresh_timer_timeout() -> void:
 
 func _on_hurtbox_hit(hitbox: Hitbox) -> void:
 	velocity = (global_position - hitbox.global_position).normalized() * knockback_speed
+	hit_flasher.flash()
 	
 class SlimeState extends State:
 	var my_owner: SlimeEnemy

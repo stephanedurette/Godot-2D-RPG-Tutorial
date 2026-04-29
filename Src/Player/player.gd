@@ -25,6 +25,7 @@ extends CharacterBody2D
 @export var npc_raycast: RayCast2D
 @export var inventory: Inventory
 @export var health: Health
+@export var sprite_flasher: HitFlasher
 
 var npc_raycast_magnitude: float
 var interactable_in_range: Node2D
@@ -111,6 +112,7 @@ func _on_player_sword_attack_finished() -> void:
 
 func _on_hurtbox_hit(hitbox: Hitbox) -> void:
 	velocity = (global_position - hitbox.global_position).normalized() * knockback_speed
+	sprite_flasher.flash()
 	
 func _on_health_depleted() -> void:
 	state_machine.change_state(death_state)

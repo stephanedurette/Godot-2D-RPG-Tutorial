@@ -189,9 +189,11 @@ motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_jtwg2")
 move_speed = 40.0
+move_accel = 4.0
 min_patrol_time = 0.1
 max_patrol_time = 0.5
 player_detect_distance = 60.0
+knockback_speed = 100.0
 player_detector = NodePath("PlayerDetector")
 player_detect_collision_shape = NodePath("PlayerDetector/CollisionShape2D")
 navigation_agent = NodePath("NavigationAgent2D")
@@ -256,6 +258,7 @@ parameters/conditions/moving = false
 parameters/moving/blend_position = Vector2(0, 0)
 
 [connection signal="on_damage_taken" from="Hurtbox" to="Health" method="take_damage"]
+[connection signal="on_hit" from="Hurtbox" to="." method="_on_hurtbox_hit"]
 [connection signal="on_health_changed" from="Health" to="." method="_on_health_on_health_changed"]
 [connection signal="on_health_depleted" from="Health" to="." method="_on_health_on_health_depleted"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]

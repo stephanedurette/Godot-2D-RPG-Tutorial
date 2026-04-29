@@ -2,9 +2,11 @@ class_name SlimeEnemy extends CharacterBody2D
 
 @export_group("Settings")
 @export var move_speed:=2.0
+@export var move_accel:=2.0
 @export var min_patrol_time: float
 @export var max_patrol_time: float
 @export var player_detect_distance: float
+@export var knockback_speed: float
 
 @export_group("References")
 @export var player_detector: Area2D
@@ -25,9 +27,9 @@ func _ready() -> void:
 	_ready_player_detector()
 	_ready_state_machine()
 
-func _on_move_velocity_changed(vel: Vector2):
-	velocity = vel
-	animation_tree.set("parameters/moving/blend_position", vel.normalized())
+func _on_move_velocity_changed(target_velocity: Vector2):
+	velocity = velocity.move_toward(target_velocity, move_accel)
+	animation_tree.set("parameters/moving/blend_position", target_velocity.normalized())
 
 func _physics_process(delta: float) -> void:
 	state_machine.current_state.process(delta)
@@ -55,6 +57,10 @@ func _ready_state_machine():
 	
 func _on_navigation_target_refresh_timer_timeout() -> void:
 	(state_machine.current_state as SlimeState).on_navigation_timer_timeout()
+
+func _on_hurtbox_hit(hitbox: Hitbox) -> void:
+	velocity = (global_position - hitbox.global_position).normalized() * knockback_speed
+	print("hit")
 	
 class SlimeState extends State:
 	var my_owner: SlimeEnemy
@@ -67,7 +73,7 @@ class SlimeState extends State:
 		
 	func on_navigation_timer_timeout():
 		pass
-	
+
 class IdleState extends SlimeState:
 	
 	func enter():
@@ -117,16 +123,4 @@ class ChasingState extends SlimeState:
 	
 	func _at_target() -> bool: 
 		return my_owner.global_position.distance_squared_to(chase_target.global_position) < 1
-		
-	#TODO, animate idle and movement
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		

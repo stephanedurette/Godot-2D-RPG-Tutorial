@@ -28,7 +28,6 @@ func _ready() -> void:
 	_ready_state_machine()
 
 func _on_move_velocity_changed(target_velocity: Vector2):
-	velocity = velocity.move_toward(target_velocity, move_accel)
 	animation_tree.set("parameters/moving/blend_position", target_velocity.normalized())
 
 func _physics_process(delta: float) -> void:
@@ -83,9 +82,11 @@ class IdleState extends SlimeState:
 	
 	func on_player_detected(body: Player):
 		my_owner.chasing_state.chase_target = body
+		body.on_health_depleted.connect_signal(func(): my_owner.state_machine.change_state(my_owner.idle_state))
 		my_owner.state_machine.change_state(my_owner.chasing_state)
 	
 	func process(_delta):
+		my_owner.velocity = my_owner.velocity.move_toward(Vector2.ZERO, my_owner.move_accel)
 		my_owner.move_and_slide()
 	
 class ChasingState extends SlimeState:
@@ -113,6 +114,8 @@ class ChasingState extends SlimeState:
 			my_owner.move_velocity.Value = dir * my_owner.move_speed
 		else:
 			my_owner.move_velocity.Value = Vector2.ZERO
+			
+		my_owner.velocity = my_owner.velocity.move_toward(my_owner.move_velocity.Value, my_owner.move_accel)
 		my_owner.move_and_slide()
 			
 	func on_navigation_timer_timeout():

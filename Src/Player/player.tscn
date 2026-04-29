@@ -86,6 +86,9 @@ blend_point_3/node = SubResource("AnimationNodeAnimation_ya03o")
 blend_point_3/pos = Vector2(0, -0.90000004)
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xv25r"]
+animation = &"death"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_srngh"]
 advance_mode = 2
 
@@ -121,8 +124,10 @@ states/Idle/position = Vector2(452, 82)
 states/Move/node = SubResource("AnimationNodeBlendSpace2D_uc31e")
 states/Move/position = Vector2(452, 206)
 states/Start/position = Vector2(312, 88)
+states/death/node = SubResource("AnimationNodeAnimation_xv25r")
+states/death/position = Vector2(726, 77)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_srngh"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_lagon"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_xk721"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_p7xkr"), "Move", "Attack", SubResource("AnimationNodeStateMachineTransition_old3p"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_m4jnh"), "Attack", "Move", SubResource("AnimationNodeStateMachineTransition_ex2hy")]
-graph_offset = Vector2(17, 40)
+graph_offset = Vector2(116, 32)
 
 [sub_resource type="Animation" id="Animation_i1ivj"]
 length = 0.001
@@ -217,6 +222,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector2i(1, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_xv25r"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 6)]
 }
 
 [sub_resource type="Animation" id="Animation_0va8g"]
@@ -414,6 +434,7 @@ _data = {
 &"attack_left": SubResource("Animation_lpdgt"),
 &"attack_right": SubResource("Animation_cb6f2"),
 &"attack_up": SubResource("Animation_cpfbt"),
+&"death": SubResource("Animation_xv25r"),
 &"idle_down": SubResource("Animation_0va8g"),
 &"idle_left": SubResource("Animation_out1w"),
 &"idle_right": SubResource("Animation_ya03o"),
@@ -514,7 +535,7 @@ position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_hndyn")
 
 [node name="Health" parent="." unique_id=516885994 instance=ExtResource("8_0va8g")]
-starting_max_health = 20
+starting_max_health = 8
 
 [connection signal="attack_finished" from="PlayerSword" to="." method="_on_player_sword_attack_finished"]
 [connection signal="attack_started" from="PlayerSword" to="." method="_on_player_sword_attack_started"]
@@ -524,5 +545,6 @@ starting_max_health = 20
 [connection signal="timeout" from="UpdatePositionTimer" to="." method="_on_update_position_timer_timeout"]
 [connection signal="on_damage_taken" from="Hurtbox" to="Health" method="take_damage"]
 [connection signal="on_hit" from="Hurtbox" to="." method="_on_hurtbox_hit"]
+[connection signal="on_health_depleted" from="Health" to="." method="_on_health_depleted"]
 
 [editable path="Hurtbox"]

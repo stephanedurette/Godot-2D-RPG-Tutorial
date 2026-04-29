@@ -35,6 +35,7 @@ var state_machine: State_Machine
 var idle_state: IdleState
 var walk_state: WalkingState
 var attack_state: AttackState
+var death_state: DeathState
 
 func _ready() -> void:
 	_ready_animation()
@@ -47,6 +48,7 @@ func _ready_state_machine():
 	idle_state = IdleState.new(self)
 	walk_state = WalkingState.new(self)
 	attack_state = AttackState.new(self)
+	death_state = DeathState.new(self)
 	state_machine = State_Machine.new()
 	state_machine.change_state(idle_state)
 
@@ -107,6 +109,11 @@ func _on_attack_input_on_pressed() -> void:
 func _on_player_sword_attack_finished() -> void:
 	(state_machine.current_state as PlayerState).on_attack_finished()
 
+func _on_hurtbox_hit(hitbox: Hitbox) -> void:
+	velocity = (global_position - hitbox.global_position).normalized() * knockback_speed
+	
+func _on_health_depleted() -> void:
+	state_machine.change_state(death_state)
 	
 class PlayerState extends State:
 	var player: Player
@@ -143,6 +150,22 @@ class IdleState extends PlayerState:
 		
 		if (dir != Vector2.ZERO):
 			player.state_machine.change_state(player.walk_state)
+	
+class DeathState extends PlayerState:
+	func on_attack_input_pressed():
+		pass
+	
+	func on_move_direction_changed(_dir: Vector2):
+		pass
+	
+	func process(_delta):
+		player.velocity = player.velocity.move_toward(Vector2.ZERO, player.move_accel)
+		player.move_and_slide()
+	
+	func enter():
+		player.animation_tree.set("parameters/conditions/idle", true);
+		await player.get_tree().create_timer(.5).timeout
+		player.animation_tree.get("parameters/playback").travel("death")
 	
 class WalkingState extends PlayerState:
 	func enter():
@@ -190,6 +213,3 @@ class AttackState extends PlayerState:
 		
 	func on_attack_finished():
 		player.state_machine.change_state(player.idle_state as State if player.current_move_direction == Vector2.ZERO else player.walk_state as State)
-
-func _on_hurtbox_hit(hitbox: Hitbox) -> void:
-	velocity = (global_position - hitbox.global_position).normalized() * knockback_speed

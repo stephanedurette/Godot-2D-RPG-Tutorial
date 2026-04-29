@@ -16,9 +16,16 @@ var idle_state: IdleState
 var chasing_state: ChasingState
 var state_machine: State_Machine
 
+var move_velocity: Observable
+
 func _ready() -> void:
+	move_velocity = Observable.new(Vector2.ZERO)
+	move_velocity.on_changed.connect(_on_move_velocity_changed)
 	_ready_player_detector()
 	_ready_state_machine()
+
+func _on_move_velocity_changed(vel: Vector2):
+	velocity = vel
 
 func _physics_process(delta: float) -> void:
 	state_machine.current_state.process(delta)
@@ -86,9 +93,9 @@ class ChasingState extends SlimeState:
 	func process(_delta):
 		if (!_at_target()):
 			var dir = my_owner.global_position.direction_to(navigation_agent.get_next_path_position())
-			my_owner.velocity = dir * my_owner.move_speed
+			my_owner.move_velocity.Value = dir * my_owner.move_speed
 		else:
-			my_owner.velocity = Vector2.ZERO
+			my_owner.move_velocity.Value = Vector2.ZERO
 		my_owner.move_and_slide()
 			
 	func on_navigation_timer_timeout():

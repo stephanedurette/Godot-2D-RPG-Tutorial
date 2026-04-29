@@ -7,6 +7,7 @@ class_name SlimeEnemy extends CharacterBody2D
 @export var player_detect_distance: float
 
 @export_group("References")
+@export var player_detector: Area2D
 @export var player_detect_collision_shape: CollisionShape2D
 @export var navigation_agent: NavigationAgent2D
 @export var navigation_timer: Timer
@@ -32,7 +33,10 @@ func _on_player_detector_body_entered(body: Node2D) -> void:
 	(state_machine.current_state as SlimeState).on_player_detected(body as Player)
 	
 func _ready_player_detector():
+	player_detector.set_deferred("monitoring", false)
+	await get_tree().process_frame #wait for the set_deferred to finish
 	(player_detect_collision_shape.shape as CircleShape2D).radius = player_detect_distance
+	player_detector.set_deferred("monitoring", true)
 	
 func _ready_state_machine():
 	state_machine = State_Machine.new()

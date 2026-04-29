@@ -81,7 +81,7 @@ position = Vector2(-24, -32)
 
 [node name="IceBlock" parent="Test Puzzle" unique_id=165347143 groups=["block_push_obstacle"] instance=ExtResource("8_upm25")]
 y_sort_enabled = false
-position = Vector2(96, -16)
+position = Vector2(80, 0)
 
 [node name="PushButton" parent="Test Puzzle" unique_id=1106219846 instance=ExtResource("6_0jdrx")]
 position = Vector2(8, -16)
@@ -98,7 +98,7 @@ position = Vector2(88, 32)
 [node name="Player Locations" type="Node" parent="." unique_id=2123455462]
 
 [node name="Player Spawn" type="Marker2D" parent="Player Locations" unique_id=1916636675]
-position = Vector2(-128, 56)
+position = Vector2(144, 40)
 
 [node name="Dungeon In" parent="Player Locations" unique_id=1988916478 node_paths=PackedStringArray("level") instance=ExtResource("4_pkap3")]
 position = Vector2(200, 42)

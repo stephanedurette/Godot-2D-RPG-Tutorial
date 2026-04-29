@@ -20,16 +20,19 @@ radius = 6.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tv5bc"]
 resource_local_to_scene = true
+radius = 0.01
 
-[node name="SlimeEnemy" type="CharacterBody2D" unique_id=875786846 node_paths=PackedStringArray("player_detect_collision_shape", "navigation_agent", "navigation_timer")]
+[node name="SlimeEnemy" type="CharacterBody2D" unique_id=875786846 node_paths=PackedStringArray("player_detector", "player_detect_collision_shape", "navigation_agent", "navigation_timer")]
 collision_layer = 0
 collision_mask = 2
 motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_jtwg2")
 move_speed = 40.0
 min_patrol_time = 0.1
 max_patrol_time = 0.5
 player_detect_distance = 60.0
+player_detector = NodePath("PlayerDetector")
 player_detect_collision_shape = NodePath("PlayerDetector/CollisionShape2D")
 navigation_agent = NodePath("NavigationAgent2D")
 navigation_timer = NodePath("NavigationTargetRefreshTimer")

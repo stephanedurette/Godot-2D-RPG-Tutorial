@@ -99,6 +99,8 @@ class ChasingState extends SlimeState:
 	func _at_target() -> bool: 
 		return my_owner.global_position.distance_squared_to(chase_target.global_position) < 1
 		
+	#TODO, animate idle and movement
+		
 		
 		
 		

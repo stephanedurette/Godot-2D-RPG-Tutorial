@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bw8jecsnqfqh5"]
+
+[ext_resource type="Script" uid="uid://6ds7hor5cp28" path="res://Src/Audio Playing/Sound/sound_manager.gd" id="1_o1276"]
+[ext_resource type="PackedScene" uid="uid://0mkopkw3amrx" path="res://Src/Audio Playing/Sound/sound_player.tscn" id="2_2ip3p"]
+[ext_resource type="Resource" uid="uid://c8ethiay1f280" path="res://Src/Audio Playing/Sound/on_play_sound_requested.tres" id="3_oiha4"]
+
+[node name="SoundManager" type="Node" unique_id=1344187996]
+script = ExtResource("1_o1276")
+sound_player_prefab = ExtResource("2_2ip3p")
+on_play_sound_requested = ExtResource("3_oiha4")

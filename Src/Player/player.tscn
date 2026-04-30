@@ -15,6 +15,8 @@
 [ext_resource type="Resource" uid="uid://21r8ps76nvsd" path="res://Src/Player/on_player_max_health_changed.tres" id="7_hndyn"]
 [ext_resource type="Resource" uid="uid://cldyhw41d2ify" path="res://Src/Dialogue/on_dialogue_end_request.tres" id="7_wfo1s"]
 [ext_resource type="PackedScene" uid="uid://bq2n6v22jn42p" path="res://Src/Combat/health.tscn" id="8_0va8g"]
+[ext_resource type="Resource" uid="uid://c8ethiay1f280" path="res://Src/Audio Playing/Sound/on_play_sound_requested.tres" id="8_cpfbt"]
+[ext_resource type="AudioStream" uid="uid://jj57jeptbiid" path="res://Third Party/Ninja Adventure - Asset Pack/Sounds/Game/Hit1.wav" id="10_xv25r"]
 [ext_resource type="PackedScene" uid="uid://b255bljwf5sf7" path="res://Src/Combat/player_sword.tscn" id="16_hndyn"]
 [ext_resource type="PackedScene" uid="uid://bpfhkhiwdl4kj" path="res://Src/Combat/hit_flasher.tscn" id="17_lpdgt"]
 
@@ -467,6 +469,7 @@ on_max_health_changed = ExtResource("7_hndyn")
 on_player_position_updated = ExtResource("2_out1w")
 on_player_inventory_udpated = ExtResource("4_uc31e")
 on_dialogue_end_request = ExtResource("7_wfo1s")
+on_sound_play_requested = ExtResource("8_cpfbt")
 on_item_collected = ExtResource("3_ya03o")
 body_sprite = NodePath("Sprite")
 sword = NodePath("PlayerSword")
@@ -475,6 +478,7 @@ npc_raycast = NodePath("InteractableDetector")
 inventory = NodePath("Inventory")
 health = NodePath("Health")
 sprite_flasher = NodePath("HitFlasher")
+on_hit = ExtResource("10_xv25r")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=879248044]
 tree_root = SubResource("AnimationNodeStateMachine_srngh")

@@ -14,6 +14,7 @@ extends CharacterBody2D
 @export var on_player_position_updated: SignalOneArg
 @export var on_player_inventory_udpated: SignalOneArg
 @export var on_dialogue_end_request: SignalNoArgs
+@export var on_sound_play_requested: SignalThreeArgs
 
 @export_group("Subscribed")
 @export var on_item_collected: SignalOneArg
@@ -26,6 +27,9 @@ extends CharacterBody2D
 @export var inventory: Inventory
 @export var health: Health
 @export var sprite_flasher: HitFlasher
+
+@export_group("Sounds")
+@export var on_hit: AudioStream
 
 var npc_raycast_magnitude: float
 var interactable_in_range: Node2D
@@ -111,6 +115,7 @@ func _on_player_sword_attack_finished() -> void:
 	(state_machine.current_state as PlayerState).on_attack_finished()
 
 func _on_hurtbox_hit(hitbox: Hitbox) -> void:
+	on_sound_play_requested.emit(on_hit, global_position, .1)
 	velocity = (global_position - hitbox.global_position).normalized() * knockback_speed
 	sprite_flasher.flash()
 	

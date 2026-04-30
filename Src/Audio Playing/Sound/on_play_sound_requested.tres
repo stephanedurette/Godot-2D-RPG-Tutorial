@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="SignalThreeArgs" format=3 uid="uid://c8ethiay1f280"]
+
+[ext_resource type="Script" uid="uid://bjeqn8o3bs5d6" path="res://Src/Helpers/Signal Bus/signal_three_args.gd" id="1_b0cq3"]
+
+[resource]
+script = ExtResource("1_b0cq3")
+metadata/_custom_type_script = "uid://bjeqn8o3bs5d6"
